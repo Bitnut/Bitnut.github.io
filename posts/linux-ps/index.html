@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Linux 下的 ps 命令和常用组合</title>
+    <meta name="description" content="A simple monospaced resume theme for Hugo.">
+    <meta name="author" content='三口一个瓜'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://bitnut.github.io/favicon.ico">
+    
+
+    
+        
+    
+</head>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://bitnut.github.io">
+          
+          三口一个瓜的博客
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/posts/">
+                        博客
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/abo">
+                        关于我
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/contact">
+                        联系方式
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h2 id="一查看进程">一、查看进程</h2>
+<p>命令： ps</p>
+<p>命令解释： 全称是 <code>process status</code> ，使用它相当于在 win 下的 <code>任务管理器</code>。</p>
+<p>常用命令参数：
+-a 显示同一终端下的所有程序
+-e 等于“-A”
+-e  显示环境变量
+-f  显示程序间的关系
+-r  显示当前终端的进程
+-u  指定用户的所有进程</p>
+<p>常用命令组合：</p>
+<p>-au 显示较详细的资讯
+-aux 显示所有包含其他使用者的行程</p>
+<p>-C &lt;命令&gt; 列出指定命令的状况
+&ndash;lines&lt;行数&gt; 每页显示的行数
+&ndash;width&lt;字符数&gt; 每页显示的字符数
+&ndash;help 显示帮助信息
+&ndash;version 显示版本显示</p>
+<h2 id="二查看进程树结构">二、查看进程（树结构）</h2>
+<p>命令： pstree</p>
+<p>命令参数：</p>
+<p>-p 为显示进程识别码，最后加上用户名。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">picher@pichers-laptop:~$ pstree -p picher | grep emacs
+              |-gnome-terminal-<span style="color:#f92672">(</span>3023<span style="color:#f92672">)</span>-+-bash<span style="color:#f92672">(</span>3030<span style="color:#f92672">)</span>-+-emacs<span style="color:#f92672">(</span>5517<span style="color:#f92672">)</span>-+-bash<span style="color:#f92672">(</span>28980<span style="color:#f92672">)</span>
+              |                       |            |             |-<span style="color:#f92672">{</span>emacs<span style="color:#f92672">}(</span>5518<span style="color:#f92672">)</span>
+              |                       |            |             |-<span style="color:#f92672">{</span>emacs<span style="color:#f92672">}(</span>5519<span style="color:#f92672">)</span>
+              |                       |            |             <span style="color:#e6db74">`</span>-<span style="color:#f92672">{</span>emacs<span style="color:#f92672">}(</span>5520<span style="color:#f92672">)</span>
+</code></pre></div><p>可以看到，emacs(5517)这个进程共启动了 4 个子线程，加上主线程共 5 个线程。</p>
+<h2 id="三杀死进程">三、杀死进程</h2>
+<p>命令：kill</p>
+<p>常用组合：</p>
+<ul>
+<li>
+<p>kill -STOP [pid]
+发送 SIGSTOP (17,19,23)停止一个进程，而并不消灭这个进程。</p>
+</li>
+<li>
+<p>kill -CONT [pid]
+发送 SIGCONT (19,18,25)重新开始一个停止的进程。</p>
+</li>
+<li>
+<p>kill -KILL [pid]
+发送 SIGKILL (9)强迫进程立即停止，并且不实施清理操作。</p>
+</li>
+<li>
+<p>kill -9 -1
+终止你拥有的全部进程。</p>
+</li>
+</ul>
+<h2 id="四完整操作">四、完整操作</h2>
+<ul>
+<li>显示所有进程信息</li>
+</ul>
+<p>命令：　　ps -A</p>
+<ul>
+<li>显示指定用户信息</li>
+</ul>
+<p>命令：　　ps -u root</p>
+<ul>
+<li>显示所有进程信息，连同命令行</li>
+</ul>
+<p>命令：　　ps -ef</p>
+<ul>
+<li>查找特定进程</li>
+</ul>
+<p>命令：　　ps -ef|grep emacs</p>
+<ul>
+<li>将目前属于您自己这次登入的 PID 与相关信息列示出来</li>
+</ul>
+<p>命令：　　ps -l</p>
+<ul>
+<li>列出目前所有的正在内存当中的程序</li>
+</ul>
+<p>命令：　　ps aux</p>
+<p>输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root          <span style="color:#ae81ff">1</span>  0.0  0.3 <span style="color:#ae81ff">185228</span>  <span style="color:#ae81ff">3100</span> ?        Ss   May23   0:08 /lib/systemd/systemd --system --deserialize <span style="color:#ae81ff">21</span>
+root          <span style="color:#ae81ff">2</span>  0.0  0.0      <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span> ?        S    May23   0:00 <span style="color:#f92672">[</span>kthreadd<span style="color:#f92672">]</span>
+root          <span style="color:#ae81ff">4</span>  0.0  0.0      <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span> ?        I&lt;   May23   0:00 <span style="color:#f92672">[</span>kworker/0:0H<span style="color:#f92672">]</span>
+root          <span style="color:#ae81ff">6</span>  0.0  0.0      <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span> ?        I&lt;   May23   0:00 <span style="color:#f92672">[</span>mm_percpu_wq<span style="color:#f92672">]</span>
+root          <span style="color:#ae81ff">7</span>  0.0  0.0      <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span> ?        S    May23   0:04 <span style="color:#f92672">[</span>ksoftirqd/0<span style="color:#f92672">]</span>
+root          <span style="color:#ae81ff">8</span>  0.0  0.0      <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span> ?        I    May23   0:03 <span style="color:#f92672">[</span>rcu_sched<span style="color:#f92672">]</span>
+root          <span style="color:#ae81ff">9</span>  0.0  0.0      <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span> ?        I    May23   0:00 <span style="color:#f92672">[</span>rcu_bh<span style="color:#f92672">]</span>
+root         <span style="color:#ae81ff">10</span>  0.0  0.0      <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span> ?        S    May23   0:00 <span style="color:#f92672">[</span>migration/0<span style="color:#f92672">]</span>
+root         <span style="color:#ae81ff">11</span>  0.0  0.0      <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span> ?        S    May23   0:00 <span style="color:#f92672">[</span>watchdog/0<span style="color:#f92672">]</span>
+</code></pre></div><h4 id="参数解释">参数解释：</h4>
+<p>USER：该 process 属于那个使用者账号的</p>
+<p>PID ：该 process 的号码</p>
+<p>%CPU：该 process 使用掉的 CPU 资源百分比</p>
+<p>%MEM：该 process 所占用的物理内存百分比</p>
+<p>VSZ ：该 process 使用掉的虚拟内存量 (Kbytes)</p>
+<p>RSS ：该 process 占用的固定的内存量 (Kbytes)</p>
+<p>TTY ：该 process 是在那个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。</p>
+<p>STAT：该程序目前的状态，主要的状态有</p>
+<p>R ：该程序目前正在运作，或者是可被运作</p>
+<p>S ：该程序目前正在睡眠当中 (可说是 idle 状态)，但可被某些讯号 (signal) 唤醒。</p>
+<p>T ：该程序目前正在侦测或者是停止了</p>
+<p>Z ：该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (疆尸) 程序的状态</p>
+<p>START：该 process 被触发启动的时间</p>
+<p>TIME ：该 process 实际使用 CPU 运作的时间</p>
+<p>COMMAND：该程序的实际指令</p>
+<ul>
+<li>可以用 | 管道和 more 连接起来分页查看</li>
+</ul>
+<p>命令：　　ps -aux | more</p>
+<ul>
+<li>把所有进程显示出来，并输出到 ps001.txt 文件</li>
+</ul>
+<p>命令：　　ps -aux &gt; ps001.log</p>
+<ul>
+<li>输出指定的字段</li>
+</ul>
+<p>命令：　　 ps -o pid,ppid,pgrp,session,tpgid,comm &gt; ps001.log</p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    
+        <hr>
+        <div class="container text-center">
+            <a href="https://github.com/Bitnut"><small>By 三口一个瓜</small></a>
+        </div>
+    
+</div>
+</body>
+</html>

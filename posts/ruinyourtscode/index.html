@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</title>
+    <meta name="description" content="A simple monospaced resume theme for Hugo.">
+    <meta name="author" content='三口一个瓜'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://bitnut.github.io/favicon.ico">
+    
+
+    
+        
+    
+</head>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://bitnut.github.io">
+          
+          三口一个瓜的博客
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/posts/">
+                        博客
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/abo">
+                        关于我
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/contact">
+                        联系方式
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h1 id="如何写出无法维护的-ts-代码挫败-microsoft-试图接管-javascript-的阴谋">如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</h1>
+<h2 id="前言">前言</h2>
+<p>这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge</p>
+<h2 id="正文">正文</h2>
+<blockquote>
+<p>If builders built buildings the way programmers write programs, then
+the first woodpecker that came along would destroy civilization.
+~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law</p>
+</blockquote>
+<h2 id="ts-特性">TS 特性</h2>
+<ul>
+<li>不封装代码： 调用者需要知道被调用的所有的细节。</li>
+<li>接口包装，包装，包装： TS 的 Utility Types 和继承特性让我快乐起来，尽量多包装几层接口，到时候好用，最好可以把高级特性多用几遍。</li>
+<li>随版本和提交变动我的接口： 比如说，把 showTable(col: number, row: number): Promise<void> 改成  showTable(row: string, col: string): void，等 release 了几个版本后，再把其改回去。这样维护我写的程序的程序员们将不能很快地明白哪一个是对的。</li>
+<li>膨胀 ENUM 类型： ENUM 把字符串类型都放某个 ENUM 里，方便复用。</li>
+<li>TS 的 namespace 特性是美妙的东西（比 ES6 的好理解，反正就是高级），在接口定义的地方大量使用 namespace。</li>
+<li>避免过度使用接口。BS 接口，面向接口编程加重了我的心志负担，不用。</li>
+<li>使用包装类型： String 和 string 哪个牛逼？</li>
+<li>重载签名把条件更宽松的放在前面： 例： 同样传递一个参数，把使用 any 的放在最开头。</li>
+<li>只因为参数不同就声名重载函数。</li>
+<li>避免过度使用类： 类写起来不舒服（太长。花大力气弄成函数式的。</li>
+<li>使用 Object.keys(): 我就要在 ts 里用这个方法，它太好用了。见<a href="https://github.com/microsoft/TypeScript/pull/12253">link</a></li>
+<li>遇到难题就写断言： 类型判断老是过不了，又不能写 any，写非空断言好了。</li>
+<li>使用缺乏设计的接口： 遇到难题又不能写断言，那随便定义个 interface 就好了。</li>
+<li>TS 的类型检查是老中医神药： ts 不是有类型检查么，很好，我不做测试也可以保证结果是对的。</li>
+<li>钻研/利用 TS 的结构化类型定义的漏洞： 本来函数需要一个 dog 类型的参数，我就是想传个 animal 类型的。给 dog 类型的变量赋值 cat 类型的实例。</li>
+<li>export 函数不写返回类型和参数类型： 自己看定义。</li>
+</ul>
+<h2 id="js-相关">js 相关</h2>
+<ul>
+<li>使用 Array 构造函数初始化数组： 当我使用 Array(1, 2, 3)， Array(5) 这样的函数可以很好的糊弄新手，因为他们不知道这个坑，这会对他们的成长颇有助益。</li>
+<li>不使用 eslint 检查代码问题： eslint 只会限制我的想像力（确信。</li>
+<li>使用 for-in 语法: 遍历对象只好用 for-in 了。</li>
+<li>花哨的符合 eslint 命名规则的命名： function capiTaliSaTion() {}。</li>
+</ul>
+<h2 id="编程习惯1">编程习惯1：</h2>
+<ul>
+<li>偶尔故意写错函数名： 比如同时定义两个函数 prepare()、preparae()。</li>
+<li>从不验证： 从不验证输入的数据，从不验证函数的返回值。因为 TS 都帮我们做好了，这样做是充分信任 MS 的表现。</li>
+<li>把变量改在名字上： 例如，把setMargin(margin: int)改成，setLeftMargin(bla), setRightMargin(bla), setCenterMargin(bla)。</li>
+<li>使用环境变量初始化： 如果你的代码需要使用环境变量。那么应该把类的成员的初始化使用环境变量，而不是构造函数。</li>
+<li>尽善尽美的类： 我的类应该尽可能地拥有各种方法。不需要定义多几个类，那样会使得代码太过混乱。</li>
+<li>面向对象是写出无法维护代码的天赐之物！ 如果你有一个类有十个类成员（变量和方法）。考虑一下简化类吧。比如写 10 个层次的继承，然后把这十个属性分别放在这十个类里面。如果可能的话，把这十个类分别放在十个不同的文件中。</li>
+<li>使用错误的换行符： 同时使用 CRLF 和 LF，而且换来换去。看我提交记录的人会像侦探一样看完我的代码。</li>
+<li>在注释中撒谎： 其实可以不用撒谎，只需要在改代码的时候不更新注释就好了。</li>
+</ul>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    
+        <hr>
+        <div class="container text-center">
+            <a href="https://github.com/Bitnut"><small>By 三口一个瓜</small></a>
+        </div>
+    
+</div>
+</body>
+</html>

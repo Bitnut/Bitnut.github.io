@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>代理实践纪录</title>
+    <meta name="description" content="A simple monospaced resume theme for Hugo.">
+    <meta name="author" content='三口一个瓜'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://bitnut.github.io/favicon.ico">
+    
+
+    
+        
+    
+</head>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://bitnut.github.io">
+          
+          三口一个瓜的博客
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/posts/">
+                        博客
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/abo">
+                        关于我
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/contact">
+                        联系方式
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h2 id="变化的-gfw-实在是令人很苦恼">变化的 GFW 实在是令人很苦恼</h2>
+<p>在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。</p>
+<h2 id="配置-trojan-服务">配置 Trojan 服务</h2>
+<ul>
+<li>
+<p>一、 准备一台 VPS（境外），不需要购买域名和配置证书。</p>
+</li>
+<li>
+<p>二、 VPS 安装 LINUX 系统.</p>
+</li>
+</ul>
+<p>注意，系统最好是以下几个。其他的发行版本没有做过测试。</p>
+<pre><code>ubuntu 16.04+
+debian 9
+centos 7+
+</code></pre>
+<ul>
+<li>三、 替换镜像源</li>
+</ul>
+<p>安装好后接着替换原本的镜像源为国内镜像源，如我使用 ubuntu 系统，则替换 <code>/etc/apt/sources.list</code> 下的内容为下面的任意一个地址，然后依次执行：</p>
+<p><code>sudo apt-get update</code></p>
+<p><code>sudo apt-get upgrade</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#阿里源</span>
+    deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    <span style="color:#75715e">#网易源</span>
+    deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
+    deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
+    deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
+    deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    <span style="color:#75715e">#清华源</span>
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">##中科大源</span>
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+</code></pre></div><ul>
+<li>四、 安装 Trojan 服务端</li>
+</ul>
+<p>使用 ssh 命令登录 VPS。 注意，安装前必须打开服务器的 80 和 443 端口。</p>
+<p>在命令行执行命令： <code>wget -N --no-check-certificate https://raw.githubusercontent.com/mark-hans/trojan-wiz/master/ins.sh &amp;&amp; chmod +x ins.sh &amp;&amp; sudo bash ins.sh</code></p>
+<p>安装过程中提示“请选择证书模式”，选择”使用IP自签发证书”的模式。</p>
+<ul>
+<li>五、启动Trojan服务端</li>
+</ul>
+<p>安装完成后，使用命令 <code>systemctl start trojan-gfw</code> 启动 trojan 服务端, 同时可以用命令 <code>systemctl status trojan-gfw</code> 来检查 trojan 服务端的状态，如果状态为 <code>active(running)</code>, 证明 trojan 服务端已经启动。</p>
+<ul>
+<li>六、拷贝服务端配置文件</li>
+</ul>
+<p>trojan 服务端配置成功后，查看下 /home/trojan/ 目录下是否生成了 <code>client.json</code> 和 <code>ca-cert.pem</code> 两个文件。确认地址后，<code>exit</code> 退出 ssh 登录。</p>
+<p>使用如下命令将配置文件拷贝到本地目录：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp root@xxx.xxx.xxx.xxx:/home/trojan/ca-cert.pem ./
+
+scp root@xxx.xxx.xxx.xxx:/home/trojan/client.json ./
+</code></pre></div><ul>
+<li>七、安装 Trojan 客户端</li>
+</ul>
+<p>执行如下命令直接下载安装包：</p>
+<p><code>wget https://github.com/trojan-gfw/trojan/releases/download/v1.14.1/trojan-1.14.1-linux-amd64.tar.xz</code></p>
+<p>解压后，将上一步中的配置文件放入目录中即可。</p>
+<ul>
+<li>八、启动 Trojan 客户端</li>
+</ul>
+<p>执行如下命令启动 Trojan 客户端：</p>
+<p><code>./trojan -c client.json </code></p>
+<p>此时，trojan 客户端会监听本地的 <code> 127.0.0.1:1080</code> 监听代理请求。浏览器可以通过 Chrome SwitchyOmega 插件来配置代理设置。</p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    
+        <hr>
+        <div class="container text-center">
+            <a href="https://github.com/Bitnut"><small>By 三口一个瓜</small></a>
+        </div>
+    
+</div>
+</body>
+</html>

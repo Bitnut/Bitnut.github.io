@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 三口一个瓜的博客</title>
+    <link>https://bitnut.github.io/posts/</link>
+    <description>Recent content in Posts on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 21 Mar 2021 17:10:40 +0800</lastBuildDate><atom:link href="https://bitnut.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux 中的软链接和硬链接</title>
+      <link>https://bitnut.github.io/posts/linux-link/</link>
+      <pubDate>Sun, 21 Mar 2021 17:10:40 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-link/</guid>
+      <description>Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。
+了解 inode 在理解软/硬链接之前，我们必需了解一下， linux 里面 存储文件 的方式。
+对于 linux 有一定了解的朋友都知道 linux 里面有一个重要的概念叫做 i 结点，即 inode。
+当文件存储在硬盘上，硬盘的最小存储单位叫做 扇区（Sector）。每个扇区储存 512 字节（即 0.5KB ）。有人会问，平时讨论文件存储的时候总是说的 块（test）又是啥？
+实际上，扇区是硬盘的概念，我们的操作系统把扇区的概念透明化，因为这个单位实在太小了，也太过具体不够抽象。因此操作系统引入了块的概念，块，实际上就是连续的多个扇区。
+读取硬盘的时候，操作系统不会一个个扇区的读取，这样效率太低，一次性连续读取多个扇区，即一次性读取一个块。这种由多个扇区组成的“块”，是操作系统层面上文件存取的最小单位。块的大小，最常见的是4KB，可以简单的理解为连续八个 sector 组成一个 test。
+那么既然文件数据都储存在块中，我们明白了文件存储的方式，如何管理已经存储好的文件呢？
+文件存储、文件读取是相对而言非常慢的操作，好的操作系统必然会寻找加快这些操作的方法。我们知道在数据库中有索引的概念，可以很好的提升查询速度。那么不如给每个文件加上索引？最好顺便能把文件信息也放一起好了！
+这种储存文件元信息的区域就叫做 inode ，也叫 索引节点。
+每一个文件都会有对应的 inode ，每个 inode 里面包含了与该文件有关的一些信息，如文件的创建者、文件的创建日期、文件的大小、权限等等。
+了解软硬链接 接下来，我们动手实践一下，去观察观察：
+首先，我们建立一个源文件 test，再建立两个硬链接和一个软链接文件
+$ touch test $ ln test test-hd1 $ ln test test-hd2 $ ln -s test test-soft $ ls -li 结果如下图：</description>
+    </item>
+    
+    <item>
+      <title>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</title>
+      <link>https://bitnut.github.io/posts/ruinyourtscode/</link>
+      <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/ruinyourtscode/</guid>
+      <description>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） 前言 这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge
+正文  If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. ~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law
+ TS 特性  不封装代码： 调用者需要知道被调用的所有的细节。 接口包装，包装，包装： TS 的 Utility Types 和继承特性让我快乐起来，尽量多包装几层接口，到时候好用，最好可以把高级特性多用几遍。 随版本和提交变动我的接口： 比如说，把 showTable(col: number, row: number): Promise 改成 showTable(row: string, col: string): void，等 release 了几个版本后，再把其改回去。这样维护我写的程序的程序员们将不能很快地明白哪一个是对的。 膨胀 ENUM 类型： ENUM 把字符串类型都放某个 ENUM 里，方便复用。 TS 的 namespace 特性是美妙的东西（比 ES6 的好理解，反正就是高级），在接口定义的地方大量使用 namespace。 避免过度使用接口。BS 接口，面向接口编程加重了我的心志负担，不用。 使用包装类型： String 和 string 哪个牛逼？ 重载签名把条件更宽松的放在前面： 例： 同样传递一个参数，把使用 any 的放在最开头。 只因为参数不同就声名重载函数。 避免过度使用类： 类写起来不舒服（太长。花大力气弄成函数式的。 使用 Object.</description>
+    </item>
+    
+    <item>
+      <title>代理实践纪录</title>
+      <link>https://bitnut.github.io/posts/proxy-config/</link>
+      <pubDate>Thu, 04 Mar 2021 21:00:35 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/proxy-config/</guid>
+      <description>变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。
+配置 Trojan 服务   一、 准备一台 VPS（境外），不需要购买域名和配置证书。
+  二、 VPS 安装 LINUX 系统.
+  注意，系统最好是以下几个。其他的发行版本没有做过测试。
+ubuntu 16.04+ debian 9 centos 7+   三、 替换镜像源  安装好后接着替换原本的镜像源为国内镜像源，如我使用 ubuntu 系统，则替换 /etc/apt/sources.list 下的内容为下面的任意一个地址，然后依次执行：
+sudo apt-get update
+sudo apt-get upgrade
+#阿里源 deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse deb http://mirrors.</description>
+    </item>
+    
+    <item>
+      <title>为什么/如何使用 Docker？</title>
+      <link>https://bitnut.github.io/posts/docker-fundation/</link>
+      <pubDate>Tue, 23 Feb 2021 07:59:04 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/docker-fundation/</guid>
+      <description>Docker 需要解决的难题 现在当我们提到布署、容器和虚拟化技术，我们首先想到的就是 Docker。 毫无疑问，Docker 已经成为了我们在开发过程中不可缺少的一部分了。在本文中，我更希望抛开底层的技术细节，从宏观的、简单的角度对 Docker 进行分析，并在分析中得出一些软件设计和产品设计的灵感。
+在 Docker 出现之前，我们在软件开发过程中到底遇到了什么难题？  运行时的维护  在相对简单的情形下（例如开发、测试、和线上布署都使用相对较少的 server），服务器的维护和代码升级并不会给我们带来太大的困扰，我们甚至可以手动完成这些维护和升级（包括系统、系统组件和依赖、配置等），就像是在自己的开发环境下一样。
+但是在可以想见的未来，一旦 server 的数量大量增加，如公司的业务进行了拓展、用户出现指数型增长等等，手动的完成这些维护工作将会是一种开发过程中的负担。
+ debug 需求  当我们在布署的时候采用了负载均衡这一类方案的时候，用户可能会访问到出错的 server，这个时候用户可能会试图去刷新页面，反向代理会把用户的请求代理到另一台服务器上。这个过程并没有太大毛病。
+问题在于我们如何定位到问题？如果说这是一个配置问题，而且我们的服务器集群中使用了超过 100 台 server，这个时候一个一个去对比具体配置并试图定位问题将会是一场灾难。  </description>
+    </item>
+    
+    <item>
+      <title>使用 Docker Wine 安装 win 下的各类软件</title>
+      <link>https://bitnut.github.io/posts/docker-wine/</link>
+      <pubDate>Sat, 20 Feb 2021 15:05:20 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/docker-wine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux 下的 ps 命令和常用组合</title>
+      <link>https://bitnut.github.io/posts/linux-ps/</link>
+      <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-ps/</guid>
+      <description>一、查看进程 命令： ps
+命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。
+常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程
+常用命令组合：
+-au 显示较详细的资讯 -aux 显示所有包含其他使用者的行程
+-C &amp;lt;命令&amp;gt; 列出指定命令的状况 &amp;ndash;lines&amp;lt;行数&amp;gt; 每页显示的行数 &amp;ndash;width&amp;lt;字符数&amp;gt; 每页显示的字符数 &amp;ndash;help 显示帮助信息 &amp;ndash;version 显示版本显示
+二、查看进程（树结构） 命令： pstree
+命令参数：
+-p 为显示进程识别码，最后加上用户名。
+picher@pichers-laptop:~$ pstree -p picher | grep emacs |-gnome-terminal-(3023)-+-bash(3030)-+-emacs(5517)-+-bash(28980) | | | |-{emacs}(5518) | | | |-{emacs}(5519) | | | `-{emacs}(5520) 可以看到，emacs(5517)这个进程共启动了 4 个子线程，加上主线程共 5 个线程。</description>
+    </item>
+    
+    <item>
+      <title>编译安装 emacs</title>
+      <link>https://bitnut.github.io/posts/emacs-build/</link>
+      <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/emacs-build/</guid>
+      <description>走个流程  源码下载  到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1
+解压安装包  xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项  ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+可能会遇到一些依赖保错
+可以执行：
+ X toolkit 的报错：  sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libgtk-3-dev libncurses-dev libxpm-dev automake autoconf
+ gnutls 的报错：  sudo apt-get install gnutls-dev
+执行 make  make &amp;amp;&amp;amp; make install
+如果遇到依赖问题：
+sudo apt-get install make</description>
+    </item>
+    
+    <item>
+      <title>Linux Tty</title>
+      <link>https://bitnut.github.io/posts/linux-tty/</link>
+      <pubDate>Thu, 18 Feb 2021 16:34:47 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-tty/</guid>
+      <description>linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty-jpg
+tty 在作为命令的情形 随便打开几个终端看看，可以看到下图：
+可以看到，输出的结果是一段地址，紧接着， cd 到这个地址下查看：
+在 /dev/pts 这个地址下，有几个文件，分别是：
+0 / 1 / 2 / 3 / ptmx
+几个文件是啥意思？ 在 Linux 系统的设备特殊文件目录 /dev/ 下，终端特殊设备文件一般有:
+注：以下几列中的地址，末尾带有&#39;/&amp;lsquo;的是目录，否则是一个文件；n 应直接看作数字的代称，如 0,1,2,3&amp;hellip;&amp;hellip;
+ 串行端口终端(/dev/ttySn) 伪终端(/dev/pty/) 控制终端(/dev/tty) 控制台终端(/dev/ttyn, /dev/console) 虚拟终端(/dev/pts/n) 其他  我们用 tty 命令打印出的结果属于虚拟终端。
+深入理解 tty 命令关联到的终端设备文件 tty 命令得到的是一个虚拟终端的文件，那么什么是终端什么是虚拟终端呢？
+从命名中其实已经可以窥见一二了，一个虚拟终端就是终端的一种而已。而虚拟终端又和伪终端联系紧密。
+伪终端 伪终端（pty），其中的 pt 全称是： pesudo terminal。顾名思义，这是一种和实际物理设备相对的概念。它不是实际意义上的串口设备，而且是一套主从工具(master-slave, 不知道现在还能不能这么写了&amp;hellip;&amp;hellip;狗头)。
+至于为什么 pty 要写成 pty 而不是 pt，这应该是个历史遗留问题，pty 实际上指的是 pseudo-teletype， tty 原本也指的是 teletype。</description>
+    </item>
+    
+    <item>
+      <title>NVM 报 ls-remote command results in “N/A 错误</title>
+      <link>https://bitnut.github.io/posts/nvm-error/</link>
+      <pubDate>Fri, 15 Jan 2021 22:20:01 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/nvm-error/</guid>
+      <description>NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。
+出现这个报错的原因有许多种，我遇到的报错实际上是由代理引起。
+参考： https://stackoverflow.com/questions/26476744/nvm-ls-remote-command-results-in-n-a
+几种原因： SSL 证书过期  临时解决方案：  请使用导出用于抓取内容的镜像的非https版本：export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
+长久解决方案：  第一种：若您运行curl $NVM_NODEJS_ORG_MIRROR 回答翻译：
+出现
+curl: (77) error setting certificate verify locations: CAfile: /etc/pki/tls/certs/ca-bundle.crt CApath: none  则考虑修改 ~/.nvm/nvm.sh 在函数 nvm_download() 里修改，加上 curl -k $*
+if nvm_has &amp;quot;curl&amp;quot;; then curl -k $* #新加的 elif nvm_has &amp;quot;wget&amp;quot;; then # Emulate curl with wget ..  实际上这个改动是啥操作呢？</description>
+    </item>
+    
+    <item>
+      <title>Webpack Error Collect</title>
+      <link>https://bitnut.github.io/posts/webpack-error-collect/</link>
+      <pubDate>Thu, 14 Jan 2021 22:20:01 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/webpack-error-collect/</guid>
+      <description>webpack 配置错误拾遗 1. ... 展开运算符错误 错误原因：
+早期的 babel 有许多问题，一些早期的版本（可能现在也没有解决）无法识别的语法、运算符可以通过插件的形式给 babel 打补丁，这里就是其中一种。
+Just install babel-plugin-transform-object-rest-spread module.
+https://www.npmjs.com/package/babel-plugin-transform-object-rest-spread
+Then add it to .babelrc:
+&amp;ldquo;plugins&amp;rdquo;: [ &amp;ldquo;babel-plugin-transform-object-rest-spread&amp;rdquo;, ],
+2. newwebpack No data received ERR_EMPTY_RESPONSE 错误 给 webpack-dev-server 添加 &amp;ndash;host xxxxxxxx(设好的 host 映射，或者指定的域名)</description>
+    </item>
+    
+  </channel>
+</rss>

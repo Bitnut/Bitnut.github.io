@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Linux Tty</title>
+    <meta name="description" content="A simple monospaced resume theme for Hugo.">
+    <meta name="author" content='三口一个瓜'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://bitnut.github.io/favicon.ico">
+    
+
+    
+        
+    
+</head>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://bitnut.github.io">
+          
+          三口一个瓜的博客
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/posts/">
+                        博客
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/abo">
+                        关于我
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/contact">
+                        联系方式
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h1 id="linux-下的-ttyptyptsptmx-linux-概念系列">linux 下的 tty/pty/pts/ptmx (linux 概念系列)</h1>
+<h2 id="tty-是什么">tty 是什么？</h2>
+<p>在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。
+<a href="/static/tron.jpg">tty-jpg</a></p>
+<h2 id="tty-在作为命令的情形">tty 在作为命令的情形</h2>
+<p>随便打开几个终端看看，可以看到下图：</p>
+<p><img src="/static/tty-order.png" alt="tty-jpg"></p>
+<p>可以看到，输出的结果是一段地址，紧接着， cd 到这个地址下查看：</p>
+<p><img src="/static/tty-location.png" alt="tty-jpg"></p>
+<p>在 /dev/pts 这个地址下，有几个文件，分别是：</p>
+<p><code>0 / 1 / 2 / 3 / ptmx</code></p>
+<h3 id="几个文件是啥意思">几个文件是啥意思？</h3>
+<p>在 Linux 系统的设备特殊文件目录 /dev/ 下，终端特殊设备文件一般有:</p>
+<p><em>注：以下几列中的地址，末尾带有'/&lsquo;的是目录，否则是一个文件；n 应直接看作数字的代称，如 0,1,2,3&hellip;&hellip;</em></p>
+<ul>
+<li>串行端口终端(/dev/ttySn)</li>
+<li>伪终端(/dev/pty/)</li>
+<li>控制终端(/dev/tty)</li>
+<li>控制台终端(/dev/ttyn, /dev/console)</li>
+<li>虚拟终端(/dev/pts/n)</li>
+<li>其他</li>
+</ul>
+<p>我们用 tty 命令打印出的结果属于虚拟终端。</p>
+<h3 id="深入理解-tty-命令关联到的终端设备文件">深入理解 tty 命令关联到的终端设备文件</h3>
+<p>tty 命令得到的是一个虚拟终端的文件，那么什么是终端什么是虚拟终端呢？</p>
+<p>从命名中其实已经可以窥见一二了，一个虚拟终端就是终端的一种而已。而虚拟终端又和伪终端联系紧密。</p>
+<h4 id="伪终端">伪终端</h4>
+<p>伪终端（pty），其中的 pt 全称是： pesudo terminal。顾名思义，这是一种和实际物理设备相对的概念。它不是实际意义上的串口设备，而且是一套<code>主从工具</code>(master-slave, 不知道现在还能不能这么写了&hellip;&hellip;狗头)。</p>
+<p>至于为什么 pty 要写成 pty 而不是 pt，这应该是个历史遗留问题，pty 实际上指的是 <strong>pseudo-teletype</strong>， tty 原本也指的是 <strong>teletype</strong>。</p>
+<ul>
+<li>slave: 指的是模拟硬件设备的一端。</li>
+<li>master: 指的是为终端模拟器提供控制 slave 端方法的一端。</li>
+</ul>
+<p>可以简单得这样理解，伪终端的出现，为用户提供了一个 终端模拟器 =&gt; 伪终端 =&gt; 硬件设备 的管道，伪终端抹去了硬件设备的复杂性，提供了相对简单和统一的交互方式。因此上文的说明中也使用了 <strong>一端</strong> 这个说法，也就是（one end）的意思。</p>
+<p>在 /dev/ 这个地址下，主从伪终端的命名方式经常是： /dev/pty/mn &amp; /dev/pty/sn，其中的 m 代表 master ，而 s 代表着 slave。</p>
+<h4 id="虚拟终端">虚拟终端</h4>
+<p>虚拟终端，就是在 Xwindows 模式下的伪终端。即上文中 pty 的一种。虚拟终端 pts(pseudo-terminal slave)是 pty 的实现方法。</p>
+<h4 id="ptmx">ptmx</h4>
+<p>ptmx 代表的是： pseudoterminal master</p>
+<p>注意到，ptmx 同时出现在 /dev/ 和 /dev/pts/ 文件夹下面。我们打印一下这两个文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">picher@pichers-laptop:/dev$ ls -l /dev/ptmx /dev/pts/ptmx
+crw-rw-rw- <span style="color:#ae81ff">1</span> root tty  5, <span style="color:#ae81ff">2</span> 2月  <span style="color:#ae81ff">19</span> 21:34 /dev/ptmx
+c--------- <span style="color:#ae81ff">1</span> root root 5, <span style="color:#ae81ff">2</span> 2月  <span style="color:#ae81ff">16</span> 17:25 /dev/pts/ptmx
+</code></pre></div><p>从两个文件的 major 和 minor Number： 5, 2; 以及同样的设备类型： c (character or block) 可以得知，这两个设备文件符代表和使用的是内核中的同一个功能。</p>
+<p>实际上，在 /dev/ 文件夹下的 ptmx 是标准的实现，而 /dev/pts/ 下的，则是为软件容器（如 docker）添加的一个 master 伪终端。</p>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li>
+<p>Pseudoterminal
+<a href="https://en.wikipedia.org/wiki/Pseudoterminal">Pseudoterminal</a></p>
+</li>
+<li>
+<p>tty (unix)
+<a href="https://en.wikipedia.org/wiki/Tty_(unix)">tty(unix)</a></p>
+</li>
+<li>
+<p>pty(7) — Linux manual page
+<a href="https://man7.org/linux/man-pages/man7/pty.7.html">pty(7) — Linux manual page4</a></p>
+</li>
+<li>
+<p>ptmx(4) - Linux man page
+<a href="https://linux.die.net/man/4/ptmx">ptmx(4) - Linux man page</a></p>
+</li>
+<li>
+<p>some-confused-concept-ptmx-and-tty
+<a href="https://unix.stackexchange.com/questions/449315/some-confused-concept-ptmx-and-tty">some-confused-concept-ptmx-and-tty</a></p>
+</li>
+</ul>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    
+        <hr>
+        <div class="container text-center">
+            <a href="https://github.com/Bitnut"><small>By 三口一个瓜</small></a>
+        </div>
+    
+</div>
+</body>
+</html>

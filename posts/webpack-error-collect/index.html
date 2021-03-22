@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Webpack Error Collect</title>
+    <meta name="description" content="A simple monospaced resume theme for Hugo.">
+    <meta name="author" content='三口一个瓜'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://bitnut.github.io/favicon.ico">
+    
+
+    
+        
+    
+</head>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://bitnut.github.io">
+          
+          三口一个瓜的博客
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/posts/">
+                        博客
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/abo">
+                        关于我
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/contact">
+                        联系方式
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h1 id="webpack-配置错误拾遗">webpack 配置错误拾遗</h1>
+<h3 id="1---展开运算符错误">1.  <code>...</code> 展开运算符错误</h3>
+<p>错误原因：</p>
+<p>早期的 babel 有许多问题，一些早期的版本（可能现在也没有解决）无法识别的语法、运算符可以通过插件的形式给 babel 打补丁，这里就是其中一种。</p>
+<p>Just install babel-plugin-transform-object-rest-spread module.</p>
+<p><a href="https://www.npmjs.com/package/babel-plugin-transform-object-rest-spread">https://www.npmjs.com/package/babel-plugin-transform-object-rest-spread</a></p>
+<p>Then add it to .babelrc:</p>
+<p>&ldquo;plugins&rdquo;: [
+&ldquo;babel-plugin-transform-object-rest-spread&rdquo;,
+],</p>
+<h3 id="2-newwebpack-no-data-received-err_empty_response-错误">2. <code>newwebpack No data received ERR_EMPTY_RESPONSE</code> 错误</h3>
+<p>给 webpack-dev-server 添加 &ndash;host xxxxxxxx(设好的 host 映射，或者指定的域名)</p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    
+        <hr>
+        <div class="container text-center">
+            <a href="https://github.com/Bitnut"><small>By 三口一个瓜</small></a>
+        </div>
+    
+</div>
+</body>
+</html>
