@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>emacs on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/tags/emacs/</link>
+    <description>Recent content in emacs on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 19 Feb 2021 21:53:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编译安装 emacs</title>
+      <link>http://localhost:1313/post/emacs-build/</link>
+      <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/emacs-build/</guid>
+      <description>走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 可能会</description>
+    </item>
+    
+  </channel>
+</rss>

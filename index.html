@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>三口一个瓜的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="三口一个瓜的博客" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/" />
+  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="三口一个瓜的博客" />
+  <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="三口一个瓜的博客" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="三口一个瓜的博客" />
+<meta property="og:description" content="三口一个瓜的博客" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:1313/" />
+
+<meta itemprop="name" content="三口一个瓜的博客">
+<meta itemprop="description" content="三口一个瓜的博客"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="三口一个瓜的博客"/>
+<meta name="twitter:description" content="三口一个瓜的博客"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">三口一个瓜的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">三口一个瓜的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpu-cache-inspiration/">CPU 缓存梳理及探讨</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-11-08 </span>
+      <div class="post-category">
+          <a href="/categories/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1/"> 经典设计 </a>
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/"> 计算机组成 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      1. 概述 本来写这篇文章的出发点是想要梳理一下，工作中常用到的 cache，借此为自己的知识体系做一个总结和深化。但是，总感觉简单地梳理又不那么令
+    </div>
+    <div class="read-more">
+      <a href="/post/cpu-cache-inspiration/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/js-array-in-memory/">深入了解: JS 到底如何管理数组的</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-03-26 </span>
+      <div class="post-category">
+          <a href="/categories/programming-language/"> programming language </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      概述 数组是所有 JavaScript 程序员非常熟悉和经常使用的数据结构，和其他的语言类似，仅仅通过一个简单的 let foo = [] 就可以创建出一个数组并使用他。但是，作为一种
+    </div>
+    <div class="read-more">
+      <a href="/post/js-array-in-memory/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/eslint-automic/">在 JS/TS 开发中快乐地使用 eslint</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-12-08 </span>
+      <div class="post-category">
+          <a href="/categories/programming-language/"> programming language </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查
+    </div>
+    <div class="read-more">
+      <a href="/post/eslint-automic/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/js-higher-functions/">一张图说明 JS 的高阶函数</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-10-24 </span>
+      <div class="post-category">
+          <a href="/categories/programming/"> programming </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      JS 提供了一些比较方便高阶函数供我们使用，用 for/while 循环写得慢还容易出错的代码，使用高阶函数早就写完需求了（狗头）。 但是高阶函数各个语言之间总会有些
+    </div>
+    <div class="read-more">
+      <a href="/post/js-higher-functions/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/node-secure-seesions/">如何在 nodejs 中使用正确地使用 session</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-09-07 </span>
+      <div class="post-category">
+          <a href="/categories/backend/"> backend </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 最近公司希望重构论坛项目，计划使用 nodebb 这个基于 nodejs 的论坛开源项目。 nodebb 这个项目有个不错的设计，它的一些非核心功能是可以使用插件化的方式进行拓展
+    </div>
+    <div class="read-more">
+      <a href="/post/node-secure-seesions/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux-netease-front/">解决 Linux 下的网易云音乐字体过小问题</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-06-14 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      问题 linux 下网易云音乐，是不错的选择，奈何自带的字体实在太小。 解决方案 使用编辑器修改 /opt/netease/netease-cloud-music/netease-cloud-music.bash 的内容，在最后一行中添加 --force-device-sc
+    </div>
+    <div class="read-more">
+      <a href="/post/linux-netease-front/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux-awk2/">Linux Awk 入门（02）</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-05-12 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以
+    </div>
+    <div class="read-more">
+      <a href="/post/linux-awk2/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux-awk/">Linux Awk 入门（01）</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-04-21 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是
+    </div>
+    <div class="read-more">
+      <a href="/post/linux-awk/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/socks5-protocal/">Socks5 协议详解（经典设计）</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-04-12 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          <a href="/categories/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1/"> 经典设计 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。 socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，
+    </div>
+    <div class="read-more">
+      <a href="/post/socks5-protocal/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/jianshu403/">解决 http 访问简书图片资源 403 问题</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-04-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      问题起因 最近遇到一个问题，我有些文章放在简书还没有同步过来个人博客上。可就是当我移植过来之后，突然发现图片都显示不出来了。 具体情况如图： 识别
+    </div>
+    <div class="read-more">
+      <a href="/post/jianshu403/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/switchtohugo/">解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-04-09 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。 例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了
+    </div>
+    <div class="read-more">
+      <a href="/post/switchtohugo/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux-strange-shell/">Linux 下 ‘奇怪’ 的 shell</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-03-26 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。 如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。 下面的这些
+    </div>
+    <div class="read-more">
+      <a href="/post/linux-strange-shell/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux-link/">Linux 中的软链接和硬链接</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-03-21 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过
+    </div>
+    <div class="read-more">
+      <a href="/post/linux-link/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/ruinyourtscode/">如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-03-20 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. ~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law 前言 这篇文章主
+    </div>
+    <div class="read-more">
+      <a href="/post/ruinyourtscode/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/proxy-config/">代理实践纪录</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-03-04 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/"> 工具 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。 配
+    </div>
+    <div class="read-more">
+      <a href="/post/proxy-config/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux-ps/">Linux 下的 ps 命令和常用组合</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-02-19 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 总结整理一下简单、常用的 ps 命令用法。 一、查看进程 命令： ps 命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。 常用命令参数： -a 显示同一终
+    </div>
+    <div class="read-more">
+      <a href="/post/linux-ps/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/emacs-build/">编译安装 emacs</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-02-19 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+          <a href="/categories/%E5%B7%A5%E5%85%B7/"> 工具 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;&amp;1 可能会
+    </div>
+    <div class="read-more">
+      <a href="/post/emacs-build/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux-tty/">认识 Linux 下的 TTY</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-02-18 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个
+    </div>
+    <div class="read-more">
+      <a href="/post/linux-tty/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/nvm-error/">NVM 报 ls-remote command results in “N/A 错误</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-01-15 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。 出现这个报错的原因有许多种，我遇到的报错实际上是由代
+    </div>
+    <div class="read-more">
+      <a href="/post/nvm-error/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/webpack-error-collect/">webpack 配置错误拾遗</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-01-14 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      1. ... 展开运算符错误 错误原因： 早期的 babel 有许多问题，一些早期的版本（可能现在也没有解决）无法识别的语法、运算符可以通过插件的形式给 babel 打补丁，这里
+    </div>
+    <div class="read-more">
+      <a href="/post/webpack-error-collect/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/icontransform/">解决按钮移动动画伴随光标样式抖动的问题</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-30 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      问题描述 最近在工作中遇到了一个很奇怪的问题，网站的页面大部分按钮和卡片都有一个向上移动的过渡动画，当鼠标悬浮在这些元素上的时候，动画会触发并
+    </div>
+    <div class="read-more">
+      <a href="/post/icontransform/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/blackwhite/">如何简单粗暴地让网页变黑白？</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-14 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。 今天主要来探讨一下让页面变黑白效果的方
+    </div>
+    <div class="read-more">
+      <a href="/post/blackwhite/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/hexoblog/">Hexo&#43;GithubPages 非常简单易行的搭建个人博客</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-07-29 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/"> 工具 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言：搭建博客要自己打代码吗？ 开始动手：搭建博客的步骤 个性化：更换主题！！ 写博客：初识 markdown 语法 倒腾主题 前言 搭建博客难吗？ 看完这篇你就知道有多简
+    </div>
+    <div class="read-more">
+      <a href="/post/hexoblog/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/zhouyi/">浅谈《周易》</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-07-21 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      周易的现实意义 《周易》是我国的独特文化结晶，也称作《易经》，是《三易》之一、儒门圣典。《周易》在创始之初就试图从天、神性的角度说明做某件事情
+    </div>
+    <div class="read-more">
+      <a href="/post/zhouyi/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cryptdb1/">CryptDB  简单原理论述</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-09-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作
+    </div>
+    <div class="read-more">
+      <a href="/post/cryptdb1/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cryptdb2/">详细论述 CryptDB 的原理</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-09-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥 博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 CryptDB 简单原理论述 相关资料 想要理解Cryp
+    </div>
+    <div class="read-more">
+      <a href="/post/cryptdb2/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cryptdb-install/">cryptdb 安装及使用说明</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-07 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+          <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥：D 博主写的 CryptDB 另外几篇相关文章： CryptDB 简单原理论述 详细论述 CryptDB 的原理 这个暑假的数据库实训
+    </div>
+    <div class="read-more">
+      <a href="/post/cryptdb-install/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/abo/">关于我</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 0001-01-01 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      关于我 你好，我是三口一个瓜。你也可以叫我瓜。这里是我的博客，日常记录和抒情的场所。 我是一名程序员，emacs 爱好者，平时喜欢健身、跑步, 同时
+    </div>
+    <div class="read-more">
+      <a href="/post/abo/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/contact/">联系方式</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 0001-01-01 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Email: 940095072@qq.com Phone: 13427520205 Github: Bitnut QQ: 940095072 微信: h940095072 邮寄地址 中国 China 广东省深圳市 西丽街道，松坪山路，松坪村菊园
+    </div>
+    <div class="read-more">
+      <a href="/post/contact/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    </section>
+  
+  <nav class="pagination">
+    
+    
+  </nav>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="940095072.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

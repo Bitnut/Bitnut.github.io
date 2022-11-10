@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>计算机组成 on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/</link>
+    <description>Recent content in 计算机组成 on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 08 Nov 2022 08:04:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CPU 缓存梳理及探讨</title>
+      <link>http://localhost:1313/post/cpu-cache-inspiration/</link>
+      <pubDate>Tue, 08 Nov 2022 08:04:50 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpu-cache-inspiration/</guid>
+      <description>1. 概述 本来写这篇文章的出发点是想要梳理一下，工作中常用到的 cache，借此为自己的知识体系做一个总结和深化。但是，总感觉简单地梳理又不那么令</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>v8 on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/tags/v8/</link>
+    <description>Recent content in v8 on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 26 Mar 2022 08:04:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/v8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入了解: JS 到底如何管理数组的</title>
+      <link>http://localhost:1313/post/js-array-in-memory/</link>
+      <pubDate>Sat, 26 Mar 2022 08:04:50 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/js-array-in-memory/</guid>
+      <description>概述 数组是所有 JavaScript 程序员非常熟悉和经常使用的数据结构，和其他的语言类似，仅仅通过一个简单的 let foo = [] 就可以创建出一个数组并使用他。但是，作为一种</description>
+    </item>
+    
+  </channel>
+</rss>

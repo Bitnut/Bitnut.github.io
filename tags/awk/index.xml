@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Awk on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/tags/awk/</link>
+    <description>Recent content in Awk on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 12 May 2021 13:00:28 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/awk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Awk 入门（02）</title>
+      <link>http://localhost:1313/post/linux-awk2/</link>
+      <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/linux-awk2/</guid>
+      <description>前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以</description>
+    </item>
+    
+    <item>
+      <title>Linux Awk 入门（01）</title>
+      <link>http://localhost:1313/post/linux-awk/</link>
+      <pubDate>Wed, 21 Apr 2021 12:00:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/linux-awk/</guid>
+      <description>快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是</description>
+    </item>
+    
+  </channel>
+</rss>

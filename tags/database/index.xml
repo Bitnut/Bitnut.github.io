@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>database on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/tags/database/</link>
+    <description>Recent content in database on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 11 Sep 2017 08:52:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CryptDB  简单原理论述</title>
+      <link>http://localhost:1313/post/cryptdb1/</link>
+      <pubDate>Mon, 11 Sep 2017 08:52:53 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cryptdb1/</guid>
+      <description>博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作</description>
+    </item>
+    
+    <item>
+      <title>详细论述 CryptDB 的原理</title>
+      <link>http://localhost:1313/post/cryptdb2/</link>
+      <pubDate>Mon, 11 Sep 2017 08:52:18 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cryptdb2/</guid>
+      <description>版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥 博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 CryptDB 简单原理论述 相关资料 想要理解Cryp</description>
+    </item>
+    
+    <item>
+      <title>cryptdb 安装及使用说明</title>
+      <link>http://localhost:1313/post/cryptdb-install/</link>
+      <pubDate>Mon, 07 Aug 2017 20:44:51 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cryptdb-install/</guid>
+      <description>版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥：D 博主写的 CryptDB 另外几篇相关文章： CryptDB 简单原理论述 详细论述 CryptDB 的原理 这个暑假的数据库实训</description>
+    </item>
+    
+  </channel>
+</rss>
