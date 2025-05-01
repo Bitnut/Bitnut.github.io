@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） - 三口一个瓜的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="" /><meta name="description" content="如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization.
+~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law
+前言 这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.147.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/ruinyourtscode/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:url" content="http://localhost:1313/post/ruinyourtscode/">
+  <meta property="og:site_name" content="三口一个瓜的博客">
+  <meta property="og:title" content="如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）">
+  <meta property="og:description" content="如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization.
+~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law
+前言 这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-03-20T19:11:51+08:00">
+    <meta property="article:modified_time" content="2021-03-20T19:11:51+08:00">
+    <meta property="article:tag" content="Node">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="MS">
+    <meta property="article:tag" content="Ts">
+
+  <meta itemprop="name" content="如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）">
+  <meta itemprop="description" content="如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization.
+~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law
+前言 这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge">
+  <meta itemprop="datePublished" content="2021-03-20T19:11:51+08:00">
+  <meta itemprop="dateModified" content="2021-03-20T19:11:51+08:00">
+  <meta itemprop="wordCount" content="1253">
+  <meta itemprop="keywords" content="Node,Linux,MS,Ts">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）">
+  <meta name="twitter:description" content="如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization.
+~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law
+前言 这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">三口一个瓜的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">三口一个瓜的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-03-20 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#如何写出无法维护的-ts-代码挫败-microsoft-试图接管-javascript-的阴谋">如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</a>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#正文">正文</a>
+          <ul>
+            <li><a href="#ts-特性">TS 特性</a></li>
+          </ul>
+        </li>
+        <li><a href="#js-相关">js 相关</a></li>
+        <li><a href="#编程习惯1">编程习惯1：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="如何写出无法维护的-ts-代码挫败-microsoft-试图接管-javascript-的阴谋">如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</h1>
+<blockquote>
+<p>If builders built buildings the way programmers write programs, then
+the first woodpecker that came along would destroy civilization.</p></blockquote>
+<blockquote>
+<p>~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law</p></blockquote>
+<h2 id="前言">前言</h2>
+<p>这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge</p>
+<h2 id="正文">正文</h2>
+<h3 id="ts-特性">TS 特性</h3>
+<ul>
+<li>不封装代码： 调用者需要知道被调用的所有的细节。</li>
+<li>接口包装，包装，包装： TS 的 Utility Types 和继承特性让我快乐起来，尽量多包装几层接口，到时候好用，最好可以把高级特性多用几遍。</li>
+<li>随版本和提交变动我的接口： 比如说，把 showTable(col: number, row: number): Promise<void> 改成  showTable(row: string, col: string): void，等 release 了几个版本后，再把其改回去。这样维护我写的程序的程序员们将不能很快地明白哪一个是对的。</li>
+<li>膨胀 ENUM 类型：  把字符串类型都放某个 ENUM 里，方便复用。</li>
+<li>TS 的 namespace 特性是美妙的东西（比 ES6 的好理解，反正就是高级），在接口定义的地方大量使用 namespace。</li>
+<li>避免过度使用接口。BS 接口，面向接口编程加重了我的心志负担，不用。</li>
+<li>使用包装类型： String 和 string 哪个牛逼？</li>
+<li>重载签名把条件更宽松的放在前面： 例： 同样传递一个参数，把使用 any 的放在最开头。</li>
+<li>只因为参数不同就声名重载函数。</li>
+<li>避免过度使用类： 类写起来不舒服（太长。花大力气弄成函数式的。</li>
+<li>使用 Object.keys(): 我就要在 ts 里用这个方法，它太好用了。</li>
+<li>遇到难题就写断言： 类型判断老是过不了，又不能写 any，写非空断言好了。</li>
+<li>使用缺乏设计的接口： 遇到难题又不能写断言，那随便定义个 interface 就好了。</li>
+<li>TS 的类型检查是老中医神药： ts 不是有类型检查么，很好，我不做测试也可以保证结果是对的。</li>
+<li>钻研/利用 TS 的结构化类型定义的漏洞： 本来函数需要一个 dog 类型的参数，我就是想传个 animal 类型的。给 dog 类型的变量赋值 cat 类型的实例。</li>
+<li>export 函数不写返回类型和参数类型： 自己看定义。</li>
+</ul>
+<h2 id="js-相关">js 相关</h2>
+<ul>
+<li>使用 Array 构造函数初始化数组： 当我使用 Array(1, 2, 3)， Array(5) 这样的函数可以很好的糊弄新手，因为他们不知道这个坑，这会对他们的成长颇有助益。</li>
+<li>不使用 eslint 检查代码问题： eslint 只会限制我的想像力（确信。</li>
+<li>使用 for-in 语法: 遍历对象只好用 for-in 了。</li>
+<li>花哨的符合 eslint 命名规则的命名： function capiTaliSaTion() {}。</li>
+</ul>
+<h2 id="编程习惯1">编程习惯1：</h2>
+<ul>
+<li>偶尔故意写错函数名： 比如同时定义两个函数 prepare()、preparae()。</li>
+<li>从不验证： 从不验证输入的数据，从不验证函数的返回值。因为 TS 都帮我们做好了，这样做是充分信任 MS 的表现。</li>
+<li>把变量改在名字上： 例如，把setMargin(margin: int)改成，setLeftMargin(bla), setRightMargin(bla), setCenterMargin(bla)。</li>
+<li>使用环境变量初始化： 如果你的代码需要使用环境变量。那么应该把类的成员的初始化使用环境变量，而不是构造函数。</li>
+<li>尽善尽美的类： 我的类应该尽可能地拥有各种方法。不需要定义多几个类，那样会使得代码太过混乱。</li>
+<li>面向对象是写出无法维护代码的天赐之物！ 如果你有一个类有十个类成员（变量和方法）。考虑一下简化类吧。比如写 10 个层次的继承，然后把这十个属性分别放在这十个类里面。如果可能的话，把这十个类分别放在十个不同的文件中。</li>
+<li>使用错误的换行符： 同时使用 CRLF 和 LF，而且换来换去。看我提交记录的人会像侦探一样看完我的代码。</li>
+<li>在注释中撒谎： 其实可以不用撒谎，只需要在改代码的时候不更新注释就好了。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content"></span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-03-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/node/">node</a>
+          <a href="/tags/linux/">Linux</a>
+          <a href="/tags/ms/">MS</a>
+          <a href="/tags/ts/">ts</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/linux-link/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Linux 中的软链接和硬链接</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/proxy-config/">
+            <span class="next-text nav-default">代理实践纪录</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="Bitnut/comment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="940095072.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

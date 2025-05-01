@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>详细论述 CryptDB 的原理 - 三口一个瓜的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="" /><meta name="description" content=" 版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥
+博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
+CryptDB 简单原理论述
+相关资料 想要理解CryptDB, 你可能需要阅读如下资料： CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. 文章链接
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.147.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cryptdb2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:url" content="http://localhost:1313/post/cryptdb2/">
+  <meta property="og:site_name" content="三口一个瓜的博客">
+  <meta property="og:title" content="详细论述 CryptDB 的原理">
+  <meta property="og:description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥
+博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
+CryptDB 简单原理论述
+相关资料 想要理解CryptDB, 你可能需要阅读如下资料： CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. 文章链接">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2017-09-11T08:52:18+08:00">
+    <meta property="article:modified_time" content="2017-09-11T08:52:18+08:00">
+    <meta property="article:tag" content="Cryptdb">
+    <meta property="article:tag" content="Database">
+
+  <meta itemprop="name" content="详细论述 CryptDB 的原理">
+  <meta itemprop="description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥
+博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
+CryptDB 简单原理论述
+相关资料 想要理解CryptDB, 你可能需要阅读如下资料： CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. 文章链接">
+  <meta itemprop="datePublished" content="2017-09-11T08:52:18+08:00">
+  <meta itemprop="dateModified" content="2017-09-11T08:52:18+08:00">
+  <meta itemprop="wordCount" content="4304">
+  <meta itemprop="keywords" content="Cryptdb,Database">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="详细论述 CryptDB 的原理">
+  <meta name="twitter:description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥
+博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
+CryptDB 简单原理论述
+相关资料 想要理解CryptDB, 你可能需要阅读如下资料： CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. 文章链接">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">三口一个瓜的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">三口一个瓜的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">详细论述 CryptDB 的原理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-09-11 </span>
+        <div class="post-category">
+            <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#博主写的-cryptdb-另外几篇相关文章">博主写的 CryptDB 另外几篇相关文章：</a></li>
+        <li><a href="#相关资料">相关资料</a></li>
+        <li><a href="#主要结构">主要结构：</a></li>
+        <li><a href="#安全保障">安全保障：</a></li>
+        <li><a href="#thread1下的密码学实现">Thread1下的密码学实现：</a></li>
+        <li><a href="#概念可调节的基于查询的加密">概念：可调节的基于查询的加密</a></li>
+        <li><a href="#两种join">两种join</a></li>
+        <li><a href="#策略的注解">策略的注解：</a></li>
+        <li><a href="#key-chaining">Key Chaining</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥</p></blockquote>
+<h2 id="博主写的-cryptdb-另外几篇相关文章">博主写的 CryptDB 另外几篇相关文章：</h2>
+<p><a href="https://bitnut.github.io/posts/cryptdb-install/">cryptdb 安装及使用说明</a></p>
+<p><a href="https://bitnut.github.io/posts/cryptdb1/">CryptDB 简单原理论述</a></p>
+<h2 id="相关资料">相关资料</h2>
+<p>想要理解CryptDB, 你可能需要阅读如下资料：
+CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. <a href="http://web.cs.ucdavis.edu/~franklin/ecs228/2013/popa_etal_sosp_2011.pdf">文章链接</a></p>
+<p>Guidelines for Using the CryptDB System Securely <a href="https://eprint.iacr.org/2015/979">链接</a></p>
+<ul>
+<li>其他可能有用的资源:</li>
+</ul>
+<p>CryptDB 有软件的下载和使用介绍。</p>
+<p>GitHub - CryptDB/cryptdb: A database system that can process SQL queries over encrypted data. 这个比较方便，建议看这个！</p>
+<p>Raluca Ada Popa&rsquo;s Homepage 建议～</p>
+<h2 id="主要结构">主要结构：</h2>
+<p>Database proxy和一个unmodifiedDBMS</p>
+<p>User-defined functions (UDFs) [用来执行密码操作]</p>
+<h2 id="安全保障">安全保障：</h2>
+<ul>
+<li>面对thread1：</li>
+</ul>
+<p>将所有的SQL查询用proxy拦截。</p>
+<p>利用proxy加解密从DBMS传过来的数据，也会转换一些操作（比如说计算方面的+会利用*代替）</p>
+<ul>
+<li>面对thread2：</li>
+</ul>
+<p>原理看得不是很懂，只知道是说对于不同的数据是会采用不同的数据进行加密的（比如说不同用户的加密秘钥是不同的）。</p>
+<p>但是在这个情况下是能够保护到没有在数据库被攻击期间登录的用户的。而且仅仅是thread1下采取的措施是不足以保证thread2下的安全的，因为敌人可以得到密钥</p>
+<h2 id="thread1下的密码学实现">Thread1下的密码学实现：</h2>
+<p>几个密码算法的简要概括：</p>
+<ul>
+<li>RND：</li>
+</ul>
+<p>最高级别的密码学保护，所有的计算都是不被允许的，甚至相同的两个明文映射到的都是不同的密文！（这里看图一感觉就不是很懂了！为什么会支持COUNT和UPDATE这样的操作？？大神请告诉我）</p>
+<ul>
+<li>DET</li>
+</ul>
+<p>只会暴露那些相同的映射关系，所以可以执行=的断言操作。</p>
+<p>理论上可以实现：</p>
+<p>join，GroupBy, count, distinct, in, not in, =, !=</p>
+<ul>
+<li>OPE</li>
+</ul>
+<p>可以在密文上实现排序！因为加密之后的密文仍然会暴露他们的大小关系。</p>
+<p>理论上可以实现：</p>
+<p>Orderby, min, max, sort</p>
+<ul>
+<li>HOM（同态加密）</li>
+</ul>
+<p>可以实现在加密的密文上的计算，但是需要转换！原理：HOMk(x)*HOMk(y)=HOMk(x+y)通过吧加密值相乘可以求出和的加密值。同样计算average时返回count值和sum值即可！</p>
+<p>理论上可以实现：</p>
+<p>Sum,multiply, average</p>
+<ul>
+<li>JOIN</li>
+</ul>
+<p>Join的设置是有必要的，因为DET的实现使用了不同的key以防止跨列相关联（作者的话=。=难以理解）。</p>
+<ul>
+<li>SEARCH</li>
+</ul>
+<p>支持LIKE操作，利用了特殊的规则把内容分成块状，去重（重复的字块）之后打乱顺序再使用Song</p>
+<ul>
+<li>et al的算法加密，非常安全，几乎可以达到和RND一样的加密程度（因为DBMS只能通过UDF和传入的密文检查是否match到，其他的信息对于DBMS来说都是一抹黑）。</li>
+</ul>
+<p>请结合下图了解几种加密算法之间差别，甚至同一个算法在不同的使用场景之下都会有不同的加密效果！</p>
+<p>图一</p>
+<p>实际的运用场景：</p>
+<h2 id="概念可调节的基于查询的加密">概念：可调节的基于查询的加密</h2>
+<p>解释：为了在提供数据库服务的同时保证最高的安全保障，cryptDB会调节加密的方式。</p>
+<p>下面的洋葱图展示了在最原始的情况下，数据被加密的情况。每向外一层都代表了更高程度的加密。同样的基于性能的考虑，为不同的数据类型准备几种不同的洋葱丝有必要的。例如：对于string类型add操作是没有意义的，对于integer来说search操作也是毫无效果的。</p>
+<p>图二</p>
+<p>加密的秘钥是不同的，仅仅在同一个onion层和同一列下key是统一的。这样防止DBMS获取到更多别的关系下的信息。</p>
+<p>解开加密层：</p>
+<p>利用DECRYPT_***</p>
+<p>UDF（***是某种加密算法）这个UDF是嵌入到查询语句之中的。例如：</p>
+<p>UPDATE Table1 SET</p>
+<p>C2-Ord= DECRYPT RND(K, C2-Ord, C2-IV)</p>
+<p>解密操作只会发生在对于查询对数据加密要求贬低的时候，在要求不变的时候，解密操作不会发生。</p>
+<h2 id="两种join">两种join</h2>
+<p>Equi-join和range</p>
+<p>join。</p>
+<p>为了实现equi-join不同的列之间必须用同样的key进行加密，否则数据库实际上没有办法进行对比的操作。另外不能join到一起的列不能够使用同样的key（意思是因为某些原因，即使是可以join的，但是应用层不希望他们可以执行join操作）</p>
+<p>在上面的讨论之后，如果事先知道了要join的列名equi-join是很容易实现的。但是问题是如果proxy代理并不知道呢（因为在DBMS内无论是表名还是列名都是隐藏的）？事情会变得比较复杂。</p>
+<ul>
+<li>JOIN-ADJ</li>
+</ul>
+<p>为了解决列对（column pair）不是先验的情况下join操作的执行问题，CryptDB给出了JOIN-ADJ这种‘新的’密码学原型（其实不是很新就是了）。</p>
+<ul>
+<li>JOIN-ADJ是个啥？</li>
+</ul>
+<p>论文里谈到JOIN-ADJ是一种【对输入确定性的函数】（就是相同的明文对应的一定是相同的JOIN-ADJ值），同时也是【可调整的利用秘钥加密之后的hash值】（意思是这个hash值由对应的加密算法生成，而且带有可调整的附加属性的）。</p>
+<ul>
+<li>JOIN-ADJ怎么使用？</li>
+</ul>
+<p>首先JOIN-ADJ是不可置反的。</p>
+<p>因此利用了JOIN-ADJ的JOIN加密方案由如下所示：</p>
+<p>JOIN(v) = JOIN-ADJ(v)||DET(v)…….（这里的||符号起到连接字符串的作用）</p>
+<p>在这个结构之下，CryptDB通过比较JOIN-ADJ(v)来实现比较属性名是否相同，通过解密DET(v)来获取被加密的属性值。</p>
+<p>当每次proxy悉知了有心得JOIN操作到来，它会向DBMS传递一个key使得DBMS可以调整两个列之间的JOIN-ADJ值，使得他们的值趋于一致（就是变成一样的）（当然必须明文要是相同的才行）。一旦他们经过了调整，之后对于这两个列的JOIN操作就无需再次调整他们的JOIN-ADJ值了，因为他们会将这个值保留，直到需要作出改变为止。</p>
+<p>显然，这里提到的JOIN操作是具有可传递性的，AB、AC可以实现JOIN，那么BC同样可以。这样ABC形成了一个所谓的“可传递组”的概念（看起来其实就是属性闭包嘛）。</p>
+<p>注意他这里为什么要用“可传递组”这样一个奇葩的名称，实际上作者的对于可以实现JOIN操作的列对的管理是通过这样的标记来实现的：（表名+列名），并不是普通意义上的属性闭包。根据作者的说法，这样的标记是出于【避免波动】（不是很懂）这样的考虑，而且是为了让所有在“可传递组”中的列能共享同样的join-base。</p>
+<p>CryptDB通过选择字母表顺序上的第一个标签作为join-base，因此如果每次有新表加入，而且这个表的标签会成为新的join-base的话，n个列的情况下，总共需要n(n-1)/2次join转换（即对JOIN-ADJ值的调整）</p>
+<ul>
+<li>JOIN-ADJ的生成
+这里没有难度，请自己看生成方式。</li>
+</ul>
+<p>威胁2下的CryptDB：</p>
+<p>第四章在一个论坛网站phpBB的模型上讨论了这个问题如何在数据库陷入险境的时候，减轻收到的数据损失？</p>
+<p>CryptDB作出了以下两种保证来处理威胁2。</p>
+<p>1.私人之间传递的信息是对他人隔离的。</p>
+<p>2.某个论坛中发表的言论信息只有属于该论坛的人才能看见。</p>
+<p>这样的保证有两个挑战：</p>
+<p>1.在SQL查询的层次就需要获取对于共享信息的权限控制策略。（因此要在建表的时候声明principles）【4.1】</p>
+<p>2.减少敌方能够获取的信息量（key chaining）【4.2】</p>
+<h2 id="策略的注解">策略的注解：</h2>
+<p>软件开发人员通过对CryptDB中数据库模式结构的定义，来指定在SQL查询这个层次上的策略。</p>
+<p>如何进行注解？</p>
+<p>开发人员会指定每一个数据实例其对应的principle是什么。Principle是一个实体，例如一个用户或者一个小组，利用他们可以很好的对权限进行定义。</p>
+<p>CryptDB使用的是自己定义的principal而不是现成的DBMS的principles。因为现成的principle提供的定义细粒度不够，不足以满足开发的需求。其二CryptDB在principle之间需要实现显式的特权授予（SPECK_FOR），这也是现有的DBMS principle不能够提供的！</p>
+<p>注：特权的意思其实就是能够对数据进行解密操作。</p>
+<p>注解需要以下3步：</p>
+<p>请对照下面的定义来理解！</p>
+<p>Step1：</p>
+<p>定义principle types：利用PRINCTYPE关键字定义。每一个principle都是某个principle type的实例（就类似C++里面变量和变量类型的概念）</p>
+<p>一共有两种principle：external和internal（注意是除了external就是internal了下面不再重复这个概念）。</p>
+<p>External：这种principle代表了那些端用户（end user），这些端用户通过显式的使用密码得到自己的权利。</p>
+<p>Internal：这种principle的特权是可以被external的principle获取的，但是只能通过显式的声明来实现授予。</p>
+<p>Step2：</p>
+<p>显式的定义每一列是否包含有敏感的信息，同时也定义哪些principle拥有获取这些敏感信息的权利。使用ENC_FOR来实现这样的操作。如下图中的表privmsgs中，只有principle 5可以解密msgtext x37a21f。</p>
+<p>Step3：</p>
+<p>可以利用SPEAK_FOR定义授权的规则。语法：(a x) SPEAKS_FOR (b y)</p>
+<p>直译过来这个声明的意思就是x类a principle声明了自己拥有y类b</p>
+<p>principle的特权。其实对着表来看的话就是a这个属性获取了b这个属性的特权。</p>
+<p>注意：b这个属性只能待在声明所在的这张表里面，但是a就不一样了，a可以待在别的表里面。</p>
+<h2 id="key-chaining">Key Chaining</h2>
+<p>其实没有说前面说的“属性”用来代替principle其实是不准确的说法。到了Key Chaining这里是绝对不可以用的。</p>
+<p>每一个principle实例其实都关联了一个随机选择的key。假如某个principle A给另外一个principle B授权了，就是B speaks for A，那么A的key将会用B的key加密然后存储到数据库中的access_keys表格中。</p>
+<p>敏感区域的数据是用和前面onion同样的方式加密的，区别在于这里是每一个实例都会被单独加密，而不是整一列使用同样的秘钥加密。</p>
+<p>每个principle实例的key是由对称秘钥和公钥私钥对组成的。公钥加密开销比较大，因此普通情况下principle都是用对称密钥加密的。可是也有特殊情况，一旦涉及到有的principle没有登录，这时候别的principle都是没有办法获知没有登录的principle的对称密钥的，所以利用公钥加密的方法，把明文用公钥加密传给对方，等到对方上线的时候使用私钥解密即可。</p>
+<p>CryptDB为每一个external principle派发一个随机key，这个key被存放在external_keys表格里面</p>
+<p>每当地方想要通过更改SPEAKS_FOR来窥探隐私信息的时候，CryptDB的机制告诉我们，需要对access_keys表格进行相应的更改，想要更改这个表格必须获得被授权principle的key（前面讲过的），这就意味着只有这个principle登录的时候，敌方才能获取相应的key从而对这个principle的私密信息进行窥探。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content"></span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2017-09-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/cryptdb/">cryptdb</a>
+          <a href="/tags/database/">database</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cryptdb1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CryptDB  简单原理论述</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/cryptdb-install/">
+            <span class="next-text nav-default">cryptdb 安装及使用说明</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="Bitnut/comment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="940095072.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

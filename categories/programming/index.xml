@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Programming on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/categories/programming/</link>
+    <description>Recent content in Programming on 三口一个瓜的博客</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 24 Oct 2021 08:04:50 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一张图说明 JS 的高阶函数</title>
+      <link>http://localhost:1313/post/js-higher-functions/</link>
+      <pubDate>Sun, 24 Oct 2021 08:04:50 +0800</pubDate>
+      <guid>http://localhost:1313/post/js-higher-functions/</guid>
+      <description>&lt;p&gt;JS 提供了一些比较方便高阶函数供我们使用，用 for/while 循环写得慢还容易出错的代码，使用高阶函数早就写完需求了（狗头）。&lt;/p&gt;&#xA;&lt;p&gt;但是高阶函数各个语言之间总会有些差别，平时看文档总是没法记得牢固，各种用法傻傻分不清楚？那么来看看下面这张图吧，秒级理解。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

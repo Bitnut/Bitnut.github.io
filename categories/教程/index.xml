@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>教程 on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</link>
+    <description>Recent content in 教程 on 三口一个瓜的博客</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 12 May 2021 13:00:28 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Awk 入门（02）</title>
+      <link>http://localhost:1313/post/linux-awk2/</link>
+      <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      <guid>http://localhost:1313/post/linux-awk2/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/static/linux-awk/gnu-awk.png&#34; alt=&#34;gun-awk&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。&lt;/p&gt;&#xA;&lt;p&gt;仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 &lt;code&gt;记录&lt;/code&gt; 以及 &lt;code&gt;处理记录&lt;/code&gt;，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux Awk 入门（01）</title>
+      <link>http://localhost:1313/post/linux-awk/</link>
+      <pubDate>Wed, 21 Apr 2021 12:00:28 +0800</pubDate>
+      <guid>http://localhost:1313/post/linux-awk/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/static/linux-awk/gnu-awk.png&#34; alt=&#34;gun-awk&#34;&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;快速入门-awk&#34;&gt;快速入门 awk&lt;/h1&gt;&#xA;&lt;h2 id=&#34;一-awk-的作用优势和特点&#34;&gt;一、 awk 的作用、优势和特点&lt;/h2&gt;&#xA;&lt;p&gt;awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。&lt;/p&gt;&#xA;&lt;p&gt;它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写”  : P。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>cryptdb 安装及使用说明</title>
+      <link>http://localhost:1313/post/cryptdb-install/</link>
+      <pubDate>Mon, 07 Aug 2017 20:44:51 +0800</pubDate>
+      <guid>http://localhost:1313/post/cryptdb-install/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 &lt;em&gt;瓜哥&lt;/em&gt;：D&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;博主写的-cryptdb-另外几篇相关文章&#34;&gt;博主写的 CryptDB 另外几篇相关文章：&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bitnut.github.io/posts/cryptdb1/&#34;&gt;CryptDB 简单原理论述&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bitnut.github.io/posts/cryptdb2/&#34;&gt;详细论述 CryptDB 的原理&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;这个暑假的数据库实训内容，研究的项目背景下面会介绍～&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

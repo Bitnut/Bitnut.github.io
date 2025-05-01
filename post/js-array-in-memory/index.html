@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>深入了解: JS 到底如何管理数组的 - 三口一个瓜的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="" /><meta name="description" content="概述 数组是所有 JavaScript 程序员非常熟悉和经常使用的数据结构，和其他的语言类似，仅仅通过一个简单的 let foo = [] 就可以创建出一个数组并使用他。但是，作为一种弱类型语言，使用过其他强类型语言的程序员也许会对 javascript 的这种写法感到非常疑惑：let array = [0, &#39;a&#39;, &quot;hello&quot;]。WTF？发生了什么，难道数组里面的元素类型不应该是完全一致的么？这是发生了什么魔法么。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.147.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/js-array-in-memory/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:url" content="http://localhost:1313/post/js-array-in-memory/">
+  <meta property="og:site_name" content="三口一个瓜的博客">
+  <meta property="og:title" content="深入了解: JS 到底如何管理数组的">
+  <meta property="og:description" content="概述 数组是所有 JavaScript 程序员非常熟悉和经常使用的数据结构，和其他的语言类似，仅仅通过一个简单的 let foo = [] 就可以创建出一个数组并使用他。但是，作为一种弱类型语言，使用过其他强类型语言的程序员也许会对 javascript 的这种写法感到非常疑惑：let array = [0, &#39;a&#39;, &#34;hello&#34;]。WTF？发生了什么，难道数组里面的元素类型不应该是完全一致的么？这是发生了什么魔法么。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-03-26T08:04:50+08:00">
+    <meta property="article:modified_time" content="2022-03-26T08:04:50+08:00">
+    <meta property="article:tag" content="Nodejs">
+    <meta property="article:tag" content="Javascript">
+    <meta property="article:tag" content="V8">
+
+  <meta itemprop="name" content="深入了解: JS 到底如何管理数组的">
+  <meta itemprop="description" content="概述 数组是所有 JavaScript 程序员非常熟悉和经常使用的数据结构，和其他的语言类似，仅仅通过一个简单的 let foo = [] 就可以创建出一个数组并使用他。但是，作为一种弱类型语言，使用过其他强类型语言的程序员也许会对 javascript 的这种写法感到非常疑惑：let array = [0, &#39;a&#39;, &#34;hello&#34;]。WTF？发生了什么，难道数组里面的元素类型不应该是完全一致的么？这是发生了什么魔法么。">
+  <meta itemprop="datePublished" content="2022-03-26T08:04:50+08:00">
+  <meta itemprop="dateModified" content="2022-03-26T08:04:50+08:00">
+  <meta itemprop="wordCount" content="4386">
+  <meta itemprop="keywords" content="Nodejs,Javascript,V8">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入了解: JS 到底如何管理数组的">
+  <meta name="twitter:description" content="概述 数组是所有 JavaScript 程序员非常熟悉和经常使用的数据结构，和其他的语言类似，仅仅通过一个简单的 let foo = [] 就可以创建出一个数组并使用他。但是，作为一种弱类型语言，使用过其他强类型语言的程序员也许会对 javascript 的这种写法感到非常疑惑：let array = [0, &#39;a&#39;, &#34;hello&#34;]。WTF？发生了什么，难道数组里面的元素类型不应该是完全一致的么？这是发生了什么魔法么。">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">三口一个瓜的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">三口一个瓜的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">深入了解: JS 到底如何管理数组的</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-26 </span>
+        <div class="post-category">
+            <a href="/categories/programming-language/"> programming language </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#js-的数组定义">JS 的数组定义</a></li>
+        <li><a href="#js-数组的类型">JS 数组的“类型”</a></li>
+        <li><a href="#来完成几个实验">来完成几个实验</a></li>
+        <li><a href="#v8-数组的核心源码">v8 数组的核心源码</a>
+          <ul>
+            <li><a href="#增加数组元素">增加数组元素</a></li>
+          </ul>
+        </li>
+        <li><a href="#小结">小结</a></li>
+        <li><a href="#文献引用">文献引用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="概述">概述</h2>
+<p>数组是所有 JavaScript 程序员非常熟悉和经常使用的数据结构，和其他的语言类似，仅仅通过一个简单的 <code>let foo = []</code> 就可以创建出一个数组并使用他。但是，作为一种弱类型语言，使用过其他强类型语言的程序员也许会对 javascript 的这种写法感到非常疑惑：<code>let array = [0, 'a', &quot;hello&quot;]</code>。WTF？发生了什么，难道数组里面的元素类型不应该是完全一致的么？这是发生了什么魔法么。</p>
+<p>JavaScript 到底是如何构建和管理数组的呢？这篇文章就以 nodejs 依赖的 v8 引擎为例，深入理解 js 管理数组的原理。</p>
+<p><em>注</em> 如果觉得不想读完整篇文章，只想了解大概的内容，可以到文章末尾阅读 <code>小结</code> 章节。</p>
+<p><em>注</em> 为了文章的严谨性，本文采用的是 <code>Nodejs</code> 版本 <code>16.13.0</code> 在提交: <a href="https://github.com/nodejs/node/commit/8fdabcb9184a438d86a279936290d81b2ac2c13c">8fdabcb</a> 所依赖的 V8 版本： <code>9.4.146</code>，其他的版本特性和改动均不再此次讨论的范围内。</p>
+<h2 id="js-的数组定义">JS 的数组定义</h2>
+<p>首先来看一下 MDN 的文档是怎么定义 JS 中的数组类型的：</p>
+<blockquote>
+<p>The JavaScript Array class is a global object that is used in the construction of arrays; which are high-level, list-like objects.</p></blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN Array 定义</a></p>
+<h2 id="js-数组的类型">JS 数组的“类型”</h2>
+<p>什么？JS 的数组什么时候有了类型？没错，JS 的数组是有类型的，只不过在 JavaScript 的层次，数组的类型是没有意义的。但是在实际的 JavaScript 引擎中，引入类型是非常正常的做法，例如 V8 引擎在实现数组的是后就引入了类型的概念。我们下面来简单介绍一下，在 V8 层面上，数组的类型究竟是怎么实现的。</p>
+<p>首先给出下图，这是 V8 定义的 JS 数组类型。</p>
+<p><img src="/static/js-array-types.png" alt="JS-array-types"></p>
+<p>这张图中所展示的类型主要有以下几个特点：</p>
+<ol>
+<li>所有的类型以 <code>_ELEMENTS</code> 结尾</li>
+<li>都用下划线分割为了三段</li>
+<li>第一段有两种值： <code>PACKED</code> 和 <code>HOLEY</code></li>
+<li>第二段有三种值： <code>SMI</code> 、 <code>DOUBLE</code> 和 ``</li>
+</ol>
+<p>我们来对以上四点进行分点解析</p>
+<ul>
+<li>所有的类型以 <code>_ELEMENTS</code> 结尾</li>
+</ul>
+<p>这是 V8 中一个很有意思的地方，我把相关的源代码贴在下方：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl">  <span class="c1">// elements-kind.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The &#34;fast&#34; kind for elements that only contain SMI values. Must be first
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// to make it possible to efficiently check maps for this kind.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">PACKED_SMI_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HOLEY_SMI_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The &#34;fast&#34; kind for tagged values. Must be second to make it possible to
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// efficiently check maps for this and the PACKED_SMI_ELEMENTS kind
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// together at once.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">PACKED_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HOLEY_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The &#34;fast&#34; kind for unwrapped, non-tagged double values.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">PACKED_DOUBLE_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HOLEY_DOUBLE_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The nonextensible kind for elements.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">PACKED_NONEXTENSIBLE_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HOLEY_NONEXTENSIBLE_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The sealed kind for elements.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">PACKED_SEALED_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HOLEY_SEALED_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The frozen kind for elements.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">PACKED_FROZEN_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HOLEY_FROZEN_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The &#34;slow&#34; kind.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">DICTIONARY_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Elements kind of the &#34;arguments&#34; object (only in sloppy mode).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">FAST_SLOPPY_ARGUMENTS_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SLOW_SLOPPY_ARGUMENTS_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// For string wrapper objects (&#34;new String(&#39;...&#39;)&#34;), the string&#39;s characters
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// are overlaid onto a regular elements backing store.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">FAST_STRING_WRAPPER_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SLOW_STRING_WRAPPER_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Fixed typed arrays.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define TYPED_ARRAY_ELEMENTS_KIND(Type, type, TYPE, ctype) TYPE##_ELEMENTS,
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>  <span class="n">TYPED_ARRAYS</span><span class="p">(</span><span class="n">TYPED_ARRAY_ELEMENTS_KIND</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">RAB_GSAB_TYPED_ARRAYS</span><span class="p">(</span><span class="n">TYPED_ARRAY_ELEMENTS_KIND</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#undef TYPED_ARRAY_ELEMENTS_KIND
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// WasmObject elements kind. The actual elements type is read from the
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// respective WasmTypeInfo.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">WASM_ARRAY_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Sentinel ElementsKind for objects with no elements.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">NO_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Derived constants from ElementsKind.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">FIRST_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">PACKED_SMI_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LAST_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">RAB_GSAB_BIGINT64_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FIRST_FAST_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">PACKED_SMI_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LAST_FAST_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">HOLEY_DOUBLE_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FIRST_FIXED_TYPED_ARRAY_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">UINT8_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LAST_FIXED_TYPED_ARRAY_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">BIGINT64_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FIRST_RAB_GSAB_FIXED_TYPED_ARRAY_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">RAB_GSAB_UINT8_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LAST_RAB_GSAB_FIXED_TYPED_ARRAY_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">RAB_GSAB_BIGINT64_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TERMINAL_FAST_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">HOLEY_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FIRST_ANY_NONEXTENSIBLE_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">PACKED_NONEXTENSIBLE_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LAST_ANY_NONEXTENSIBLE_ELEMENTS_KIND</span> <span class="o">=</span> <span class="n">HOLEY_FROZEN_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Alias for kSystemPointerSize-sized elements
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#ifdef V8_COMPRESS_POINTERS
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>  <span class="n">SYSTEM_POINTER_ELEMENTS</span> <span class="o">=</span> <span class="n">PACKED_DOUBLE_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#else
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>  <span class="n">SYSTEM_POINTER_ELEMENTS</span> <span class="o">=</span> <span class="n">PACKED_ELEMENTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到，v8 在这个版本中定义了 41 种 <code>elements</code> 类型。这些 <code>elements</code> 究竟起到什么作用？这个在 谷歌的这篇 <a href="https://v8.dev/blog/fast-properties">blog</a> 中有讲到:</p>
+<blockquote>
+<p>单纯从 JavaScript 的角度看，对象实际上就是就是以 string 作为 <code>key</code> ，任意值作为 <code>value</code> 的字典。当然在遍历的时候，情况会有差别。不过不同类型（string, number, symbol）的属性（key），的行为基本上是一致的（从字典的使用方式上来说）。但是出于性能和内存占用的考虑，V8 设计了不一样的属性类型。</p></blockquote>
+<p>其中，最显著的差别就在于，<code>普通对象属性</code> 和 <code>数组下标</code> 了。</p>
+<p>举一个简单的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span><span class="nx">first</span><span class="o">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="nx">second</span><span class="o">:</span> <span class="s2">&#34;2&#34;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#34;</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中，object.first 和 object.second 是对象的属性（named property），而 <code>1</code>/<code>2</code> 属于是数组 <code>arr</code> 的元素(element)，他们之间存在巨大差别。如图所示：</p>
+<p><img src="/static/js-property-vs-element.png" alt="js-property-vs-element"></p>
+<p>element 和 property 甚至不是使用一种数据结构进行存储。在 V8 的眼里，element 和 元素的属性是完全不同的两种东西。</p>
+<ul>
+<li>都用下划线分割为了三段</li>
+</ul>
+<p>下划线分割的三段说明了这些类型的三种基本层次。上文介绍的 element 属于是第一种层次，说明这些数据是<code>元素类型</code>。其他的两种见下文。</p>
+<ul>
+<li>第一段有两种值： <code>PACKED</code> 和 <code>HOLEY</code></li>
+</ul>
+<p><code>PACKED</code> 和 <code>HOLEY</code> 这两种值，说明了数组当前是否是<code>稀疏的（HOLEY）</code>。</p>
+<p>对于 V8 来说，这是两种存在重要差别的类型，一旦变为 <code>HOLEY</code> 意味着数组在之前的访问中发生了越界，数组中&quot;有洞&quot;了。这对于性能优化来说是一种负担。要知道在其他的语言中，数组越界是非常严重的错误，但是 js 不一样，js 认为数组越界访问不算什么大事，但是从 V8 的角度来看，数组越界如果是可以接受的，那么这种行为实际上根本没法控制，为了性能的考虑，只能用特殊的值来填补由于数组越界访问带来的“漏洞”。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">foo</span><span class="p">[</span><span class="mi">999</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样的代码会带来什么后果？ 如果 V8 老老实实，把 foo[999] 之前的 999 个空都分配好内存，这会带来什么样的后果？甚至更极端一些，如果不是 <code>999</code> 而是 <code>99999999</code> 呢？</p>
+<p>所以出于性能上的考虑，HOLEY 的数组实际上处理起来要比 <code>PACKED</code> 的数组要多了判断条件，甚至可能触发原型链的查找。这会使得我们的数组操作变得极为缓慢。</p>
+<ul>
+<li>第二段有三种值： <code>SMI</code> 、 <code>DOUBLE</code> 和 ``</li>
+</ul>
+<p>这三种值实际上应该被称为： <code>smi</code> <code>double</code> <code>regular</code> ，在 V8 中， smi 代表了小的整数，double 代表了浮点数和无法用 smi 代表的大整数，而 regular 代表的是普通元素，他们不能用 smi 或者 double 概括。从 smi -&gt; double -&gt; regular 属于是递进的关系，从 smi 到 regular，元素的类型变得越来越通用，而更<code>通用</code>类型的数组，是无法重新降级，变为更<code>精确</code>类型数组的。</p>
+<h2 id="来完成几个实验">来完成几个实验</h2>
+<p>说了那么多关于类型的东西，我们可以动动手在 <a href="https://nodejs.org/docs/latest-v16.x/api/repl.html">Nodejs 交互式解释器</a> 中中几个实验，看看数组在 V8 里面是怎么变化的。</p>
+<ol>
+<li>给 node 传递一个 V8 引擎的参数： <code>--allow-natives-syntax</code>，这样可以让我们直接使用到 V8 引擎提供的底层 api。</li>
+</ol>
+<p><em>注</em> 这么做主要是为了探究 V8 的部分，如果我们不传递这个 flag，那么像 <code>%CollectGarbage()</code> 这样的，以 <code>%</code> 开头的 V8 api 将无法调用，因为 js 不允许变量名以 %开头。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>picher@picherspc ~<span class="o">]</span>$ node --allow-natives-syntax
+</span></span><span class="line"><span class="cl">Welcome to Node.js v16.13.0.
+</span></span><span class="line"><span class="cl">Type <span class="s2">&#34;.help&#34;</span> <span class="k">for</span> more information.
+</span></span><span class="line"><span class="cl">&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>操作数组，观察数组类型变化</li>
+</ol>
+<ul>
+<li>增加一个小的整数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="o">%</span><span class="nx">DebugPrint</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DebugPrint</span><span class="o">:</span> <span class="mh">0x2fd1f4ffda51</span><span class="o">:</span> <span class="p">[</span><span class="nx">JSArray</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">map</span><span class="o">:</span> <span class="mh">0x002db83835f1</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">PACKED_SMI_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">FastProperties</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x0ec65dd20841</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">PACKED_SMI_ELEMENTS</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">length</span><span class="o">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">properties</span><span class="o">:</span> <span class="mh">0x12ae6c281309</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">All</span> <span class="nx">own</span> <span class="nx">properties</span> <span class="p">(</span><span class="nx">excluding</span> <span class="nx">elements</span><span class="p">)</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="mh">0x12ae6c284d41</span><span class="o">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="k">in</span> <span class="nx">ReadOnlySpace</span><span class="o">:</span> <span class="err">#</span><span class="nx">length</span><span class="o">:</span> <span class="mh">0x202b943c1189</span> <span class="o">&lt;</span><span class="nx">AccessorInfo</span><span class="o">&gt;</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">accessor</span> <span class="nx">descriptor</span><span class="p">),</span> <span class="nx">location</span><span class="o">:</span> <span class="nx">descriptor</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x0ec65dd20841</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">0</span><span class="o">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">1</span><span class="o">-</span><span class="mi">16</span><span class="o">:</span> <span class="mh">0x12ae6c281669</span> <span class="o">&lt;</span><span class="nx">the_hole</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="mh">0x2db83835f1</span><span class="o">:</span> <span class="p">[</span><span class="nx">Map</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">JS_ARRAY_TYPE</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">size</span><span class="o">:</span> <span class="mi">32</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">inobject</span> <span class="nx">properties</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">PACKED_SMI_ELEMENTS</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">unused</span> <span class="nx">property</span> <span class="nx">fields</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="kr">enum</span> <span class="nx">length</span><span class="o">:</span> <span class="nx">invalid</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">back</span> <span class="nx">pointer</span><span class="o">:</span> <span class="mh">0x12ae6c281599</span> <span class="o">&lt;</span><span class="kc">undefined</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype_validity</span> <span class="nx">cell</span><span class="o">:</span> <span class="mh">0x202b943c15e9</span> <span class="o">&lt;</span><span class="nx">Cell</span> <span class="nx">value</span><span class="o">=</span> <span class="mi">1</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">descriptors</span> <span class="err">#</span><span class="mi">1</span><span class="o">:</span> <span class="mh">0x092220768279</span> <span class="o">&lt;</span><span class="nx">DescriptorArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">transitions</span> <span class="err">#</span><span class="mi">2</span><span class="o">:</span> <span class="mh">0x0172c20afc81</span> <span class="o">&lt;</span><span class="nx">TransitionArray</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">&gt;</span><span class="nx">Transition</span> <span class="nx">array</span> <span class="err">#</span><span class="mi">2</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">     <span class="mh">0x172c20acd49</span><span class="o">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="k">in</span> <span class="nx">OldSpace</span><span class="o">:</span> <span class="err">#</span><span class="nx">level</span><span class="o">:</span> <span class="p">(</span><span class="nx">transition</span> <span class="nx">to</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">data</span> <span class="nx">field</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">:</span> <span class="p">[</span><span class="nx">WEC</span><span class="p">])</span> <span class="err">@</span> <span class="nx">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mh">0x2fe087e07851</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">PACKED_SMI_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">     <span class="mh">0x12ae6c285949</span> <span class="o">&lt;</span><span class="nx">Symbol</span><span class="o">:</span> <span class="p">(</span><span class="nx">elements_transition_symbol</span><span class="p">)</span><span class="o">&gt;:</span> <span class="p">(</span><span class="nx">transition</span> <span class="nx">to</span> <span class="nx">HOLEY_SMI_ELEMENTS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mh">0x002db83835a9</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">HOLEY_SMI_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">constructor</span><span class="o">:</span> <span class="mh">0x3c9fb29cdba9</span> <span class="o">&lt;</span><span class="nx">JSFunction</span> <span class="nb">Array</span> <span class="p">(</span><span class="nx">sfi</span> <span class="o">=</span> <span class="mh">0x3299fbc5ec79</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">dependent</span> <span class="nx">code</span><span class="o">:</span> <span class="mh">0x12ae6c281239</span> <span class="o">&lt;</span><span class="nx">Other</span> <span class="nx">heap</span> <span class="nx">object</span> <span class="p">(</span><span class="nx">WEAK_FIXED_ARRAY_TYPE</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">construction</span> <span class="nx">counter</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们主要看<code>后半段</code>的详细信息，输出显示元素的类型是: <code>PACKED_SMI_ELEMENTS</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">PACKED_SMI_ELEMENTS</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>增加一个浮点数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mf">10.24</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="o">%</span><span class="nx">DebugPrint</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DebugPrint</span><span class="o">:</span> <span class="mh">0x3cdbba546781</span><span class="o">:</span> <span class="p">[</span><span class="nx">JSArray</span><span class="p">]</span> <span class="k">in</span> <span class="nx">OldSpace</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">map</span><span class="o">:</span> <span class="mh">0x002db8383561</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">PACKED_DOUBLE_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">FastProperties</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x1e684e5693f9</span> <span class="o">&lt;</span><span class="nx">FixedDoubleArray</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">PACKED_DOUBLE_ELEMENTS</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">length</span><span class="o">:</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">properties</span><span class="o">:</span> <span class="mh">0x12ae6c281309</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">All</span> <span class="nx">own</span> <span class="nx">properties</span> <span class="p">(</span><span class="nx">excluding</span> <span class="nx">elements</span><span class="p">)</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="mh">0x12ae6c284d41</span><span class="o">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="k">in</span> <span class="nx">ReadOnlySpace</span><span class="o">:</span> <span class="err">#</span><span class="nx">length</span><span class="o">:</span> <span class="mh">0x202b943c1189</span> <span class="o">&lt;</span><span class="nx">AccessorInfo</span><span class="o">&gt;</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">accessor</span> <span class="nx">descriptor</span><span class="p">),</span> <span class="nx">location</span><span class="o">:</span> <span class="nx">descriptor</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x1e684e5693f9</span> <span class="o">&lt;</span><span class="nx">FixedDoubleArray</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">0</span><span class="o">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">1</span><span class="o">:</span> <span class="mf">10.24</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">2</span><span class="o">-</span><span class="mi">16</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">the_hole</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="mh">0x2db8383561</span><span class="o">:</span> <span class="p">[</span><span class="nx">Map</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">JS_ARRAY_TYPE</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">size</span><span class="o">:</span> <span class="mi">32</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">inobject</span> <span class="nx">properties</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">PACKED_DOUBLE_ELEMENTS</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">unused</span> <span class="nx">property</span> <span class="nx">fields</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="kr">enum</span> <span class="nx">length</span><span class="o">:</span> <span class="nx">invalid</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">back</span> <span class="nx">pointer</span><span class="o">:</span> <span class="mh">0x002db83835a9</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">HOLEY_SMI_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype_validity</span> <span class="nx">cell</span><span class="o">:</span> <span class="mh">0x202b943c15e9</span> <span class="o">&lt;</span><span class="nx">Cell</span> <span class="nx">value</span><span class="o">=</span> <span class="mi">1</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">descriptors</span> <span class="err">#</span><span class="mi">1</span><span class="o">:</span> <span class="mh">0x3cdbba546899</span> <span class="o">&lt;</span><span class="nx">DescriptorArray</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">transitions</span> <span class="err">#</span><span class="mi">1</span><span class="o">:</span> <span class="mh">0x2a320a8461f9</span> <span class="o">&lt;</span><span class="nx">TransitionArray</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">&gt;</span><span class="nx">Transition</span> <span class="nx">array</span> <span class="err">#</span><span class="mi">1</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">     <span class="mh">0x12ae6c285949</span> <span class="o">&lt;</span><span class="nx">Symbol</span><span class="o">:</span> <span class="p">(</span><span class="nx">elements_transition_symbol</span><span class="p">)</span><span class="o">&gt;:</span> <span class="p">(</span><span class="nx">transition</span> <span class="nx">to</span> <span class="nx">HOLEY_DOUBLE_ELEMENTS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mh">0x002db8383519</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">HOLEY_DOUBLE_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">constructor</span><span class="o">:</span> <span class="mh">0x3c9fb29cdba9</span> <span class="o">&lt;</span><span class="nx">JSFunction</span> <span class="nb">Array</span> <span class="p">(</span><span class="nx">sfi</span> <span class="o">=</span> <span class="mh">0x3299fbc5ec79</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">dependent</span> <span class="nx">code</span><span class="o">:</span> <span class="mh">0x12ae6c281239</span> <span class="o">&lt;</span><span class="nx">Other</span> <span class="nx">heap</span> <span class="nx">object</span> <span class="p">(</span><span class="nx">WEAK_FIXED_ARRAY_TYPE</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">construction</span> <span class="nx">counter</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">10.24</span> <span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时显示数组的元素类型是: <code>PACKED_DOUBLE_ELEMENTS</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">PACKED_DOUBLE_ELEMENTS</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>增加一个字符串</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="o">%</span><span class="nx">DebugPrint</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DebugPrint</span><span class="o">:</span> <span class="mh">0x3cdbba546781</span><span class="o">:</span> <span class="p">[</span><span class="nx">JSArray</span><span class="p">]</span> <span class="k">in</span> <span class="nx">OldSpace</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">map</span><span class="o">:</span> <span class="mh">0x002db8383441</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">PACKED_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">FastProperties</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x0ec65dd1d8c9</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">PACKED_ELEMENTS</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">length</span><span class="o">:</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">properties</span><span class="o">:</span> <span class="mh">0x12ae6c281309</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">All</span> <span class="nx">own</span> <span class="nx">properties</span> <span class="p">(</span><span class="nx">excluding</span> <span class="nx">elements</span><span class="p">)</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="mh">0x12ae6c284d41</span><span class="o">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="k">in</span> <span class="nx">ReadOnlySpace</span><span class="o">:</span> <span class="err">#</span><span class="nx">length</span><span class="o">:</span> <span class="mh">0x202b943c1189</span> <span class="o">&lt;</span><span class="nx">AccessorInfo</span><span class="o">&gt;</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">accessor</span> <span class="nx">descriptor</span><span class="p">),</span> <span class="nx">location</span><span class="o">:</span> <span class="nx">descriptor</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x0ec65dd1d8c9</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">0</span><span class="o">:</span> <span class="mh">0x0ec65dd1d971</span> <span class="o">&lt;</span><span class="nx">HeapNumber</span> <span class="mf">1.0</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">1</span><span class="o">:</span> <span class="mh">0x0ec65dd1d961</span> <span class="o">&lt;</span><span class="nx">HeapNumber</span> <span class="mf">10.24</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">2</span><span class="o">:</span> <span class="mh">0x21ef98e561f1</span> <span class="o">&lt;</span><span class="nb">String</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">:</span> <span class="err">#</span><span class="nx">foo</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">3</span><span class="o">-</span><span class="mi">16</span><span class="o">:</span> <span class="mh">0x12ae6c281669</span> <span class="o">&lt;</span><span class="nx">the_hole</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="mh">0x2db8383441</span><span class="o">:</span> <span class="p">[</span><span class="nx">Map</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">JS_ARRAY_TYPE</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">size</span><span class="o">:</span> <span class="mi">32</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">inobject</span> <span class="nx">properties</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">PACKED_ELEMENTS</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">unused</span> <span class="nx">property</span> <span class="nx">fields</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="kr">enum</span> <span class="nx">length</span><span class="o">:</span> <span class="nx">invalid</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">back</span> <span class="nx">pointer</span><span class="o">:</span> <span class="mh">0x002db8383519</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">HOLEY_DOUBLE_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype_validity</span> <span class="nx">cell</span><span class="o">:</span> <span class="mh">0x202b943c15e9</span> <span class="o">&lt;</span><span class="nx">Cell</span> <span class="nx">value</span><span class="o">=</span> <span class="mi">1</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">descriptors</span> <span class="err">#</span><span class="mi">1</span><span class="o">:</span> <span class="mh">0x3cdbba546899</span> <span class="o">&lt;</span><span class="nx">DescriptorArray</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">transitions</span> <span class="err">#</span><span class="mi">4</span><span class="o">:</span> <span class="mh">0x10313dc14e11</span> <span class="o">&lt;</span><span class="nx">TransitionArray</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">&gt;</span><span class="nx">Transition</span> <span class="nx">array</span> <span class="err">#</span><span class="mi">4</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">     <span class="mh">0x3cdbba5554d9</span><span class="o">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="k">in</span> <span class="nx">OldSpace</span><span class="o">:</span> <span class="err">#</span><span class="nx">level</span><span class="o">:</span> <span class="p">(</span><span class="nx">transition</span> <span class="nx">to</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">data</span> <span class="nx">field</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">:</span> <span class="p">[</span><span class="nx">WEC</span><span class="p">])</span> <span class="err">@</span> <span class="nx">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mh">0x2fe087e0b9d9</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">PACKED_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">     <span class="mh">0x12ae6c285949</span> <span class="o">&lt;</span><span class="nx">Symbol</span><span class="o">:</span> <span class="p">(</span><span class="nx">elements_transition_symbol</span><span class="p">)</span><span class="o">&gt;:</span> <span class="p">(</span><span class="nx">transition</span> <span class="nx">to</span> <span class="nx">HOLEY_ELEMENTS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mh">0x002db8383639</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">HOLEY_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">     <span class="mh">0x12ae6c285241</span><span class="o">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="k">in</span> <span class="nx">ReadOnlySpace</span><span class="o">:</span> <span class="err">#</span><span class="nx">raw</span><span class="o">:</span> <span class="p">(</span><span class="nx">transition</span> <span class="nx">to</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">data</span> <span class="nx">field</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">:</span> <span class="p">[</span><span class="nx">___</span><span class="p">])</span> <span class="err">@</span> <span class="nx">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mh">0x002db83bac29</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">PACKED_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">     <span class="mh">0x12ae6c2859a9</span> <span class="o">&lt;</span><span class="nx">Symbol</span><span class="o">:</span> <span class="p">(</span><span class="nx">frozen_symbol</span><span class="p">)</span><span class="o">&gt;:</span> <span class="p">(</span><span class="nx">transition</span> <span class="nx">to</span> <span class="nx">frozen</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mh">0x002db8383681</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">PACKED_FROZEN_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">constructor</span><span class="o">:</span> <span class="mh">0x3c9fb29cdba9</span> <span class="o">&lt;</span><span class="nx">JSFunction</span> <span class="nb">Array</span> <span class="p">(</span><span class="nx">sfi</span> <span class="o">=</span> <span class="mh">0x3299fbc5ec79</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">dependent</span> <span class="nx">code</span><span class="o">:</span> <span class="mh">0x12ae6c281239</span> <span class="o">&lt;</span><span class="nx">Other</span> <span class="nx">heap</span> <span class="nx">object</span> <span class="p">(</span><span class="nx">WEAK_FIXED_ARRAY_TYPE</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">construction</span> <span class="nx">counter</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">10.24</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span> <span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时显示数组的元素类型是: <code>PACKED_ELEMENTS</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">PACKED_ELEMENTS</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>把数组变为稀疏数组</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;bar&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="o">%</span><span class="nx">DebugPrint</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DebugPrint</span><span class="o">:</span> <span class="mh">0x3cdbba546781</span><span class="o">:</span> <span class="p">[</span><span class="nx">JSArray</span><span class="p">]</span> <span class="k">in</span> <span class="nx">OldSpace</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">map</span><span class="o">:</span> <span class="mh">0x002db8383639</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">HOLEY_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">FastProperties</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x3bb3582411e1</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">HOLEY_ELEMENTS</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">length</span><span class="o">:</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">properties</span><span class="o">:</span> <span class="mh">0x12ae6c281309</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">All</span> <span class="nx">own</span> <span class="nx">properties</span> <span class="p">(</span><span class="nx">excluding</span> <span class="nx">elements</span><span class="p">)</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="mh">0x12ae6c284d41</span><span class="o">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="k">in</span> <span class="nx">ReadOnlySpace</span><span class="o">:</span> <span class="err">#</span><span class="nx">length</span><span class="o">:</span> <span class="mh">0x202b943c1189</span> <span class="o">&lt;</span><span class="nx">AccessorInfo</span><span class="o">&gt;</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">accessor</span> <span class="nx">descriptor</span><span class="p">),</span> <span class="nx">location</span><span class="o">:</span> <span class="nx">descriptor</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x3bb3582411e1</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">0</span><span class="o">:</span> <span class="mh">0x3bb3582412a9</span> <span class="o">&lt;</span><span class="nx">HeapNumber</span> <span class="mf">1.0</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">1</span><span class="o">:</span> <span class="mh">0x3bb3582412b9</span> <span class="o">&lt;</span><span class="nx">HeapNumber</span> <span class="mf">10.24</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">2</span><span class="o">:</span> <span class="mh">0x21ef98e561f1</span> <span class="o">&lt;</span><span class="nb">String</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">:</span> <span class="err">#</span><span class="nx">foo</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="o">:</span> <span class="mh">0x12ae6c281669</span> <span class="o">&lt;</span><span class="nx">the_hole</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">           <span class="mi">9</span><span class="o">:</span> <span class="mh">0x21ef98e70fe1</span> <span class="o">&lt;</span><span class="nb">String</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">:</span> <span class="err">#</span><span class="nx">bar</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="mi">10</span><span class="o">-</span><span class="mi">16</span><span class="o">:</span> <span class="mh">0x12ae6c281669</span> <span class="o">&lt;</span><span class="nx">the_hole</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="mh">0x2db8383639</span><span class="o">:</span> <span class="p">[</span><span class="nx">Map</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">JS_ARRAY_TYPE</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">size</span><span class="o">:</span> <span class="mi">32</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">inobject</span> <span class="nx">properties</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">HOLEY_ELEMENTS</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">unused</span> <span class="nx">property</span> <span class="nx">fields</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="kr">enum</span> <span class="nx">length</span><span class="o">:</span> <span class="nx">invalid</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">stable_map</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">back</span> <span class="nx">pointer</span><span class="o">:</span> <span class="mh">0x002db8383441</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">PACKED_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype_validity</span> <span class="nx">cell</span><span class="o">:</span> <span class="mh">0x202b943c15e9</span> <span class="o">&lt;</span><span class="nx">Cell</span> <span class="nx">value</span><span class="o">=</span> <span class="mi">1</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">descriptors</span> <span class="p">(</span><span class="nx">own</span><span class="p">)</span> <span class="err">#</span><span class="mi">1</span><span class="o">:</span> <span class="mh">0x092220768279</span> <span class="o">&lt;</span><span class="nx">DescriptorArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">constructor</span><span class="o">:</span> <span class="mh">0x3c9fb29cdba9</span> <span class="o">&lt;</span><span class="nx">JSFunction</span> <span class="nb">Array</span> <span class="p">(</span><span class="nx">sfi</span> <span class="o">=</span> <span class="mh">0x3299fbc5ec79</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">dependent</span> <span class="nx">code</span><span class="o">:</span> <span class="mh">0x12ae6c281239</span> <span class="o">&lt;</span><span class="nx">Other</span> <span class="nx">heap</span> <span class="nx">object</span> <span class="p">(</span><span class="nx">WEAK_FIXED_ARRAY_TYPE</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">construction</span> <span class="nx">counter</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">10.24</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="mi">6</span> <span class="nx">empty</span> <span class="nx">items</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span> <span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们看到，界外访问之后，数组的元素类型变成了: <code>HOLEY_ELEMENTS</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">HOLEY_ELEMENTS</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>FixedArray?</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">32</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="o">%</span><span class="nx">DebugPrint</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DebugPrint</span><span class="o">:</span> <span class="mh">0x3cdbba546781</span><span class="o">:</span> <span class="p">[</span><span class="nx">JSArray</span><span class="p">]</span> <span class="k">in</span> <span class="nx">OldSpace</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">map</span><span class="o">:</span> <span class="mh">0x002db8381869</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">DICTIONARY_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">FastProperties</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x3e5557730419</span> <span class="o">&lt;</span><span class="nx">NumberDictionary</span><span class="p">[</span><span class="mi">52</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">[</span><span class="nx">DICTIONARY_ELEMENTS</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">length</span><span class="o">:</span> <span class="mi">33554433</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">properties</span><span class="o">:</span> <span class="mh">0x12ae6c281309</span> <span class="o">&lt;</span><span class="nx">FixedArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">All</span> <span class="nx">own</span> <span class="nx">properties</span> <span class="p">(</span><span class="nx">excluding</span> <span class="nx">elements</span><span class="p">)</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="mh">0x12ae6c284d41</span><span class="o">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="k">in</span> <span class="nx">ReadOnlySpace</span><span class="o">:</span> <span class="err">#</span><span class="nx">length</span><span class="o">:</span> <span class="mh">0x202b943c1189</span> <span class="o">&lt;</span><span class="nx">AccessorInfo</span><span class="o">&gt;</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">accessor</span> <span class="nx">descriptor</span><span class="p">),</span> <span class="nx">location</span><span class="o">:</span> <span class="nx">descriptor</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span><span class="o">:</span> <span class="mh">0x3e5557730419</span> <span class="o">&lt;</span><span class="nx">NumberDictionary</span><span class="p">[</span><span class="mi">52</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="o">-</span> <span class="nx">max_number_key</span><span class="o">:</span> <span class="mi">33554432</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">33554432</span><span class="o">:</span> <span class="mi">0</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">dict_index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">:</span> <span class="p">[</span><span class="nx">WEC</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">2</span><span class="o">:</span> <span class="mh">0x21ef98e561f1</span> <span class="o">&lt;</span><span class="nb">String</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">:</span> <span class="err">#</span><span class="nx">foo</span><span class="o">&gt;</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">dict_index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">:</span> <span class="p">[</span><span class="nx">WEC</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">9</span><span class="o">:</span> <span class="mh">0x21ef98e70fe1</span> <span class="o">&lt;</span><span class="nb">String</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">:</span> <span class="err">#</span><span class="nx">bar</span><span class="o">&gt;</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">dict_index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">:</span> <span class="p">[</span><span class="nx">WEC</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">0</span><span class="o">:</span> <span class="mh">0x3bb3582412a9</span> <span class="o">&lt;</span><span class="nx">HeapNumber</span> <span class="mf">1.0</span><span class="o">&gt;</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">dict_index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">:</span> <span class="p">[</span><span class="nx">WEC</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">1</span><span class="o">:</span> <span class="mh">0x3bb3582412b9</span> <span class="o">&lt;</span><span class="nx">HeapNumber</span> <span class="mf">10.24</span><span class="o">&gt;</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">dict_index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">:</span> <span class="p">[</span><span class="nx">WEC</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">20</span><span class="o">:</span> <span class="mh">0x21ef98e76fa9</span> <span class="o">&lt;</span><span class="nb">String</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">:</span> <span class="err">#</span><span class="nx">bar1</span><span class="o">&gt;</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">dict_index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">:</span> <span class="p">[</span><span class="nx">WEC</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="mh">0x2db8381869</span><span class="o">:</span> <span class="p">[</span><span class="nx">Map</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">JS_ARRAY_TYPE</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">size</span><span class="o">:</span> <span class="mi">32</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">inobject</span> <span class="nx">properties</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">DICTIONARY_ELEMENTS</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">unused</span> <span class="nx">property</span> <span class="nx">fields</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="kr">enum</span> <span class="nx">length</span><span class="o">:</span> <span class="nx">invalid</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">stable_map</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">back</span> <span class="nx">pointer</span><span class="o">:</span> <span class="mh">0x002db8383639</span> <span class="o">&lt;</span><span class="nx">Map</span><span class="p">(</span><span class="nx">HOLEY_ELEMENTS</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype_validity</span> <span class="nx">cell</span><span class="o">:</span> <span class="mh">0x202b943c15e9</span> <span class="o">&lt;</span><span class="nx">Cell</span> <span class="nx">value</span><span class="o">=</span> <span class="mi">1</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">instance</span> <span class="nx">descriptors</span> <span class="p">(</span><span class="nx">own</span><span class="p">)</span> <span class="err">#</span><span class="mi">1</span><span class="o">:</span> <span class="mh">0x092220768279</span> <span class="o">&lt;</span><span class="nx">DescriptorArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">prototype</span><span class="o">:</span> <span class="mh">0x2a320a845af9</span> <span class="o">&lt;</span><span class="nx">JSArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">constructor</span><span class="o">:</span> <span class="mh">0x3c9fb29cdba9</span> <span class="o">&lt;</span><span class="nx">JSFunction</span> <span class="nb">Array</span> <span class="p">(</span><span class="nx">sfi</span> <span class="o">=</span> <span class="mh">0x3299fbc5ec79</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">dependent</span> <span class="nx">code</span><span class="o">:</span> <span class="mh">0x12ae6c281239</span> <span class="o">&lt;</span><span class="nx">Other</span> <span class="nx">heap</span> <span class="nx">object</span> <span class="p">(</span><span class="nx">WEAK_FIXED_ARRAY_TYPE</span><span class="p">)</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">construction</span> <span class="nx">counter</span><span class="o">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mf">10.24</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;foo&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="mi">6</span> <span class="nx">empty</span> <span class="nx">items</span><span class="o">&gt;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;bar&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="mi">10</span> <span class="nx">empty</span> <span class="nx">items</span><span class="o">&gt;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;bar1&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="mi">33554411</span> <span class="nx">empty</span> <span class="nx">items</span><span class="o">&gt;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在试图插入一个超出数组边界非常多的元素时，数组的元素类型变成了: <code>DICTIONARY_ELEMENTS</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"> <span class="o">-</span> <span class="nx">elements</span> <span class="nx">kind</span><span class="o">:</span> <span class="nx">DICTIONARY_ELEMENTS</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>经过以上几个实验，我们观察到，在 V8 的实现中，数组的类型，发生了质的改变，这些信息在 JavaScript 的层面上是完全透明的，V8 隐藏了这些细节。</p>
+<h2 id="v8-数组的核心源码">v8 数组的核心源码</h2>
+<p>上文我们通过几步实验，验证了 V8 层面的数组类型变化。我们接下来正式进入主题，看看源码长什么样子:)</p>
+<p>经过上文分析可以得出的结论是: V8 会在新建和增加数组元素时进行数组元素类型的转换。下面我们就以增加数组元素为例，阅读一下 V8 的核心源码部分：</p>
+<h3 id="增加数组元素">增加数组元素</h3>
+<p>V8 关于数组元素操作的代码主要封装在 <code>JSArray</code> 这个类里面。在 <a href="https://github.com/v8/v8/blob/9.4.146/src/objects/js-array.h">js-array.h</a></p>
+<p>源代码的注释里说明了 js 数组的两种实现：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// The JSArray describes JavaScript Arrays
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  Such an array can be in one of two modes:
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    - fast, backing storage is a FixedArray and length &lt;= elements.length();
+</span></span></span><span class="line"><span class="cl"><span class="c1">//       Please note: push and pop can be used to grow and shrink the array.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//    - slow, backing storage is a HashTable with numbers as keys.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">JSArray</span> <span class="o">:</span> <span class="k">public</span> <span class="n">JSObject</span> <span class="p">{</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>JSArray 实际上是 JSObject 的派生类，因此我们继续看 <code>JSObject</code> 的实现。</p>
+<p>在 JSObject 的<code>头文件</code>中可以找到添加元素的函数签名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">V8_EXPORT_PRIVATE</span> <span class="k">static</span> <span class="n">Maybe</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">AddDataElement</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Handle</span><span class="o">&lt;</span><span class="n">JSObject</span><span class="o">&gt;</span> <span class="n">receiver</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">index</span><span class="p">,</span> <span class="n">Handle</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">PropertyAttributes</span> <span class="n">attributes</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们知道</p>
+<p>我们来看看函数的定义部分：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">Maybe</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">JSObject</span><span class="o">::</span><span class="n">AddDataElement</span><span class="p">(</span><span class="n">Handle</span><span class="o">&lt;</span><span class="n">JSObject</span><span class="o">&gt;</span> <span class="n">object</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">index</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                     <span class="n">Handle</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                     <span class="n">PropertyAttributes</span> <span class="n">attributes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Isolate</span><span class="o">*</span> <span class="n">isolate</span> <span class="o">=</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">GetIsolate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">DCHECK</span><span class="p">(</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">(</span><span class="n">isolate</span><span class="p">).</span><span class="n">is_extensible</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">old_length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">new_capacity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">IsJSArray</span><span class="p">(</span><span class="n">isolate</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">CHECK</span><span class="p">(</span><span class="n">JSArray</span><span class="o">::</span><span class="n">cast</span><span class="p">(</span><span class="o">*</span><span class="n">object</span><span class="p">).</span><span class="n">length</span><span class="p">().</span><span class="n">ToArrayLength</span><span class="p">(</span><span class="o">&amp;</span><span class="n">old_length</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">ElementsKind</span> <span class="n">kind</span> <span class="o">=</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">GetElementsKind</span><span class="p">(</span><span class="n">isolate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FixedArrayBase</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">elements</span><span class="p">(</span><span class="n">isolate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ElementsKind</span> <span class="n">dictionary_kind</span> <span class="o">=</span> <span class="n">DICTIONARY_ELEMENTS</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">IsSloppyArgumentsElementsKind</span><span class="p">(</span><span class="n">kind</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elements</span> <span class="o">=</span> <span class="n">SloppyArgumentsElements</span><span class="o">::</span><span class="n">cast</span><span class="p">(</span><span class="n">elements</span><span class="p">).</span><span class="n">arguments</span><span class="p">(</span><span class="n">isolate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dictionary_kind</span> <span class="o">=</span> <span class="n">SLOW_SLOPPY_ARGUMENTS_ELEMENTS</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">IsStringWrapperElementsKind</span><span class="p">(</span><span class="n">kind</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dictionary_kind</span> <span class="o">=</span> <span class="n">SLOW_STRING_WRAPPER_ELEMENTS</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">attributes</span> <span class="o">!=</span> <span class="n">NONE</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kind</span> <span class="o">=</span> <span class="n">dictionary_kind</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">elements</span><span class="p">.</span><span class="n">IsNumberDictionary</span><span class="p">(</span><span class="n">isolate</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kind</span> <span class="o">=</span> <span class="n">ShouldConvertToFastElements</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">               <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">NumberDictionary</span><span class="o">::</span><span class="n">cast</span><span class="p">(</span><span class="n">elements</span><span class="p">),</span> <span class="n">index</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">new_capacity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">               <span class="o">?</span> <span class="n">BestFittingFastElementsKind</span><span class="p">(</span><span class="o">*</span><span class="n">object</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">               <span class="o">:</span> <span class="n">dictionary_kind</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">ShouldConvertToSlowElements</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                 <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">elements</span><span class="p">.</span><span class="n">length</span><span class="p">()),</span> <span class="n">index</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="o">&amp;</span><span class="n">new_capacity</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kind</span> <span class="o">=</span> <span class="n">dictionary_kind</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">ElementsKind</span> <span class="n">to</span> <span class="o">=</span> <span class="n">value</span><span class="o">-&gt;</span><span class="n">OptimalElementsKind</span><span class="p">(</span><span class="n">isolate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">IsHoleyElementsKind</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">IsJSArray</span><span class="p">(</span><span class="n">isolate</span><span class="p">)</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">      <span class="n">index</span> <span class="o">&gt;</span> <span class="n">old_length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">to</span> <span class="o">=</span> <span class="n">GetHoleyElementsKind</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kind</span> <span class="o">=</span> <span class="n">GetHoleyElementsKind</span><span class="p">(</span><span class="n">kind</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="n">GetMoreGeneralElementsKind</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">to</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ElementsAccessor</span><span class="o">*</span> <span class="n">accessor</span> <span class="o">=</span> <span class="n">ElementsAccessor</span><span class="o">::</span><span class="n">ForKind</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">MAYBE_RETURN</span><span class="p">(</span><span class="n">accessor</span><span class="o">-&gt;</span><span class="n">Add</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">new_capacity</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">               <span class="n">Nothing</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">IsJSArray</span><span class="p">(</span><span class="n">isolate</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="n">old_length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Handle</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">new_length</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">isolate</span><span class="o">-&gt;</span><span class="n">factory</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">NewNumberFromUint</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">JSArray</span><span class="o">::</span><span class="n">cast</span><span class="p">(</span><span class="o">*</span><span class="n">object</span><span class="p">).</span><span class="n">set_length</span><span class="p">(</span><span class="o">*</span><span class="n">new_length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">Just</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到，代码主要分为了以下步骤:</p>
+<ol>
+<li>检查是否是可添加元素的数组</li>
+<li>检查是否是数组，如果是则获取当前数组长度</li>
+<li>获取当前数组的元素类型</li>
+<li>预先准备好可以转换到的字典元素类型</li>
+<li>根据条件检查正确且最优的元素转换类型，并赋值给 <code>kind</code></li>
+<li>获取即将添加的值 <code>value</code> 的最优的元素类型并赋值给 <code>to</code></li>
+<li>如果发现数组可能会便稀疏，则 <code>to</code> 和 <code>kind</code> 会被重新赋予相应的 <code>HOLEY</code> 类型</li>
+<li>从 <code>kind</code> 和 <code>to</code> 中选择最宽泛的类型，并赋值给 <code>to</code></li>
+<li>获取一个类型为 <code>to</code> 的 <code>accessor</code></li>
+<li>尝试添加元素</li>
+<li>如果扩容后仍然是数组，且数组大小变大，数组重新设置长度值</li>
+</ol>
+<h2 id="小结">小结</h2>
+<ul>
+<li>JS 数组在 V8 中使用特殊的数据结构 <code>element</code> 保存。</li>
+<li>数组大小在一定范围内： ~268MB 时，会使用 FixedArray 存放数据，并且会非常高效(相对 JS 的字典类型而言)。一旦数组可能变得非常大，V8 会转而使用字典类型存放数组数据。</li>
+<li>数组的扩容，在一定范围内是自动发生的。</li>
+<li>JS 的数组具有类型，每一个数组都会有一个这样的类型。</li>
+<li>JS 的数组类型会在插入不同数据、不同操作的时候发生转变。</li>
+<li>尽量使用更精确的 JS 数据类型，这样会使得 V8 更加高效。</li>
+</ul>
+<h2 id="文献引用">文献引用</h2>
+<ul>
+<li><a href="https://v8.dev/blog/fast-properties">fast-properties</a></li>
+<li><a href="https://v8.dev/blog/elements-kinds">element-kinds</a></li>
+<li><a href="https://nodejs.org/docs/latest-v16.x/api/repl.html#class-replserver">Nodejs REPL</a></li>
+<li><a href="https://github.com/nodejs/node/blob/49342fe6f2ca6cedd5219d835a0a810e6f03cdd7">node v16.13.0</a></li>
+<li><a href="https://github.com/v8/v8/tree/9.4.146">v8/v8</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content"></span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">nodejs</a>
+          <a href="/tags/javascript/">javascript</a>
+          <a href="/tags/v8/">v8</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpu-cache-inspiration/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CPU 缓存梳理及探讨</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/eslint-automic/">
+            <span class="next-text nav-default">在 JS/TS 开发中快乐地使用 eslint</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="Bitnut/comment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="940095072.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

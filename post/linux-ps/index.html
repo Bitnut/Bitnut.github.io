@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Linux 下的 ps 命令和常用组合 - 三口一个瓜的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="" /><meta name="description" content="前言 总结整理一下简单、常用的 ps 命令用法。
+一、查看进程 命令： ps
+命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。
+常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.147.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/linux-ps/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:url" content="http://localhost:1313/post/linux-ps/">
+  <meta property="og:site_name" content="三口一个瓜的博客">
+  <meta property="og:title" content="Linux 下的 ps 命令和常用组合">
+  <meta property="og:description" content="前言 总结整理一下简单、常用的 ps 命令用法。
+一、查看进程 命令： ps
+命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。
+常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-02-19T21:53:55+08:00">
+    <meta property="article:modified_time" content="2021-02-19T21:53:55+08:00">
+    <meta property="article:tag" content="Linux">
+
+  <meta itemprop="name" content="Linux 下的 ps 命令和常用组合">
+  <meta itemprop="description" content="前言 总结整理一下简单、常用的 ps 命令用法。
+一、查看进程 命令： ps
+命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。
+常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程">
+  <meta itemprop="datePublished" content="2021-02-19T21:53:55+08:00">
+  <meta itemprop="dateModified" content="2021-02-19T21:53:55+08:00">
+  <meta itemprop="wordCount" content="1106">
+  <meta itemprop="keywords" content="Linux">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Linux 下的 ps 命令和常用组合">
+  <meta name="twitter:description" content="前言 总结整理一下简单、常用的 ps 命令用法。
+一、查看进程 命令： ps
+命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。
+常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">三口一个瓜的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">三口一个瓜的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linux 下的 ps 命令和常用组合</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-02-19 </span>
+        <div class="post-category">
+            <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#一查看进程">一、查看进程</a></li>
+        <li><a href="#二查看进程树结构">二、查看进程（树结构）</a></li>
+        <li><a href="#三杀死进程">三、杀死进程</a></li>
+        <li><a href="#四完整操作">四、完整操作</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="前言">前言</h2>
+<p>总结整理一下简单、常用的 ps 命令用法。</p>
+<h2 id="一查看进程">一、查看进程</h2>
+<p>命令： ps</p>
+<p>命令解释： 全称是 <code>process status</code> ，使用它相当于在 win 下的 <code>任务管理器</code>。</p>
+<p>常用命令参数：
+-a 显示同一终端下的所有程序
+-e 等于“-A”
+-e  显示环境变量
+-f  显示程序间的关系
+-r  显示当前终端的进程
+-u  指定用户的所有进程</p>
+<p>常用命令组合：</p>
+<p>-au 显示较详细的资讯
+-aux 显示所有包含其他使用者的行程</p>
+<p>-C &lt;命令&gt; 列出指定命令的状况
+&ndash;lines&lt;行数&gt; 每页显示的行数
+&ndash;width&lt;字符数&gt; 每页显示的字符数
+&ndash;help 显示帮助信息
+&ndash;version 显示版本显示</p>
+<h2 id="二查看进程树结构">二、查看进程（树结构）</h2>
+<p>命令： pstree</p>
+<p>命令参数：</p>
+<p>-p 为显示进程识别码，最后加上用户名。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">picher@pichers-laptop:~$ pstree -p picher <span class="p">|</span> grep emacs
+</span></span><span class="line"><span class="cl">              <span class="p">|</span>-gnome-terminal-<span class="o">(</span>3023<span class="o">)</span>-+-bash<span class="o">(</span>3030<span class="o">)</span>-+-emacs<span class="o">(</span>5517<span class="o">)</span>-+-bash<span class="o">(</span>28980<span class="o">)</span>
+</span></span><span class="line"><span class="cl">              <span class="p">|</span>                       <span class="p">|</span>            <span class="p">|</span>             <span class="p">|</span>-<span class="o">{</span>emacs<span class="o">}(</span>5518<span class="o">)</span>
+</span></span><span class="line"><span class="cl">              <span class="p">|</span>                       <span class="p">|</span>            <span class="p">|</span>             <span class="p">|</span>-<span class="o">{</span>emacs<span class="o">}(</span>5519<span class="o">)</span>
+</span></span><span class="line"><span class="cl">              <span class="p">|</span>                       <span class="p">|</span>            <span class="p">|</span>             <span class="sb">`</span>-<span class="o">{</span>emacs<span class="o">}(</span>5520<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到，emacs(5517)这个进程共启动了 4 个子线程，加上主线程共 5 个线程。</p>
+<h2 id="三杀死进程">三、杀死进程</h2>
+<p>命令：kill</p>
+<p>常用组合：</p>
+<ul>
+<li>
+<p>kill -STOP [pid]
+发送 SIGSTOP (17,19,23)停止一个进程，而并不消灭这个进程。</p>
+</li>
+<li>
+<p>kill -CONT [pid]
+发送 SIGCONT (19,18,25)重新开始一个停止的进程。</p>
+</li>
+<li>
+<p>kill -KILL [pid]
+发送 SIGKILL (9)强迫进程立即停止，并且不实施清理操作。</p>
+</li>
+<li>
+<p>kill -9 -1
+终止你拥有的全部进程。</p>
+</li>
+</ul>
+<h2 id="四完整操作">四、完整操作</h2>
+<ul>
+<li>显示所有进程信息</li>
+</ul>
+<p>命令：　　ps -A</p>
+<ul>
+<li>显示指定用户信息</li>
+</ul>
+<p>命令：　　ps -u root</p>
+<ul>
+<li>显示所有进程信息，连同命令行</li>
+</ul>
+<p>命令：　　ps -ef</p>
+<ul>
+<li>查找特定进程</li>
+</ul>
+<p>命令：　　ps -ef|grep emacs</p>
+<ul>
+<li>将目前属于您自己这次登入的 PID 与相关信息列示出来</li>
+</ul>
+<p>命令：　　ps -l</p>
+<ul>
+<li>列出目前所有的正在内存当中的程序</li>
+</ul>
+<p>命令：　　ps aux</p>
+<p>输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+</span></span><span class="line"><span class="cl">root          <span class="m">1</span>  0.0  0.3 <span class="m">185228</span>  <span class="m">3100</span> ?        Ss   May23   0:08 /lib/systemd/systemd --system --deserialize <span class="m">21</span>
+</span></span><span class="line"><span class="cl">root          <span class="m">2</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:00 <span class="o">[</span>kthreadd<span class="o">]</span>
+</span></span><span class="line"><span class="cl">root          <span class="m">4</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I&lt;   May23   0:00 <span class="o">[</span>kworker/0:0H<span class="o">]</span>
+</span></span><span class="line"><span class="cl">root          <span class="m">6</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I&lt;   May23   0:00 <span class="o">[</span>mm_percpu_wq<span class="o">]</span>
+</span></span><span class="line"><span class="cl">root          <span class="m">7</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:04 <span class="o">[</span>ksoftirqd/0<span class="o">]</span>
+</span></span><span class="line"><span class="cl">root          <span class="m">8</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I    May23   0:03 <span class="o">[</span>rcu_sched<span class="o">]</span>
+</span></span><span class="line"><span class="cl">root          <span class="m">9</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I    May23   0:00 <span class="o">[</span>rcu_bh<span class="o">]</span>
+</span></span><span class="line"><span class="cl">root         <span class="m">10</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:00 <span class="o">[</span>migration/0<span class="o">]</span>
+</span></span><span class="line"><span class="cl">root         <span class="m">11</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:00 <span class="o">[</span>watchdog/0<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="参数解释">参数解释：</h4>
+<p>USER：该 process 属于那个使用者账号的</p>
+<p>PID ：该 process 的号码</p>
+<p>%CPU：该 process 使用掉的 CPU 资源百分比</p>
+<p>%MEM：该 process 所占用的物理内存百分比</p>
+<p>VSZ ：该 process 使用掉的虚拟内存量 (Kbytes)</p>
+<p>RSS ：该 process 占用的固定的内存量 (Kbytes)</p>
+<p>TTY ：该 process 是在那个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。</p>
+<p>STAT：该程序目前的状态，主要的状态有</p>
+<p>R ：该程序目前正在运作，或者是可被运作</p>
+<p>S ：该程序目前正在睡眠当中 (可说是 idle 状态)，但可被某些讯号 (signal) 唤醒。</p>
+<p>T ：该程序目前正在侦测或者是停止了</p>
+<p>Z ：该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (疆尸) 程序的状态</p>
+<p>START：该 process 被触发启动的时间</p>
+<p>TIME ：该 process 实际使用 CPU 运作的时间</p>
+<p>COMMAND：该程序的实际指令</p>
+<ul>
+<li>可以用 | 管道和 more 连接起来分页查看</li>
+</ul>
+<p>命令：　　ps -aux | more</p>
+<ul>
+<li>把所有进程显示出来，并输出到 ps001.txt 文件</li>
+</ul>
+<p>命令：　　ps -aux &gt; ps001.log</p>
+<ul>
+<li>输出指定的字段</li>
+</ul>
+<p>命令：　　 ps -o pid,ppid,pgrp,session,tpgid,comm &gt; ps001.log</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content"></span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-02-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/proxy-config/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">代理实践纪录</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/emacs-build/">
+            <span class="next-text nav-default">编译安装 emacs</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="Bitnut/comment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="940095072.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

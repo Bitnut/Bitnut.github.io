@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>如何简单粗暴地让网页变黑白？ - 三口一个瓜的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="" /><meta name="description" content="很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。
+今天主要来探讨一下让页面变黑白效果的方法 今年早些时候，新冠疫情给国内造成了巨大损失。因此在今年四月四的时候，为了叨念逝者、寄托哀思，国内不仅暂停了大部分娱乐活动，而且各大门户网站、视频网站，都对首页或者所有页面做出了内容和样式的大调整。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.147.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/blackwhite/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:url" content="http://localhost:1313/post/blackwhite/">
+  <meta property="og:site_name" content="三口一个瓜的博客">
+  <meta property="og:title" content="如何简单粗暴地让网页变黑白？">
+  <meta property="og:description" content="很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。
+今天主要来探讨一下让页面变黑白效果的方法 今年早些时候，新冠疫情给国内造成了巨大损失。因此在今年四月四的时候，为了叨念逝者、寄托哀思，国内不仅暂停了大部分娱乐活动，而且各大门户网站、视频网站，都对首页或者所有页面做出了内容和样式的大调整。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2020-04-14T22:31:55+08:00">
+    <meta property="article:modified_time" content="2020-04-14T22:31:55+08:00">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="Css">
+    <meta property="article:tag" content="Frontend">
+
+  <meta itemprop="name" content="如何简单粗暴地让网页变黑白？">
+  <meta itemprop="description" content="很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。
+今天主要来探讨一下让页面变黑白效果的方法 今年早些时候，新冠疫情给国内造成了巨大损失。因此在今年四月四的时候，为了叨念逝者、寄托哀思，国内不仅暂停了大部分娱乐活动，而且各大门户网站、视频网站，都对首页或者所有页面做出了内容和样式的大调整。">
+  <meta itemprop="datePublished" content="2020-04-14T22:31:55+08:00">
+  <meta itemprop="dateModified" content="2020-04-14T22:31:55+08:00">
+  <meta itemprop="wordCount" content="1257">
+  <meta itemprop="keywords" content="Web,Css,Frontend">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="如何简单粗暴地让网页变黑白？">
+  <meta name="twitter:description" content="很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。
+今天主要来探讨一下让页面变黑白效果的方法 今年早些时候，新冠疫情给国内造成了巨大损失。因此在今年四月四的时候，为了叨念逝者、寄托哀思，国内不仅暂停了大部分娱乐活动，而且各大门户网站、视频网站，都对首页或者所有页面做出了内容和样式的大调整。">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">三口一个瓜的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">三口一个瓜的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">如何简单粗暴地让网页变黑白？</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-14 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。</p>
+<h4 id="今天主要来探讨一下让页面变黑白效果的方法">今天主要来探讨一下让页面变黑白效果的方法</h4>
+<p>今年早些时候，新冠疫情给国内造成了巨大损失。因此在今年四月四的时候，为了叨念逝者、寄托哀思，国内不仅暂停了大部分娱乐活动，而且各大门户网站、视频网站，都对首页或者所有页面做出了内容和样式的大调整。</p>
+<p>在诸多修改中，最具视觉冲击力的当属大幅的网页黑白效果了。那么，如何不修改网页的大多数属性、重新打包图片等，简单地实现页面的黑白效果呢？</p>
+<h4 id="可以借用-css3-的-filter滤镜属性">可以借用 CSS3 的 filter滤镜属性</h4>
+<p>最直接的想法应该就是修改CSS样式表了。通过简单的查询可以了解到，CSS3中有filter这个属性。</p>
+<ul>
+<li>grayscale(%)
+将图像转换为灰度图像。值定义转换的比例。值为100%则完全转为灰度图像，值为0%图像无变化。值在0%到100%之间，则是效果的线性乘子。若未设置，值默认是0；</li>
+</ul>
+<p>简单的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">img {
+</span></span><span class="line"><span class="cl">    -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+</span></span><span class="line"><span class="cl">    filter: grayscale(100%);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面的代码通过 img 选择器将所有图片改成了黑白色</p>
+<p>如果想要将整个页面改成黑白色，可以选择使用 html 选择器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">html {
+</span></span><span class="line"><span class="cl">    -webkit-filter:grayscale(100%);
+</span></span><span class="line"><span class="cl">    filter: grayscale(100%);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>具体可以到菜鸟教程里查看filter这个属性的各种滤镜，功能可以说是非常强大。</p>
+<p><a href="https://www.runoob.com/cssref/css3-pr-filter.html">CSS3 filter(滤镜) 属性</a></p>
+<p>但是问题就在于这是一个CSS3属性。兼容问题目前始终是 CSS3 绕不开的问题，我们通过<a href="https://caniuse.com">can i use</a>查阅，可以看到该属性对于IE等老旧浏览器并不友好。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7277397-b037d456fbfc862e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="filter 属性的兼容情况"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7277397-1b6c3ee07aa692ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="greyscale 等的兼容情况"></p>
+<p>目前查询到的能兼容其它浏览器的较全版本如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">html{
+</span></span><span class="line"><span class="cl">    filter: gray;
+</span></span><span class="line"><span class="cl">    filter: grayscale(100%);              /* 标准写法 */
+</span></span><span class="line"><span class="cl">    -webkit-filter: grayscale(100%); /* webkit内核支持程度较好 */
+</span></span><span class="line"><span class="cl">    -moz-filter: grayscale(100%);
+</span></span><span class="line"><span class="cl">    -ms-filter: grayscale(100%);
+</span></span><span class="line"><span class="cl">    -o-filter: grayscale(100%);
+</span></span><span class="line"><span class="cl">    filter: url(&#34;data:image/svg+xml;utf8,&lt;svg xmlns=\&#39;http://www.w3.org/2000/svg\&#39;&gt;&lt;filter id=\&#39;grayscale\&#39;&gt;&lt;feColorMatrix type=\&#39;matrix\&#39; values=\&#39;0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\&#39;/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&#34;);
+</span></span><span class="line"><span class="cl">    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+</span></span><span class="line"><span class="cl">    -webkit-filter: grayscale(1);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>前面的几段很普通，是平常的兼容性写法。</p>
+<p><code>filter:url(&quot;data:image/svg...</code> 这一行有些意思，它主要针对的应该是Firefox浏览器，因为 Firefox 虽说不支持css filter，但是支持svg effects for html。算是曲线救国了～</p>
+<p><code>svg</code> 图片进行解码与颜色填充达到修改颜色的目的。</p>
+<p>而<code>filter:progid:DXImageTransform.Microsoft.BasicImage()</code>此行代码为IE自己提供的滤镜实现，性能不太友好。</p>
+<p>可以来看看腾讯视频、哔哩哔哩等对于黑白效果的实现。</p>
+<p>哔哩哔哩：仅一行代码，图片素材则是单独替换的灰度图，并非通过样式修改，应该是有性能上的考量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">html{
+</span></span><span class="line"><span class="cl">    webkit-filter: grayscale(.95);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>腾讯视频使用代码如下，在IE浏览器下同样表现良好：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">html{
+</span></span><span class="line"><span class="cl">    filter: gray;
+</span></span><span class="line"><span class="cl">    -webkit-filter: grayscale(100%);
+</span></span><span class="line"><span class="cl">    filter: grayscale(100%);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>总的来说，上面的方式可以解决大部分的问题，flash、视频等内容没办法一一覆盖，像B站就只是更改了首页的色调，其他的页面并没有做特殊处理。</p>
+<p>所以具体情况还是要具体分析。对于大型的样式管理比较复杂的网站，要是因为这样一个小调整导致整个网站访问大幅减慢，身为做出微小工作的你，可能就要背锅了2333。</p>
+<p>最后对于IE10、11，可能还得用js。解决方案主要参考ajaxblender的《Convert Images to Grayscale》。</p>
+<p>来做个小实验吧。</p>
+<p>在 App.vue 中的 style 标签中插入上述代码。</p>
+<p>原来的样子：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7277397-52f9a47cd114bff1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="一个新的 vue 项目"></p>
+<p>插入后，在chrome和Firefox中的样子：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7277397-e56c81fa1064f5dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="黑白处理之后"></p>
+<p>简单记录一下～</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content"></span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-04-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/web/">web</a>
+          <a href="/tags/css/">css</a>
+          <a href="/tags/frontend/">frontend</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/icontransform/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">解决按钮移动动画伴随光标样式抖动的问题</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/hexoblog/">
+            <span class="next-text nav-default">Hexo&#43;GithubPages 非常简单易行的搭建个人博客</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="Bitnut/comment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="940095072.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具 on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 工具 on 三口一个瓜的博客</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 04 Mar 2021 21:00:35 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>代理实践纪录</title>
+      <link>http://localhost:1313/post/proxy-config/</link>
+      <pubDate>Thu, 04 Mar 2021 21:00:35 +0800</pubDate>
+      <guid>http://localhost:1313/post/proxy-config/</guid>
+      <description>&lt;h2 id=&#34;变化的-gfw-实在是令人很苦恼&#34;&gt;变化的 GFW 实在是令人很苦恼&lt;/h2&gt;&#xA;&lt;p&gt;在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。&lt;/p&gt;&#xA;&lt;h2 id=&#34;配置-trojan-服务&#34;&gt;配置 Trojan 服务&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;一、 准备一台 VPS（境外），不需要购买域名和配置证书。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>编译安装 emacs</title>
+      <link>http://localhost:1313/post/emacs-build/</link>
+      <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      <guid>http://localhost:1313/post/emacs-build/</guid>
+      <description>&lt;h3 id=&#34;走个流程&#34;&gt;走个流程&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;源码下载&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;到 emacs 的&lt;a href=&#34;https://www.gnu.org/software/emacs/download.html&#34;&gt;官网&lt;/a&gt;下载安装包&#xA;当我写这篇博客的时候，emacs 的最新稳定版是 27.1&lt;/p&gt;&#xA;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;解压安装包&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;xz -d emacs-27.1.tar.xz&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tar -xvf emacs-27.1.tar&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;&#xA;&lt;li&gt;配置安装选项&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;code&gt;./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &amp;gt;/dev/null 2&amp;gt;&amp;amp;1&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;可能会遇到一些依赖保错&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hexo&#43;GithubPages 非常简单易行的搭建个人博客</title>
+      <link>http://localhost:1313/post/hexoblog/</link>
+      <pubDate>Sun, 29 Jul 2018 09:45:55 +0800</pubDate>
+      <guid>http://localhost:1313/post/hexoblog/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/7277397-e35bec7c84c6a4aa.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;书写&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;前言：搭建博客要自己打代码吗？&lt;/li&gt;&#xA;&lt;li&gt;开始动手：搭建博客的步骤&lt;/li&gt;&#xA;&lt;li&gt;个性化：更换主题！！&lt;/li&gt;&#xA;&lt;li&gt;写博客：初识 markdown 语法&lt;/li&gt;&#xA;&lt;li&gt;倒腾主题&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;h3 id=&#34;搭建博客难吗&#34;&gt;搭建博客难吗？&lt;/h3&gt;&#xA;&lt;p&gt;看完这篇你就知道有多简单 :P&lt;/p&gt;&#xA;&lt;h3 id=&#34;搭建个人博客需要自己打代码吗&#34;&gt;搭建个人博客需要自己打代码吗？&lt;/h3&gt;&#xA;&lt;p&gt;想要美美哒，肯定是要一点的啊&amp;#x1f625;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

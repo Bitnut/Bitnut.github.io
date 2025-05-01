@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>cryptdb 安装及使用说明 - 三口一个瓜的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="" /><meta name="description" content=" 版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥：D
+博主写的 CryptDB 另外几篇相关文章： CryptDB 简单原理论述
+详细论述 CryptDB 的原理
+这个暑假的数据库实训内容，研究的项目背景下面会介绍～
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.147.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cryptdb-install/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:url" content="http://localhost:1313/post/cryptdb-install/">
+  <meta property="og:site_name" content="三口一个瓜的博客">
+  <meta property="og:title" content="cryptdb 安装及使用说明">
+  <meta property="og:description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥：D
+博主写的 CryptDB 另外几篇相关文章： CryptDB 简单原理论述
+详细论述 CryptDB 的原理
+这个暑假的数据库实训内容，研究的项目背景下面会介绍～">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2017-08-07T20:44:51+08:00">
+    <meta property="article:modified_time" content="2017-08-07T20:44:51+08:00">
+    <meta property="article:tag" content="Cryptdb">
+    <meta property="article:tag" content="Database">
+
+  <meta itemprop="name" content="cryptdb 安装及使用说明">
+  <meta itemprop="description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥：D
+博主写的 CryptDB 另外几篇相关文章： CryptDB 简单原理论述
+详细论述 CryptDB 的原理
+这个暑假的数据库实训内容，研究的项目背景下面会介绍～">
+  <meta itemprop="datePublished" content="2017-08-07T20:44:51+08:00">
+  <meta itemprop="dateModified" content="2017-08-07T20:44:51+08:00">
+  <meta itemprop="wordCount" content="5335">
+  <meta itemprop="keywords" content="Cryptdb,Database">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="cryptdb 安装及使用说明">
+  <meta name="twitter:description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥：D
+博主写的 CryptDB 另外几篇相关文章： CryptDB 简单原理论述
+详细论述 CryptDB 的原理
+这个暑假的数据库实训内容，研究的项目背景下面会介绍～">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">三口一个瓜的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">三口一个瓜的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">cryptdb 安装及使用说明</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-08-07 </span>
+        <div class="post-category">
+            <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+            <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#博主写的-cryptdb-另外几篇相关文章">博主写的 CryptDB 另外几篇相关文章：</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#本文会详细介绍cryptdb的安装过程以及它的使用方法">本文会详细介绍CryptDB的安装过程，以及它的使用方法</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#接下来瓜哥决定用半小时带你走进cryptdb的世界">接下来瓜哥决定用半小时带你走进cryptdb的世界！！</a>
+          <ul>
+            <li></li>
+            <li><a href="#使用cryptdb">使用cryptdb</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 <em>瓜哥</em>：D</p></blockquote>
+<h2 id="博主写的-cryptdb-另外几篇相关文章">博主写的 CryptDB 另外几篇相关文章：</h2>
+<p><a href="https://bitnut.github.io/posts/cryptdb1/">CryptDB 简单原理论述</a></p>
+<p><a href="https://bitnut.github.io/posts/cryptdb2/">详细论述 CryptDB 的原理</a></p>
+<p><em>这个暑假的数据库实训内容，研究的项目背景下面会介绍～</em></p>
+<p><strong>背景资料</strong></p>
+<p>Popa, R.A 在 MIT 攻读博士时发明了 CryptDB;
+后来这个数据库方案迅速被微软和谷歌等知名企业采用和学习;
+作者毕业后自己创立了公司PreVeil;
+同时也是Assistantprofessor (讲师), UC Berkeley;</p>
+<h6 id="想要理解cryptdb-你可能需要阅读如下资料"><em>想要理解CryptDB, 你可能需要阅读如下资料</em>：</h6>
+<p>CryptDB.	 Popa, R. A., et al. (2011). CryptDB: protecting confidentiality	with encrypted query processing. <a href="http://web.cs.ucdavis.edu/~franklin/ecs228/2013/popa_etal_sosp_2011.pdf">文章链接</a>
+Guidelines	for Using the CryptDB System Securely <a href="https://eprint.iacr.org/2015/979">链接</a></p>
+<h6 id="其他可能有用的资源">其他可能有用的资源:</h6>
+<p>CryptDB</p>
+<ul>
+<li><a href="http://css.csail.mit.edu/cryptdb/">项目主页:</a> 有软件的下载和使用介绍。</li>
+<li><a href="https://github.com/CryptDB/cryptdb">github主页:</a>这个比较方便，建议看这个！</li>
+<li><a href="https://people.eecs.berkeley.edu/~raluca/">发明人主页:</a>建议～</li>
+</ul>
+<h2 id="本文会详细介绍cryptdb的安装过程以及它的使用方法">本文会详细介绍CryptDB的安装过程，以及它的使用方法</h2>
+<hr>
+<h4 id="准备阶段">准备阶段</h4>
+<h4 id="github-上官方-readme-截取的提示文字">GitHub 上官方 readme 截取的提示文字</h4>
+<p>Convention : When this document uses syntax like single-quote text single-quote + &lsquo;some-text-here&rsquo; + &lsquo;a second example&rsquo; it indicates that the reader is to use the value without the single-quotes.</p>
+<p>意思是 readme 中用到【文字+文字+文字】的段落只要理解单引号中的文字就好。</p>
+<h6 id="getting-started">Getting started</h6>
+<ul>
+<li>Requirements:
+<blockquote>
+<p>Ubuntu 12.04, 13.04; Not tested on a different OS.</p>
+<p>ruby</p></blockquote>
+</li>
+<li>Build CryptDB using the installation script.
+<blockquote>
+<p>note, this script will stop and start your mysql instance.</p>
+<p>scripts/install.rb + should just be &lsquo;.&rsquo; if you are in the cryptdb directory + the script will likely require root privileges in order to install dependencies and UDFs.</p></blockquote>
+</li>
+<li>Username/Password By default cryptdb uses &lsquo;root&rsquo; for the username and &rsquo;letmein&rsquo; for the password. You can change this by modifying the source. + Tests: test/test_utils.hh + Shell: main/cdb_test.cc + Proxy: mysqlproxy/wrapper.lua</li>
+<li>Rebuildling CryptDB If you modify the source and want to rebuild, issue &lsquo;make&rsquo; in the cryptdb directory. If you change the UDFs you will also need to do &lsquo;make install&rsquo; (which will likely require root privilege).</li>
+</ul>
+<h4 id="开始安装">开始安装</h4>
+<ol>
+<li>
+<p>请安装 Ubuntu 12.04, 13.04。本文只在 <em>12.04</em> 上运行所有的指令和测试！(下面给出镜像地址)    <a href="http://releases.ubuntu.com/12.04/">http://releases.ubuntu.com/12.04/</a></p>
+<pre><code>####*磁盘空间不要分配的太少！默认的 8G 肯定是不够的！不然 Linux 会炸.我分配了 20G*
+</code></pre>
+</li>
+<li>
+<p>鉴于文中提到的 root 权限会被使用频繁。进入操作界面之后先设置好设置 root 权限：</p>
+<p>命令：
+1. 设置 root：<code>sudo passwd root</code>
+2. 切换至 root：<code>su</code></p>
+</li>
+<li>
+<p>下载 git
+命令：<code>apt-get install git</code>
+<strong>注</strong>： <em>apt-get 下载失败的问题几乎都可以通过 update 和 upgrade 解决。所以如果 apt-get 出错，请不要烦恼~ 小问题而已！</em></p>
+</li>
+<li>
+<p>安装 ruby
+命令：<code>apt-get install ruby-full</code></p>
+</li>
+<li>
+<p>clone 源码
+命令：git clone <a href="https://github.com/CryptDB/cryptdb">https://github.com/CryptDB/cryptdb</a></p>
+</li>
+<li>
+<p>运行脚本
+1. 切换至 cryptdb 文件夹
+2. ./scripts/install.rb ~/cryptdb  （后面的参数是cryptdb的安装路径，注意看清楚，这里是默认的home目录下）</p>
+</li>
+</ol>
+<p>至此安装结束</p>
+<ul>
+<li>成功的样子：
+<img src="http://upload-images.jianshu.io/upload_images/7277397-45fccac3c1b02317.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="InstallGood.jpg"></li>
+</ul>
+<h4 id="修改一些配置">修改一些配置</h4>
+<ol>
+<li>安装 vim 编辑器
+命令：<code>apt-get install vim</code></li>
+<li>打开 wrapper.lua 进行修改
+命令：<code>vim /你的路径/cryptdb/mysqlproxy/wrapper.lua</code></li>
+<li>修改第一个函数 read_auth() 下的<em>os.getenv(&ldquo;CRYPTDB_PASS&rdquo;) or &ldquo;letmein&rdquo;<em>为</em>os.getenv(&ldquo;CRYPTDB_PASS&rdquo;) or &ldquo;root&rdquo;</em></li>
+<li>回到 cryptdb 根目录执行 make 语句(就是直接在命令行输入 <code>make</code>，回车)</li>
+</ol>
+<h2 id="接下来瓜哥决定用半小时带你走进cryptdb的世界">接下来瓜哥决定用半小时带你走进cryptdb的世界！！</h2>
+<h4 id="一些前期准备">一些前期准备</h4>
+<h4 id="首先在-mysql-上面建立自己的数据库-test">首先在 <em>MySQL</em> 上面建立自己的数据库 <em>test</em></h4>
+<p>MySQL 的语法和我们学习的（在大二学的 Oracle）略有出入，我这里把我们数据库实验的脚本编写了一下，重新导入到 MySQL 中。</p>
+<p>步骤：</p>
+<h6 id="一-共享文件夹如果你习惯使用-win">一. 共享文件夹（如果你习惯使用 win）</h6>
+<ol>
+<li>安装VBox的增强功能，点击一下上方的按键，找到：设备==&gt;安装增强功能</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/7277397-3825f3bc3ee3b068.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="applySharing.jpg"></p>
+<ol start="2">
+<li>打开终端，进入到 /media 再进入到里面的那个文件夹，跑一下里面的 VBoxLinuxAdditions.run 的那个文件，完成后<code>reboot</code>。</li>
+<li>（前面的为了全屏的话你肯定做过）在 VBox 软件中选择共享文件夹，选择你在 win 下想要共享的文件夹，自动挂载，和固定分配。</li>
+<li>把我写的脚本放进那个文件夹里。</li>
+<li>在 Linux 的终端中输入命令： <code>sudo mount -t vboxsf</code> 你的文件夹名字 /mnt/随便建一个文件夹的名字。这样把你的共享文件夹手动挂载到Linux中（想要自动挂载的话，请把这个命令完完整整得写到 /etc/rc.local 的末行）</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/7277397-c10469401156dcb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="autoMount.png"></p>
+<h6 id="二搭建数据库">二.搭建数据库</h6>
+<ol start="6">
+<li>终端中打开 MySQL 命令:<code>mysql -u root -p</code></li>
+<li>输入你的密码:<code>blablabla</code></li>
+<li>先创建数据库 test 命令：<code>create database test;</code></li>
+<li>运行脚本 命令：<code>source 你的路径/first.sql</code></li>
+<li>其实改了脚本之后还是有蜜汁bug，不过吧第一张表格classroom的代码粘贴运行即可。</li>
+<li>再次运行该脚本</li>
+<li>搞定，可以用命令：<code>show tables;</code>查看一下已经导入的表格。
+这里给出脚本：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">use</span><span class="w"> </span><span class="n">test</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">prereq</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">time_slot</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">advisor</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">takes</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">student</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">teaches</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">section</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">instructor</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">course</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">department</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">classroom</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">classroom</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">building</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">room_number</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">capacity</span><span class="w">		</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">building</span><span class="p">,</span><span class="w"> </span><span class="n">room_number</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">department</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">dept_name</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">building</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">budget</span><span class="w">		        </span><span class="nb">numeric</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">budget</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">dept_name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">course</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">course_id</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">title</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">dept_name</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">credits</span><span class="w">		</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">credits</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">course_id</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">dept_name</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">department</span><span class="p">(</span><span class="n">dept_name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">instructor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">ID</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">name</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">dept_name</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">salary</span><span class="w">			</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">salary</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">29000</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">dept_name</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">department</span><span class="p">(</span><span class="n">dept_name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">section</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">course_id</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="n">sec_id</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">semester</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">semester</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Winter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Summer&#39;</span><span class="p">)),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">year</span><span class="w">			</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="k">year</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1701</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2100</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">building</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">room_number</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">time_slot_id</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">course_id</span><span class="p">,</span><span class="w"> </span><span class="n">sec_id</span><span class="p">,</span><span class="w"> </span><span class="n">semester</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">course_id</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">course</span><span class="p">(</span><span class="n">course_id</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">building</span><span class="p">,</span><span class="w"> </span><span class="n">room_number</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w">         </span><span class="n">classroom</span><span class="p">(</span><span class="n">building</span><span class="p">,</span><span class="n">room_number</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">teaches</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">ID</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">course_id</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">sec_id</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">semester</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">year</span><span class="w">			</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">course_id</span><span class="p">,</span><span class="w"> </span><span class="n">sec_id</span><span class="p">,</span><span class="w"> </span><span class="n">semester</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">course_id</span><span class="p">,</span><span class="n">sec_id</span><span class="p">,</span><span class="w"> </span><span class="n">semester</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w">     </span><span class="n">section</span><span class="p">(</span><span class="n">course_id</span><span class="p">,</span><span class="n">sec_id</span><span class="p">,</span><span class="n">semester</span><span class="p">,</span><span class="k">year</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">instructor</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">student</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">ID</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">name</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">dept_name</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">tot_cred</span><span class="w">		</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">tot_cred</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">dept_name</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">department</span><span class="p">(</span><span class="n">dept_name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">takes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">ID</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">course_id</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">sec_id</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">semester</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">year</span><span class="w">			</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">grade</span><span class="w">		        </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">course_id</span><span class="p">,</span><span class="w"> </span><span class="n">sec_id</span><span class="p">,</span><span class="w"> </span><span class="n">semester</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">course_id</span><span class="p">,</span><span class="n">sec_id</span><span class="p">,</span><span class="w"> </span><span class="n">semester</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">section</span><span class="p">(</span><span class="n">course_id</span><span class="p">,</span><span class="n">sec_id</span><span class="p">,</span><span class="w"> </span><span class="n">semester</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">student</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">advisor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">s_ID</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">i_ID</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">s_ID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">i_ID</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">on</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">s_ID</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">time_slot</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">time_slot_id</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">day</span><span class="w">			</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">start_hr</span><span class="w">		</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">start_hr</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">start_hr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">24</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">start_min</span><span class="w">		</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">start_min</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">start_min</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">60</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">end_hr</span><span class="w">			</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">end_hr</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">end_hr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">24</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">end_min</span><span class="w">		</span><span class="nb">numeric</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">end_min</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">end_min</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">60</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">time_slot_id</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">,</span><span class="w"> </span><span class="n">start_hr</span><span class="p">,</span><span class="w"> </span><span class="n">start_min</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">prereq</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="n">course_id</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="n">prereq_id</span><span class="w">		</span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">course_id</span><span class="p">,</span><span class="w"> </span><span class="n">prereq_id</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	 </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">course_id</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">course</span><span class="p">(</span><span class="n">course_id</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">prereq</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">time_slot</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">advisor</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">takes</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">teaches</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">section</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">instructor</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">course</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">department</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">classroom</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">classroom</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Packard&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;500&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">classroom</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Painter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;514&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">classroom</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Taylor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;70&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">classroom</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Watson&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;100&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;30&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">classroom</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Watson&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;120&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Watson&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;90000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Taylor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;100000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Elec. Eng.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Taylor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;85000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Finance&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Painter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;120000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;History&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Painter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Music&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Packard&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;80000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Watson&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;70000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;BIO-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Intro. to Biology&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;BIO-301&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Genetics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;BIO-399&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Computational Biology&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Intro. to Computer Science&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-190&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Game Design&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-315&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Robotics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-319&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Image Processing&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-347&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Database System Concepts&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;EE-181&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Intro. to Digital Systems&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Elec. Eng.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;FIN-201&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Investment Banking&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Finance&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;HIS-351&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;World History&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;History&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;MU-199&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Music Video Production&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Music&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">course</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;PHY-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Physical Principles&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;10101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Srinivasan&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;65000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;12121&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Wu&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Finance&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;90000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;15151&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Mozart&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Music&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;40000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;22222&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Einstein&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;95000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;32343&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;El Said&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;History&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;60000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;33456&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Gold&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;87000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;45565&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Katz&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;75000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;58583&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Califieri&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;History&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;62000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76543&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Singh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Finance&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;80000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76766&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Crick&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;72000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;83821&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Brandt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;92000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">instructor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98345&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Kim&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Elec. Eng.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;80000&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;BIO-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Summer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Painter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;514&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;BIO-301&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Summer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Painter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;514&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Packard&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;H&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Packard&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;F&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-190&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Taylor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;E&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-190&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Taylor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-315&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Watson&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;120&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;D&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-319&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Watson&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;100&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-319&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Taylor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-347&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Taylor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;EE-181&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Taylor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;FIN-201&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Packard&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;HIS-351&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Painter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;514&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;MU-199&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Packard&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;D&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;PHY-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Watson&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;100&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;10101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;10101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-315&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;10101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-347&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;12121&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;FIN-201&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;15151&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MU-199&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;22222&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PHY-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;32343&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HIS-351&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;45565&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;45565&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-319&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76766&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;BIO-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Summer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76766&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;BIO-301&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Summer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;83821&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-190&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;83821&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-190&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;83821&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-319&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">teaches</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98345&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;EE-181&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;00128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Zhang&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;102&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;12345&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Shankar&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;32&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;19991&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Brandt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;History&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;80&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;23121&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Chavez&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Finance&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;110&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;44553&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Peltier&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;56&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;45678&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Levy&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;46&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;54321&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Williams&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;54&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;55739&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Sanchez&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Music&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;38&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;70557&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Snow&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Physics&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76543&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Brown&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comp. Sci.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;58&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76653&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Aoi&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Elec. Eng.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;60&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98765&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Bourikas&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Elec. Eng.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;98&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98988&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Tanaka&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;120&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;00128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;00128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-347&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A-&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;12345&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;12345&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-190&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;12345&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-315&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;12345&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-347&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;19991&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HIS-351&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;23121&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;FIN-201&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;C+&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;44553&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PHY-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B-&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;45678&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;F&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;45678&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B+&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;45678&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-319&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;54321&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A-&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;54321&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-190&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B+&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;55739&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MU-199&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A-&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76543&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76543&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-319&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76653&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;EE-181&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98765&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;C-&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98765&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-315&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98988&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;BIO-101&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Summer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2009&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">takes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98988&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;BIO-301&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Summer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2010&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">advisor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;00128&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;45565&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">advisor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;12345&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;10101&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">advisor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;23121&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;76543&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">advisor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;44553&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;22222&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">advisor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;45678&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;22222&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">advisor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76543&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;45565&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">advisor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;76653&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;98345&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">advisor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98765&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;98345&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">advisor</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;98988&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;76766&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;9&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;9&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;9&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;9&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;9&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;9&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;13&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;13&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;13&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;13&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;13&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;13&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;30&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;45 &#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;30&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;45 &#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;14&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;30&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;15&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;45 &#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;14&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;30&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;15&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;45 &#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;50&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">time_slot</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;12&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;30&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">prereq</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;BIO-301&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;BIO-101&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">prereq</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;BIO-399&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;BIO-101&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">prereq</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-190&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">prereq</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-315&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">prereq</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-319&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">prereq</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;CS-347&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CS-101&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">prereq</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;EE-181&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PHY-101&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="使用cryptdb的开始">使用cryptdb的开始</h4>
+<p>步骤：</p>
+<h6 id="一-登陆以及登陆会遇到的问题">一. 登陆，以及登陆会遇到的问题</h6>
+<ol>
+<li>
+<p>首先把另外一个文件 Mysql Proxy 放到共享目录下并且打开，方便复制。
+Mysql Proxy( 来自github ):</p>
+<pre><code> How to Run Mysql Proxy
+     ----------------------
+
+ to start proxy:
+
+ % export EDBDIR=&lt;...&gt;/cryptdb
+ % mysql-proxy --plugins=proxy \
+         --event-threads=4 \
+ --max-open-files=1024 \
+ --proxy-lua-script=$EDBDIR/mysqlproxy/wrapper.lua \
+ --proxy-address=localhost:3307 \
+ --proxy-backend-addresses=localhost:3306
+
+ to specify username / password / shadow dir for proxy, run before starting proxy:
+
+ % export CRYPTDB_USER=...
+ % export CRYPTDB_PASS=...
+ % export CRYPTDB_SHADOW=...
+
+ to send a single command to mysql:
+
+ % mysql -u root -p -h 127.0.0.1 -P 3307 -e 'command'
+</code></pre>
+</li>
+<li>
+<p>把里面的环境变量先设置一下，把第二个命令路径改成你自己的，主要是cryptdb的安装路径（其实你要是用脚本安装的话基本不会变了）。</p>
+</li>
+<li>
+<p>运行第二条命令，进入到cryptdb的代理服务器中。</p>
+</li>
+<li>
+<p>可以看到我们利用命令设置了两个端口,其中：</p>
+<blockquote>
+<p>&ndash;proxy-address=:3307 指定mysql proxy的监听端口，也可以用 127.0.0.1:3307 表示</p>
+<p>&ndash;proxy-backend-addresses=:3306 指定mysql主机的端口</p>
+<p>&ndash;proxy-lua-script=￥EDBDIR/mysqlproxy/mysql-proxy/wrapper.lua 指定lua脚本（具体它的作用是什么，要打开细看才行）</p></blockquote>
+</li>
+<li>
+<p>这时候代理服务器已经启动打开另外两个窗口分别查看数据库</p>
+</li>
+<li>
+<p>复制最后一条命令打开数据库。注意这里有可能会出错，主要有两个原因：</p>
+<blockquote>
+<ul>
+<li>有可能显示说脚本不能运行，那么请检查之前你有没有把到脚本的路径设好，也就是文件中的第一条命令</li>
+<li>第二个原因是你没有root，这时候登录的终端窗口显示Lost connection to MySQL server at ‘reading authorization packet’</li>
+<li>第三个原因可能是你密码输错了，这样 proxy 会运行一段时间然后跳出，返回错误信息，登录的终端会显示 Access denied for user&hellip;.YES),请注意这里的密码是之前我们在wrapper.lua中修改的CRYPTDB_PASS的变量，应该是‘root’，你可以自己试着改一改来玩一玩。</li>
+</ul></blockquote>
+</li>
+</ol>
+<h3 id="使用cryptdb">使用cryptdb</h3>
+<p>这时候就已经可以通信了
+登录的终端root不root无所谓（按道理也应该是这样的嘛~哪有说是个登陆者都要root的权限才能访问数据库的）</p>
+<h6 id="先是在3307端口的操作">先是在3307端口的操作</h6>
+<ol>
+<li>查看一下数据库
+命令：<code>show databases;</code></li>
+<li>看到了我们之前建立的 test</li>
+<li>使用一下
+命令：<code>use test</code></li>
+<li>查看一下表格
+命令：<code>show tables;</code>
+<code>select * from advisor;</code></li>
+<li>哈哈，被骗了吧。没看论文的你就会跟着我在前面不断犯错在 MySQL 上面直接导入脚本中的数据库。</li>
+<li>实际上你必须在连接proxy的条件下创建表格或者创建数据库，否则你创建的表格在你使用 proxy 访问数据库的时候肯定会出错。</li>
+</ol>
+<h6 id="重新在3307端口操作本操作主要是为了建立数据库在-3306-或者-3307-端口都是可行的">重新在3307端口操作（本操作主要是为了建立数据库，在 3306 或者 3307 端口都是可行的）</h6>
+<ol start="7">
+<li>打开已经准备好的 demo 文档（来自 Github），重新创建数据库，复制里面的命令试一下吧~~~</li>
+<li>当你使用 show tables; 的时候你会发现表格名称都是不能识别的加密之后的表格名字。然而如果你试图通过查询这些表格来获取里面的信息，那将会遭受很大的挫折（never success），你必须知道原来的名字，并且用他们来查询信息。</li>
+<li>这个是正常的访问 proxy 代理的操作，可见必须是 application 才会知道这些表格名称，要不然怎么访问都是徒劳的。</li>
+</ol>
+<p>这里给出demo：</p>
+<pre><code>Single-principal demo:
+
+* in  proxy shell:
+mysql-proxy --plugins=proxy --event-threads=4 --max-open-files=1024 --proxy-lua-script=$EDBDIR/../mysqlproxy/wrapper.lua --proxy-address=127.0.0.1:3307 --
+proxy-backend-addresses=localhost:3306
+* in plain shell: drop database cryptdbtest; create database cryptdbtest; use cryptdbtest;
+* in demo shell: mysql -u root -pletmein -h 127.0.0.1 -P 3307 cryptdbtest
+
+CREATE TABLE t1 (id integer, name text, salary integer);
+(plain: show tables; describe table0;)
+INSERT INTO t1 VALUES (1, 'alice', 100);
+INSERT INTO t1 VALUES (2, 'bob', 200);
+INSERT INTO t1 VALUES (0, 'chris', 0);
+INSERT INTO t1 VALUES (4, 'dan dennis', 0);
+SELECT * FROM t1;
+(plain: select * from table0;)
+SELECT * FROM t1 WHERE id = 1;
+SELECT name, salary FROM t1 WHERE salary &gt; 0;
+SELECT sum(salary) FROM t1 WHERE salary &gt; 0;
+(plain: SELECT field1SWP from table0;)
+SELECT name FROM t1 WHERE name ILIKE 'dennis';
+
+others:
+SELECT * FROM t1 ORDER BY name;
+SELECT count(*) FROM t1 GROUP BY salary;
+DELETE FROM t1 WHERE id = 1;
+(plain: select * from table0;)
+DROP TABLE t1;
+
+CREATE TABLE t2 (id integer);
+INSERT INTO t2 VALUES (2);
+
+SELECT * FROM t1, t2 WHERE t1.id = t2.id;
+
+
+Multi-principal demo:
+
+export CRYPTDB_MODE=multi --&gt;sets either to single or multi principle
+
+-- make sure allDefaultEncrypted in EDBProxy.hh is set to false and then make
+
+CREATE TABLE msgs (msgid equals privmsg.msgid integer, msgtext encfor msgid text);
+CREATE TABLE privmsg (msgid integer, recid equals u_mess.userid speaksfor msgid integer, senderid speaksfor msgid integer);
+CREATE TABLE u_mess (userid equals privmsg.senderid integer, username givespsswd userid text);
+(log in Alice:)
+INSERT INTO pwdcryptdb__u_mess (username, psswd) VALUES ('alice', 'secretalice');
+(log in Bob:)
+INSERT INTO pwdcryptdb__u_mess (username, psswd) VALUES ('bob', 'secretbob');
+INSERT INTO u_mess VALUES (1, 'alice');
+INSERT INTO u_mess VALUES (2, 'bob');
+INSERT INTO privmsg (5, 1, 2);
+
+INSERT INTO msgs VALUES (5, 'secret message');
+(log off Bob:)
+DELETE FROM pwdcryptdb__u_mess WHERE username = 'bob';
+SELECT * FROM msgs; --&gt; should be able to see secret message
+(log off Alice similarly to above)
+SELECT * FROM msgs; --&gt; should not be able to see secret message any more
+because none of the users with access to it are logged in
+(log in Alice as above)
+SELECT * FROM msgs; --&gt; should be able to see the secret message
+</code></pre>
+<h6 id="重新在3307端口操作">重新在3307端口操作</h6>
+<ol>
+<li>查看一下数据库
+命令：<code>show databases;</code></li>
+<li>看到了我们之前建立的 test</li>
+<li>使用一下
+命令：<code>use test</code></li>
+<li>查看一下表格
+命令：<code>show tables;</code>
+<code>select * from advisor;</code></li>
+</ol>
+<h6 id="再是3306端口的操作">再是3306端口的操作</h6>
+<ol>
+<li>在使用3306端口的时候，查询到的的将会全都是密文（鬼画符一样）</li>
+<li>而且在输入原来的名字的时候没有自动补全，很烦，只能输入错误的表格名最后输出密文。</li>
+<li>目前只知道这个是针对内鬼的（curious DMA）真实可怕，诸位大佬玩玩就好，不需要耗费太多时间在这上面。</li>
+</ol>
+<h6 id="看截图对比一下两个端口">看截图对比一下两个端口</h6>
+<ol>
+<li><code>show tables;</code>两个端口显示的 tables 数据一致 （右上是3306，右下是3307）
+<img src="http://upload-images.jianshu.io/upload_images/7277397-f14b56f25af1d471.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="compareTables.png"></li>
+<li><code>SELECT * FROM t1;</code> 3306 显示没有这个表格， 3307 则完整显示了整个 t1。
+<img src="http://upload-images.jianshu.io/upload_images/7277397-f7ede4d62889a8d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="selectT1.png"></li>
+<li><code>SELECT * FROM table_QZKOAZMXZW;</code>3306 显示出大段密文，而 3307 则显示没有这样的表格。（右是3306，中是3307）
+<img src="http://upload-images.jianshu.io/upload_images/7277397-f097726a392c5832.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="selectQZKOAZMXZW.png"></li>
+</ol>
+<p>最后的操作请看官自己完成。。。已经没有任何难度了。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content"></span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2017-08-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/cryptdb/">cryptdb</a>
+          <a href="/tags/database/">database</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cryptdb2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">详细论述 CryptDB 的原理</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/abo/">
+            <span class="next-text nav-default">关于我</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="Bitnut/comment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="940095072.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

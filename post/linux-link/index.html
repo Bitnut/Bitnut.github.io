@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Linux 中的软链接和硬链接 - 三口一个瓜的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="" /><meta name="description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.147.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/linux-link/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:url" content="http://localhost:1313/post/linux-link/">
+  <meta property="og:site_name" content="三口一个瓜的博客">
+  <meta property="og:title" content="Linux 中的软链接和硬链接">
+  <meta property="og:description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-03-21T17:10:40+08:00">
+    <meta property="article:modified_time" content="2021-03-21T17:10:40+08:00">
+    <meta property="article:tag" content="GNU">
+    <meta property="article:tag" content="Linux">
+
+  <meta itemprop="name" content="Linux 中的软链接和硬链接">
+  <meta itemprop="description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。">
+  <meta itemprop="datePublished" content="2021-03-21T17:10:40+08:00">
+  <meta itemprop="dateModified" content="2021-03-21T17:10:40+08:00">
+  <meta itemprop="wordCount" content="1267">
+  <meta itemprop="keywords" content="GNU,Linux">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Linux 中的软链接和硬链接">
+  <meta name="twitter:description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">三口一个瓜的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">三口一个瓜的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linux 中的软链接和硬链接</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-03-21 </span>
+        <div class="post-category">
+            <a href="/categories/%E4%B8%93%E9%A2%98/"> 专题 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux-中的软链接和硬链接">Linux 中的软链接和硬链接</a>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#了解-inode">了解 inode</a></li>
+        <li><a href="#了解软硬链接">了解软硬链接</a>
+          <ul>
+            <li><a href="#软硬链接还有如下区别">软硬链接还有如下区别：</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="linux-中的软链接和硬链接">Linux 中的软链接和硬链接</h1>
+<h2 id="前言">前言</h2>
+<p>在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。</p>
+<h2 id="了解-inode">了解 inode</h2>
+<p>在理解软/硬链接之前，我们必需了解一下， linux  里面 <code>存储文件</code> 的方式。</p>
+<p>对于 linux 有一定了解的朋友都知道 linux 里面有一个重要的概念叫做 i 结点，即 inode。</p>
+<p>当文件存储在硬盘上，硬盘的最小存储单位叫做 <code>扇区</code>（Sector）。每个扇区储存 512 字节（即 0.5KB ）。有人会问，平时讨论文件存储的时候总是说的 <code>块</code>（test）又是啥？</p>
+<p>实际上，扇区是硬盘的概念，我们的操作系统把扇区的概念透明化，因为这个单位实在太小了，也太过具体不够抽象。因此操作系统引入了块的概念，块，实际上就是连续的多个扇区。</p>
+<p>读取硬盘的时候，操作系统不会一个个扇区的读取，这样效率太低，一次性连续读取多个扇区，即一次性读取一个块。这种由多个扇区组成的“块”，是操作系统层面上文件存取的最小单位。块的大小，最常见的是4KB，可以简单的理解为连续八个 sector 组成一个 test。</p>
+<p>那么既然文件数据都储存在块中，我们明白了文件存储的方式，如何管理已经存储好的文件呢？</p>
+<p>文件存储、文件读取是相对而言非常慢的操作，好的操作系统必然会寻找加快这些操作的方法。我们知道在数据库中有索引的概念，可以很好的提升查询速度。那么不如给每个文件加上索引？最好顺便能把文件信息也放一起好了！</p>
+<p>这种储存文件元信息的区域就叫做 inode ，也叫 <code>索引节点</code>。</p>
+<p>每一个文件都会有对应的 inode ，每个 inode 里面包含了与该文件有关的一些信息，如文件的创建者、文件的创建日期、文件的大小、权限等等。</p>
+<h2 id="了解软硬链接">了解软硬链接</h2>
+<p>接下来，我们动手实践一下，去观察观察：</p>
+<p>首先，我们建立一个源文件 test，再建立两个硬链接和一个软链接文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ touch <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ ln <span class="nb">test</span> test-hd1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ ln <span class="nb">test</span> test-hd2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ ln -s <span class="nb">test</span> test-soft
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ ls -li
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果如下图：</p>
+<p><img src="/static/linux-link-ls.png" alt="图一"></p>
+<p>我们仔细观察一下发现，test-hd1,test-hd2,test 拥有一样的 i 结点（显示结果的第一列，即 529565）。而 test-soft 拥有另外一个独立的 i 结点。</p>
+<p>所以，我们可以发现，建立的硬链接实际上指向的文件地址和我们的源文件是一样的，可以理解源文件本身就是一个硬链接。而软链接则是重新建立了一个独立的文件。</p>
+<p>可以这样理解，硬链接就是一个文件的别名/引用（本身大小为 0,因为不会建立 inode 进行存储），指向我们建立的文件。一旦所有指向文件的硬链接都被删除，系统会把这个文件当作垃圾回收掉。</p>
+<p>那么软链接如何理解？</p>
+<p>软链接可以理解为 win 下的快捷方式。它是一个指针，指向我们建立的文件，但是系统不会因为我们删除了软链接就清除源文件。</p>
+<h3 id="软硬链接还有如下区别">软硬链接还有如下区别：</h3>
+<ul>
+<li>软链接可以跨文件系统，硬链接不可以；</li>
+<li>软链接可以对一个不存在的文件名(filename)进行链接（当然此时如果你vi这个软链接文件，linux会自动新建一个文件名为filename的文件）,硬链接不可以（其文件必须存在，inode必须存在）；</li>
+<li>软链接可以对目录进行连接，硬链接不可以。两种链接都可以通过命令 ln 来创建。</li>
+<li>ln 默认创建的是硬链接。使用 -s 开关可以创建软链接</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content"></span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-03-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/gnu/">GNU</a>
+          <a href="/tags/linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/linux-strange-shell/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Linux 下 ‘奇怪’ 的 shell</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/ruinyourtscode/">
+            <span class="next-text nav-default">如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="Bitnut/comment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="940095072.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

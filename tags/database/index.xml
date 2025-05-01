@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Database on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/tags/database/</link>
+    <description>Recent content in Database on 三口一个瓜的博客</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 11 Sep 2017 08:52:53 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CryptDB  简单原理论述</title>
+      <link>http://localhost:1313/post/cryptdb1/</link>
+      <pubDate>Mon, 11 Sep 2017 08:52:53 +0800</pubDate>
+      <guid>http://localhost:1313/post/cryptdb1/</guid>
+      <description>&lt;h2 id=&#34;博主写的-cryptdb-另外几篇相关文章&#34;&gt;博主写的 CryptDB 另外几篇相关文章：&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bitnut.github.io/posts/cryptdb-install/&#34;&gt;cryptdb 安装及使用说明&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bitnut.github.io/posts/cryptdb2/&#34;&gt;详细论述 CryptDB 的原理&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;1面对threat-1&#34;&gt;1.面对threat 1&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加密过的数据上。因此就意味着需要在数据库服务端存放多种经过不同方式加密的数据。当用户执行特定操作时，Mysql-proxy就会截获操作请求并使用使用特定的加密方式对该操作进行加密，使得该操作能够正确运行在Server端。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>详细论述 CryptDB 的原理</title>
+      <link>http://localhost:1313/post/cryptdb2/</link>
+      <pubDate>Mon, 11 Sep 2017 08:52:18 +0800</pubDate>
+      <guid>http://localhost:1313/post/cryptdb2/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;博主写的-cryptdb-另外几篇相关文章&#34;&gt;博主写的 CryptDB 另外几篇相关文章：&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bitnut.github.io/posts/cryptdb-install/&#34;&gt;cryptdb 安装及使用说明&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bitnut.github.io/posts/cryptdb1/&#34;&gt;CryptDB 简单原理论述&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;相关资料&#34;&gt;相关资料&lt;/h2&gt;&#xA;&lt;p&gt;想要理解CryptDB, 你可能需要阅读如下资料：&#xA;CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. &lt;a href=&#34;http://web.cs.ucdavis.edu/~franklin/ecs228/2013/popa_etal_sosp_2011.pdf&#34;&gt;文章链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>cryptdb 安装及使用说明</title>
+      <link>http://localhost:1313/post/cryptdb-install/</link>
+      <pubDate>Mon, 07 Aug 2017 20:44:51 +0800</pubDate>
+      <guid>http://localhost:1313/post/cryptdb-install/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 &lt;em&gt;瓜哥&lt;/em&gt;：D&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;博主写的-cryptdb-另外几篇相关文章&#34;&gt;博主写的 CryptDB 另外几篇相关文章：&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bitnut.github.io/posts/cryptdb1/&#34;&gt;CryptDB 简单原理论述&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://bitnut.github.io/posts/cryptdb2/&#34;&gt;详细论述 CryptDB 的原理&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;这个暑假的数据库实训内容，研究的项目背景下面会介绍～&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
