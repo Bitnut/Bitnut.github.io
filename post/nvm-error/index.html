@@ -16,16 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。
-出现这个报错的原因有许多种，我遇到的报错实际上是由代理引起。
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。 出现这个报错的原因有许多种，我遇到的报错实际上是由代" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/nvm-error/" />
@@ -37,34 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/nvm-error/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="NVM 报 ls-remote command results in “N/A 错误">
-  <meta property="og:description" content="NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。
-出现这个报错的原因有许多种，我遇到的报错实际上是由代理引起。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-01-15T22:20:01+08:00">
-    <meta property="article:modified_time" content="2021-01-15T22:20:01+08:00">
-    <meta property="article:tag" content="Node">
-    <meta property="article:tag" content="Linux">
+<meta property="og:title" content="NVM 报 ls-remote command results in “N/A 错误" />
+<meta property="og:description" content="NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。 出现这个报错的原因有许多种，我遇到的报错实际上是由代" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/nvm-error/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-01-15T22:20:01&#43;08:00" />
+<meta property="article:modified_time" content="2021-01-15T22:20:01&#43;08:00" />
 
-  <meta itemprop="name" content="NVM 报 ls-remote command results in “N/A 错误">
-  <meta itemprop="description" content="NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。
-出现这个报错的原因有许多种，我遇到的报错实际上是由代理引起。">
-  <meta itemprop="datePublished" content="2021-01-15T22:20:01+08:00">
-  <meta itemprop="dateModified" content="2021-01-15T22:20:01+08:00">
-  <meta itemprop="wordCount" content="986">
-  <meta itemprop="keywords" content="Node,Linux">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="NVM 报 ls-remote command results in “N/A 错误">
-  <meta name="twitter:description" content="NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。
-出现这个报错的原因有许多种，我遇到的报错实际上是由代理引起。">
+<meta itemprop="name" content="NVM 报 ls-remote command results in “N/A 错误">
+<meta itemprop="description" content="NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。 出现这个报错的原因有许多种，我遇到的报错实际上是由代"><meta itemprop="datePublished" content="2021-01-15T22:20:01&#43;08:00" />
+<meta itemprop="dateModified" content="2021-01-15T22:20:01&#43;08:00" />
+<meta itemprop="wordCount" content="986">
+<meta itemprop="keywords" content="node,Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="NVM 报 ls-remote command results in “N/A 错误"/>
+<meta name="twitter:description" content="NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。 出现这个报错的原因有许多种，我遇到的报错实际上是由代"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -199,7 +187,7 @@
 <p>先看一下这个脚本函数 <code>nvm_download</code> 里到底写得是啥。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -225,31 +213,31 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nvm_download<span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">local</span> CURL_COMPRESSED_FLAG
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> nvm_has <span class="s2">&#34;curl&#34;</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> nvm_curl_use_compression<span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">      <span class="nv">CURL_COMPRESSED_FLAG</span><span class="o">=</span><span class="s2">&#34;--compressed&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    // 注意这里！！！
-</span></span><span class="line"><span class="cl">    curl --fail <span class="si">${</span><span class="nv">CURL_COMPRESSED_FLAG</span><span class="k">:-</span><span class="si">}</span> -q <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">elif</span> nvm_has <span class="s2">&#34;wget&#34;</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Emulate curl with wget</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">ARGS</span><span class="o">=</span><span class="k">$(</span>nvm_echo <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> <span class="p">|</span> <span class="nb">command</span> sed -e <span class="s1">&#39;s/--progress-bar /--progress=bar /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                            -e <span class="s1">&#39;s/--compressed //&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                            -e <span class="s1">&#39;s/--fail //&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                            -e <span class="s1">&#39;s/-L //&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                            -e <span class="s1">&#39;s/-I /--server-response /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                            -e <span class="s1">&#39;s/-s /-q /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                            -e <span class="s1">&#39;s/-sS /-nv /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                            -e <span class="s1">&#39;s/-o /-O /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                            -e <span class="s1">&#39;s/-C - /-c /&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># shellcheck disable=SC2086</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">eval</span> wget <span class="nv">$ARGS</span>
-</span></span><span class="line"><span class="cl">  <span class="k">fi</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">nvm_download<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local</span> CURL_COMPRESSED_FLAG
+  <span class="k">if</span> nvm_has <span class="s2">&#34;curl&#34;</span><span class="p">;</span> <span class="k">then</span>
+    <span class="k">if</span> nvm_curl_use_compression<span class="p">;</span> <span class="k">then</span>
+      <span class="nv">CURL_COMPRESSED_FLAG</span><span class="o">=</span><span class="s2">&#34;--compressed&#34;</span>
+    <span class="k">fi</span>
+
+    // 注意这里！！！
+    curl --fail <span class="si">${</span><span class="nv">CURL_COMPRESSED_FLAG</span><span class="k">:-</span><span class="si">}</span> -q <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>
+  <span class="k">elif</span> nvm_has <span class="s2">&#34;wget&#34;</span><span class="p">;</span> <span class="k">then</span>
+    <span class="c1"># Emulate curl with wget</span>
+    <span class="nv">ARGS</span><span class="o">=</span><span class="k">$(</span>nvm_echo <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> <span class="p">|</span> <span class="nb">command</span> sed -e <span class="s1">&#39;s/--progress-bar /--progress=bar /&#39;</span> <span class="se">\
+</span><span class="se"></span>                            -e <span class="s1">&#39;s/--compressed //&#39;</span> <span class="se">\
+</span><span class="se"></span>                            -e <span class="s1">&#39;s/--fail //&#39;</span> <span class="se">\
+</span><span class="se"></span>                            -e <span class="s1">&#39;s/-L //&#39;</span> <span class="se">\
+</span><span class="se"></span>                            -e <span class="s1">&#39;s/-I /--server-response /&#39;</span> <span class="se">\
+</span><span class="se"></span>                            -e <span class="s1">&#39;s/-s /-q /&#39;</span> <span class="se">\
+</span><span class="se"></span>                            -e <span class="s1">&#39;s/-sS /-nv /&#39;</span> <span class="se">\
+</span><span class="se"></span>                            -e <span class="s1">&#39;s/-o /-O /&#39;</span> <span class="se">\
+</span><span class="se"></span>                            -e <span class="s1">&#39;s/-C - /-c /&#39;</span><span class="k">)</span>
+    <span class="c1"># shellcheck disable=SC2086</span>
+    <span class="nb">eval</span> wget <span class="nv">$ARGS</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>关注一下核心的下载命令：</p>
 <p><code>curl --fail ${CURL_COMPRESSED_FLAG:-} -q &quot;$@&quot;</code></p>
@@ -267,7 +255,7 @@
 <p>若您您或第一种没用，考虑和我一样粗暴解法，直接将 if 语句中的 crul 和 wget 换位置，如下(也就是先考虑 wget 了)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -291,29 +279,29 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">   nvm_download<span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">local</span> CURL_COMPRESSED_FLAG
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> nvm_has <span class="s2">&#34;wget&#34;</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># Emulate curl with wget</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">ARGS</span><span class="o">=</span><span class="k">$(</span>nvm_echo <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> <span class="p">|</span> <span class="nb">command</span> sed -e <span class="s1">&#39;s/--progress-bar /--progress=bar /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                                -e <span class="s1">&#39;s/--compressed //&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                                -e <span class="s1">&#39;s/--fail //&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                                -e <span class="s1">&#39;s/-L //&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                                -e <span class="s1">&#39;s/-I /--server-response /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                                -e <span class="s1">&#39;s/-s /-q /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                                -e <span class="s1">&#39;s/-sS /-nv /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                                -e <span class="s1">&#39;s/-o /-O /&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>                                -e <span class="s1">&#39;s/-C - /-c /&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># shellcheck disable=SC2086</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">eval</span> wget <span class="nv">$ARGS</span>
-</span></span><span class="line"><span class="cl">      <span class="k">elif</span> nvm_has <span class="s2">&#34;curl&#34;</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> nvm_curl_use_compression<span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">          <span class="nv">CURL_COMPRESSED_FLAG</span><span class="o">=</span><span class="s2">&#34;--compressed&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">        curl --fail <span class="si">${</span><span class="nv">CURL_COMPRESSED_FLAG</span><span class="k">:-</span><span class="si">}</span> -q <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">   nvm_download<span class="o">()</span> <span class="o">{</span>
+      <span class="nb">local</span> CURL_COMPRESSED_FLAG
+      <span class="k">if</span> nvm_has <span class="s2">&#34;wget&#34;</span><span class="p">;</span> <span class="k">then</span>
+            <span class="c1"># Emulate curl with wget</span>
+        <span class="nv">ARGS</span><span class="o">=</span><span class="k">$(</span>nvm_echo <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span> <span class="p">|</span> <span class="nb">command</span> sed -e <span class="s1">&#39;s/--progress-bar /--progress=bar /&#39;</span> <span class="se">\
+</span><span class="se"></span>                                -e <span class="s1">&#39;s/--compressed //&#39;</span> <span class="se">\
+</span><span class="se"></span>                                -e <span class="s1">&#39;s/--fail //&#39;</span> <span class="se">\
+</span><span class="se"></span>                                -e <span class="s1">&#39;s/-L //&#39;</span> <span class="se">\
+</span><span class="se"></span>                                -e <span class="s1">&#39;s/-I /--server-response /&#39;</span> <span class="se">\
+</span><span class="se"></span>                                -e <span class="s1">&#39;s/-s /-q /&#39;</span> <span class="se">\
+</span><span class="se"></span>                                -e <span class="s1">&#39;s/-sS /-nv /&#39;</span> <span class="se">\
+</span><span class="se"></span>                                -e <span class="s1">&#39;s/-o /-O /&#39;</span> <span class="se">\
+</span><span class="se"></span>                                -e <span class="s1">&#39;s/-C - /-c /&#39;</span><span class="k">)</span>
+        <span class="c1"># shellcheck disable=SC2086</span>
+        <span class="nb">eval</span> wget <span class="nv">$ARGS</span>
+      <span class="k">elif</span> nvm_has <span class="s2">&#34;curl&#34;</span><span class="p">;</span> <span class="k">then</span>
+        <span class="k">if</span> nvm_curl_use_compression<span class="p">;</span> <span class="k">then</span>
+          <span class="nv">CURL_COMPRESSED_FLAG</span><span class="o">=</span><span class="s2">&#34;--compressed&#34;</span>
+        <span class="k">fi</span>
+        curl --fail <span class="si">${</span><span class="nv">CURL_COMPRESSED_FLAG</span><span class="k">:-</span><span class="si">}</span> -q <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>
+      <span class="k">fi</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>没啥好讲的，就是把 wget 执行顺序提前了，达到不使用 curl 的效果。</p>
 <h4 id="使用代理导致">使用代理导致：</h4>
@@ -346,7 +334,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -399,7 +387,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -417,7 +405,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -434,7 +422,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

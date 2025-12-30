@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nodejs on 三口一个瓜的博客</title>
+    <title>nodejs on 三口一个瓜的博客</title>
     <link>http://localhost:1313/tags/nodejs/</link>
-    <description>Recent content in Nodejs on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <description>Recent content in nodejs on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 26 Mar 2022 08:04:50 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Mar 2022 08:04:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>深入了解: JS 到底如何管理数组的</title>
       <link>http://localhost:1313/post/js-array-in-memory/</link>
       <pubDate>Sat, 26 Mar 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/js-array-in-memory/</guid>
-      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;&#xA;&lt;p&gt;数组是所有 JavaScript 程序员非常熟悉和经常使用的数据结构，和其他的语言类似，仅仅通过一个简单的 &lt;code&gt;let foo = []&lt;/code&gt; 就可以创建出一个数组并使用他。但是，作为一种弱类型语言，使用过其他强类型语言的程序员也许会对 javascript 的这种写法感到非常疑惑：&lt;code&gt;let array = [0, &#39;a&#39;, &amp;quot;hello&amp;quot;]&lt;/code&gt;。WTF？发生了什么，难道数组里面的元素类型不应该是完全一致的么？这是发生了什么魔法么。&lt;/p&gt;</description>
+      <description>概述 数组是所有 JavaScript 程序员非常熟悉和经常使用的数据结构，和其他的语言类似，仅仅通过一个简单的 let foo = [] 就可以创建出一个数组并使用他。但是，作为一种</description>
     </item>
+    
     <item>
       <title>在 JS/TS 开发中快乐地使用 eslint</title>
       <link>http://localhost:1313/post/eslint-automic/</link>
       <pubDate>Wed, 08 Dec 2021 03:00:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/eslint-automic/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查出隐藏的代码问题，帮助我们减少 代码出现低级错误的可能。&lt;/p&gt;</description>
+      <description>前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查</description>
     </item>
+    
     <item>
       <title>一张图说明 JS 的高阶函数</title>
       <link>http://localhost:1313/post/js-higher-functions/</link>
       <pubDate>Sun, 24 Oct 2021 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/js-higher-functions/</guid>
-      <description>&lt;p&gt;JS 提供了一些比较方便高阶函数供我们使用，用 for/while 循环写得慢还容易出错的代码，使用高阶函数早就写完需求了（狗头）。&lt;/p&gt;&#xA;&lt;p&gt;但是高阶函数各个语言之间总会有些差别，平时看文档总是没法记得牢固，各种用法傻傻分不清楚？那么来看看下面这张图吧，秒级理解。&lt;/p&gt;</description>
+      <description>JS 提供了一些比较方便高阶函数供我们使用，用 for/while 循环写得慢还容易出错的代码，使用高阶函数早就写完需求了（狗头）。 但是高阶函数各个语言之间总会有些</description>
     </item>
+    
     <item>
       <title>如何在 nodejs 中使用正确地使用 session</title>
       <link>http://localhost:1313/post/node-secure-seesions/</link>
       <pubDate>Tue, 07 Sep 2021 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/node-secure-seesions/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;最近公司希望重构论坛项目，计划使用 nodebb 这个基于 nodejs 的论坛开源项目。&lt;/p&gt;&#xA;&lt;p&gt;nodebb 这个项目有个不错的设计，它的一些非核心功能是可以使用插件化的方式进行拓展的。因此稍微研究一下就可以在不修改源代码的前提下，对 nodebb 进行个性化的定制。&lt;/p&gt;</description>
+      <description>前言 最近公司希望重构论坛项目，计划使用 nodebb 这个基于 nodejs 的论坛开源项目。 nodebb 这个项目有个不错的设计，它的一些非核心功能是可以使用插件化的方式进行拓展</description>
     </item>
+    
   </channel>
 </rss>

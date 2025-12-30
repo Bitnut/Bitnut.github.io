@@ -1,110 +1,137 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on 三口一个瓜的博客</title>
+    <title>linux on 三口一个瓜的博客</title>
     <link>http://localhost:1313/tags/linux/</link>
-    <description>Recent content in Linux on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <description>Recent content in linux on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 28 May 2024 21:53:55 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 May 2024 21:53:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux Konsole 控制台字体大小设置</title>
       <link>http://localhost:1313/post/konsole-enlarge-fonts/</link>
       <pubDate>Tue, 28 May 2024 21:53:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/konsole-enlarge-fonts/</guid>
-      <description>&lt;p&gt;最近发现自己使用的控制台字体过小，导致看得很难受。这里做一个简单的记录。&lt;/p&gt;&#xA;&lt;p&gt;我使用的是 Konsole，它有一个profile的概念。系统默认的 profile 没有办法 edit，因此需要新建一个 profile，并编辑这个 profile 的参数，来达到修改的目的。&lt;/p&gt;</description>
+      <description>最近发现自己使用的控制台字体过小，导致看得很难受。这里做一个简单的记录。 我使用的是 Konsole，它有一个profile的概念。系统默认的 profile</description>
     </item>
+    
     <item>
       <title>CPU 缓存梳理及探讨</title>
       <link>http://localhost:1313/post/cpu-cache-inspiration/</link>
       <pubDate>Tue, 08 Nov 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/cpu-cache-inspiration/</guid>
-      <description>&lt;h2 id=&#34;1-概述&#34;&gt;1. 概述&lt;/h2&gt;&#xA;&lt;p&gt;本来写这篇文章的出发点是想要梳理一下，工作中常用到的 cache，借此为自己的知识体系做一个总结和深化。但是，总感觉简单地梳理又不那么令人满足，于是打算开启一个 cache 系列，分模块对 cache 进行一个深入浅出的总结。在这些总结中，每一章都各有自己的侧重点，从不同的角度，归纳和剖析我们日常使用的 cache 技术。&lt;/p&gt;</description>
+      <description>1. 概述 本来写这篇文章的出发点是想要梳理一下，工作中常用到的 cache，借此为自己的知识体系做一个总结和深化。但是，总感觉简单地梳理又不那么令</description>
     </item>
+    
     <item>
       <title>解决 Linux 下的网易云音乐字体过小问题</title>
       <link>http://localhost:1313/post/linux-netease-front/</link>
       <pubDate>Mon, 14 Jun 2021 14:53:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/linux-netease-front/</guid>
-      <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;&#xA;&lt;p&gt;linux 下网易云音乐，是不错的选择，奈何自带的字体实在太小。&lt;/p&gt;&#xA;&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;&#xA;&lt;p&gt;使用编辑器修改 &lt;code&gt;/opt/netease/netease-cloud-music/netease-cloud-music.bash&lt;/code&gt; 的内容，在最后一行中添加 &lt;code&gt;--force-device-scale-factor=xxx&lt;/code&gt;。 xxx 是字体放大的倍数，例如我的就是： 1.2 。具体代码如下所示。&lt;/p&gt;</description>
+      <description>问题 linux 下网易云音乐，是不错的选择，奈何自带的字体实在太小。 解决方案 使用编辑器修改 /opt/netease/netease-cloud-music/netease-cloud-music.bash 的内容，在最后一行中添加 --force-device-sc</description>
     </item>
+    
     <item>
       <title>Linux Awk 入门（02）</title>
       <link>http://localhost:1313/post/linux-awk2/</link>
       <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/linux-awk2/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/static/linux-awk/gnu-awk.png&#34; alt=&#34;gun-awk&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。&lt;/p&gt;&#xA;&lt;p&gt;仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 &lt;code&gt;记录&lt;/code&gt; 以及 &lt;code&gt;处理记录&lt;/code&gt;，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。&lt;/p&gt;</description>
+      <description>前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以</description>
     </item>
+    
     <item>
       <title>Linux Awk 入门（01）</title>
       <link>http://localhost:1313/post/linux-awk/</link>
       <pubDate>Wed, 21 Apr 2021 12:00:28 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/linux-awk/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/static/linux-awk/gnu-awk.png&#34; alt=&#34;gun-awk&#34;&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;快速入门-awk&#34;&gt;快速入门 awk&lt;/h1&gt;&#xA;&lt;h2 id=&#34;一-awk-的作用优势和特点&#34;&gt;一、 awk 的作用、优势和特点&lt;/h2&gt;&#xA;&lt;p&gt;awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。&lt;/p&gt;&#xA;&lt;p&gt;它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写”  : P。&lt;/p&gt;</description>
+      <description>快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是</description>
     </item>
+    
     <item>
       <title>Linux 下 ‘奇怪’ 的 shell</title>
       <link>http://localhost:1313/post/linux-strange-shell/</link>
       <pubDate>Fri, 26 Mar 2021 13:29:14 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/linux-strange-shell/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。&lt;/p&gt;&#xA;&lt;p&gt;如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。&lt;/p&gt;&#xA;&lt;p&gt;下面的这些规则适用的对象是 POSIX 兼容的 shell 例如我们常用的 bash（GNU Bourne-Again Shell）。&lt;/p&gt;</description>
+      <description>前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。 如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。 下面的这些</description>
     </item>
+    
     <item>
       <title>Linux 中的软链接和硬链接</title>
       <link>http://localhost:1313/post/linux-link/</link>
       <pubDate>Sun, 21 Mar 2021 17:10:40 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/linux-link/</guid>
-      <description>&lt;h1 id=&#34;linux-中的软链接和硬链接&#34;&gt;Linux 中的软链接和硬链接&lt;/h1&gt;&#xA;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。&lt;/p&gt;</description>
+      <description>Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过</description>
     </item>
+    
     <item>
       <title>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</title>
       <link>http://localhost:1313/post/ruinyourtscode/</link>
       <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/ruinyourtscode/</guid>
-      <description>&lt;h1 id=&#34;如何写出无法维护的-ts-代码挫败-microsoft-试图接管-javascript-的阴谋&#34;&gt;如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;If builders built buildings the way programmers write programs, then&#xA;the first woodpecker that came along would destroy civilization.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge&lt;/p&gt;</description>
+      <description>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. ~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law 前言 这篇文章主</description>
     </item>
+    
     <item>
       <title>代理实践纪录</title>
       <link>http://localhost:1313/post/proxy-config/</link>
       <pubDate>Thu, 04 Mar 2021 21:00:35 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/proxy-config/</guid>
-      <description>&lt;h2 id=&#34;变化的-gfw-实在是令人很苦恼&#34;&gt;变化的 GFW 实在是令人很苦恼&lt;/h2&gt;&#xA;&lt;p&gt;在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。&lt;/p&gt;&#xA;&lt;h2 id=&#34;配置-trojan-服务&#34;&gt;配置 Trojan 服务&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;一、 准备一台 VPS（境外），不需要购买域名和配置证书。&lt;/p&gt;</description>
+      <description>变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。 配</description>
     </item>
+    
     <item>
       <title>Linux 下的 ps 命令和常用组合</title>
       <link>http://localhost:1313/post/linux-ps/</link>
       <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/linux-ps/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;总结整理一下简单、常用的 ps 命令用法。&lt;/p&gt;&#xA;&lt;h2 id=&#34;一查看进程&#34;&gt;一、查看进程&lt;/h2&gt;&#xA;&lt;p&gt;命令： ps&lt;/p&gt;&#xA;&lt;p&gt;命令解释： 全称是 &lt;code&gt;process status&lt;/code&gt; ，使用它相当于在 win 下的 &lt;code&gt;任务管理器&lt;/code&gt;。&lt;/p&gt;&#xA;&lt;p&gt;常用命令参数：&#xA;-a 显示同一终端下的所有程序&#xA;-e 等于“-A”&#xA;-e  显示环境变量&#xA;-f  显示程序间的关系&#xA;-r  显示当前终端的进程&#xA;-u  指定用户的所有进程&lt;/p&gt;</description>
+      <description>前言 总结整理一下简单、常用的 ps 命令用法。 一、查看进程 命令： ps 命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。 常用命令参数： -a 显示同一终</description>
     </item>
+    
     <item>
       <title>编译安装 emacs</title>
       <link>http://localhost:1313/post/emacs-build/</link>
       <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/emacs-build/</guid>
-      <description>&lt;h3 id=&#34;走个流程&#34;&gt;走个流程&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;源码下载&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;到 emacs 的&lt;a href=&#34;https://www.gnu.org/software/emacs/download.html&#34;&gt;官网&lt;/a&gt;下载安装包&#xA;当我写这篇博客的时候，emacs 的最新稳定版是 27.1&lt;/p&gt;&#xA;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;解压安装包&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;xz -d emacs-27.1.tar.xz&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tar -xvf emacs-27.1.tar&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;&#xA;&lt;li&gt;配置安装选项&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;code&gt;./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &amp;gt;/dev/null 2&amp;gt;&amp;amp;1&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;可能会遇到一些依赖保错&lt;/p&gt;</description>
+      <description>走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 可能会</description>
     </item>
+    
     <item>
       <title>认识 Linux 下的 TTY</title>
       <link>http://localhost:1313/post/linux-tty/</link>
       <pubDate>Thu, 18 Feb 2021 16:34:47 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/linux-tty/</guid>
-      <description>&lt;h1 id=&#34;linux-下的-ttyptyptsptmx-linux-概念系列&#34;&gt;linux 下的 tty/pty/pts/ptmx (linux 概念系列)&lt;/h1&gt;&#xA;&lt;h2 id=&#34;tty-是什么&#34;&gt;tty 是什么？&lt;/h2&gt;&#xA;&lt;p&gt;在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。&#xA;&lt;img src=&#34;http://localhost:1313/static/tron.jpg&#34; alt=&#34;tty-jpg&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;tty-在作为命令的情形&#34;&gt;tty 在作为命令的情形&lt;/h2&gt;&#xA;&lt;p&gt;随便打开几个终端看看，可以看到下图：&lt;/p&gt;</description>
+      <description>linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个</description>
     </item>
+    
     <item>
       <title>NVM 报 ls-remote command results in “N/A 错误</title>
       <link>http://localhost:1313/post/nvm-error/</link>
       <pubDate>Fri, 15 Jan 2021 22:20:01 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/nvm-error/</guid>
-      <description>&lt;h1 id=&#34;nvm-报-ls-remote-command-results-in-na-错误&#34;&gt;NVM 报 ls-remote command results in “N/A 错误&lt;/h1&gt;&#xA;&lt;p&gt;今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。&lt;/p&gt;&#xA;&lt;p&gt;出现这个报错的原因有许多种，我遇到的报错实际上是由代理引起。&lt;/p&gt;</description>
+      <description>NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。 出现这个报错的原因有许多种，我遇到的报错实际上是由代</description>
     </item>
+    
     <item>
       <title>webpack 配置错误拾遗</title>
       <link>http://localhost:1313/post/webpack-error-collect/</link>
       <pubDate>Thu, 14 Jan 2021 22:20:01 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/webpack-error-collect/</guid>
-      <description>&lt;h2 id=&#34;1---展开运算符错误&#34;&gt;1.  &lt;code&gt;...&lt;/code&gt; 展开运算符错误&lt;/h2&gt;&#xA;&lt;p&gt;错误原因：&lt;/p&gt;&#xA;&lt;p&gt;早期的 babel 有许多问题，一些早期的版本（可能现在也没有解决）无法识别的语法、运算符可以通过插件的形式给 babel 打补丁，这里就是其中一种。&lt;/p&gt;</description>
+      <description>1. ... 展开运算符错误 错误原因： 早期的 babel 有许多问题，一些早期的版本（可能现在也没有解决）无法识别的语法、运算符可以通过插件的形式给 babel 打补丁，这里</description>
     </item>
+    
   </channel>
 </rss>

@@ -4,23 +4,26 @@
     <title>经典设计 on 三口一个瓜的博客</title>
     <link>http://localhost:1313/categories/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1/</link>
     <description>Recent content in 经典设计 on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 08 Nov 2022 08:04:50 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Nov 2022 08:04:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CPU 缓存梳理及探讨</title>
       <link>http://localhost:1313/post/cpu-cache-inspiration/</link>
       <pubDate>Tue, 08 Nov 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/cpu-cache-inspiration/</guid>
-      <description>&lt;h2 id=&#34;1-概述&#34;&gt;1. 概述&lt;/h2&gt;&#xA;&lt;p&gt;本来写这篇文章的出发点是想要梳理一下，工作中常用到的 cache，借此为自己的知识体系做一个总结和深化。但是，总感觉简单地梳理又不那么令人满足，于是打算开启一个 cache 系列，分模块对 cache 进行一个深入浅出的总结。在这些总结中，每一章都各有自己的侧重点，从不同的角度，归纳和剖析我们日常使用的 cache 技术。&lt;/p&gt;</description>
+      <description>1. 概述 本来写这篇文章的出发点是想要梳理一下，工作中常用到的 cache，借此为自己的知识体系做一个总结和深化。但是，总感觉简单地梳理又不那么令</description>
     </item>
+    
     <item>
       <title>Socks5 协议详解（经典设计）</title>
       <link>http://localhost:1313/post/socks5-protocal/</link>
       <pubDate>Mon, 12 Apr 2021 22:13:37 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/socks5-protocal/</guid>
-      <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;&#xA;&lt;p&gt;socks5 是一个简单的代理协议，它的全称是 &lt;code&gt;SOCKS Protocol Version 5&lt;/code&gt; 顾名思义就是第五代的 &lt;code&gt;socks&lt;/code&gt; 协议。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/static/socks5_server_traffic.png&#34; alt=&#34;socks5-server-traffic&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，具体是哪些，接下来都会慢慢了解到。&lt;/p&gt;</description>
+      <description>简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。 socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，</description>
     </item>
+    
   </channel>
 </rss>

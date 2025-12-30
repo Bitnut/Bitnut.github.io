@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Backend on 三口一个瓜的博客</title>
+    <title>backend on 三口一个瓜的博客</title>
     <link>http://localhost:1313/categories/backend/</link>
-    <description>Recent content in Backend on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <description>Recent content in backend on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 07 Sep 2021 08:04:50 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/backend/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Sep 2021 08:04:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/backend/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何在 nodejs 中使用正确地使用 session</title>
       <link>http://localhost:1313/post/node-secure-seesions/</link>
       <pubDate>Tue, 07 Sep 2021 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/node-secure-seesions/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;最近公司希望重构论坛项目，计划使用 nodebb 这个基于 nodejs 的论坛开源项目。&lt;/p&gt;&#xA;&lt;p&gt;nodebb 这个项目有个不错的设计，它的一些非核心功能是可以使用插件化的方式进行拓展的。因此稍微研究一下就可以在不修改源代码的前提下，对 nodebb 进行个性化的定制。&lt;/p&gt;</description>
+      <description>前言 最近公司希望重构论坛项目，计划使用 nodebb 这个基于 nodejs 的论坛开源项目。 nodebb 这个项目有个不错的设计，它的一些非核心功能是可以使用插件化的方式进行拓展</description>
     </item>
+    
   </channel>
 </rss>

@@ -4,23 +4,26 @@
     <title>哲学 on 三口一个瓜的博客</title>
     <link>http://localhost:1313/categories/%E5%93%B2%E5%AD%A6/</link>
     <description>Recent content in 哲学 on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 07 Apr 2025 20:29:47 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/%E5%93%B2%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Apr 2025 20:29:47 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E5%93%B2%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>逻辑思维和科学思维</title>
       <link>http://localhost:1313/post/logical-science-thinking/</link>
       <pubDate>Mon, 07 Apr 2025 20:29:47 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/logical-science-thinking/</guid>
-      <description>&lt;p&gt;理性的思维方式可以简单地概括成两类：一是逻辑思维，二是科学思维&lt;/p&gt;&#xA;&lt;h2 id=&#34;两种思维&#34;&gt;两种思维&lt;/h2&gt;&#xA;&lt;p&gt;逻辑思维，或者说逻辑推理依赖的公理体系是不依赖实验或者观测地，其具备必然性。只要公理（即前提假设）（公理可能也是观测得来的，但是这不是必然条件）和逻辑正确结论就真。逻辑推理不会因为出现了新证据被推翻。它关注的是如何从已知的前提出发，通过有效的推理规则得出结论。&lt;/p&gt;</description>
+      <description>理性的思维方式可以简单地概括成两类：一是逻辑思维，二是科学思维 两种思维 逻辑思维，或者说逻辑推理依赖的公理体系是不依赖实验或者观测地，其具备必</description>
     </item>
+    
     <item>
       <title>登山者的石头哲学：寻找生命的支点</title>
       <link>http://localhost:1313/post/climing-stone-thinking/</link>
       <pubDate>Fri, 01 Mar 2024 07:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/climing-stone-thinking/</guid>
-      <description>&lt;p&gt;我最近迷上了登山或者准确的说，是徒步。最有趣的徒步路线不是阶梯状或是绿道，而是去攀登那种野路小径。每当我在这种小路上寻找下一个着力点，登山靴与岩石摩擦的沙沙声在山谷回响，我忽然意识到：这何尝不是人生的隐喻？那些形态各异的山石，正是命运赐予我们的选择题。&lt;/p&gt;</description>
+      <description>我最近迷上了登山或者准确的说，是徒步。最有趣的徒步路线不是阶梯状或是绿道，而是去攀登那种野路小径。每当我在这种小路上寻找下一个着力点，登山靴</description>
     </item>
+    
   </channel>
 </rss>

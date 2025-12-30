@@ -16,17 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。
-如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。
-下面的这些规则适用的对象是 POSIX 兼容的 shell 例如我们常用的 bash（GNU Bourne-Again Shell）。
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。 如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。 下面的这些" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/linux-strange-shell/" />
@@ -38,37 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/linux-strange-shell/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="Linux 下 ‘奇怪’ 的 shell">
-  <meta property="og:description" content="前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。
-如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。
-下面的这些规则适用的对象是 POSIX 兼容的 shell 例如我们常用的 bash（GNU Bourne-Again Shell）。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-03-26T13:29:14+08:00">
-    <meta property="article:modified_time" content="2021-03-26T13:29:14+08:00">
-    <meta property="article:tag" content="GNU">
-    <meta property="article:tag" content="Linux">
+<meta property="og:title" content="Linux 下 ‘奇怪’ 的 shell" />
+<meta property="og:description" content="前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。 如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。 下面的这些" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/linux-strange-shell/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-26T13:29:14&#43;08:00" />
+<meta property="article:modified_time" content="2021-03-26T13:29:14&#43;08:00" />
 
-  <meta itemprop="name" content="Linux 下 ‘奇怪’ 的 shell">
-  <meta itemprop="description" content="前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。
-如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。
-下面的这些规则适用的对象是 POSIX 兼容的 shell 例如我们常用的 bash（GNU Bourne-Again Shell）。">
-  <meta itemprop="datePublished" content="2021-03-26T13:29:14+08:00">
-  <meta itemprop="dateModified" content="2021-03-26T13:29:14+08:00">
-  <meta itemprop="wordCount" content="765">
-  <meta itemprop="keywords" content="GNU,Linux">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Linux 下 ‘奇怪’ 的 shell">
-  <meta name="twitter:description" content="前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。
-如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。
-下面的这些规则适用的对象是 POSIX 兼容的 shell 例如我们常用的 bash（GNU Bourne-Again Shell）。">
+<meta itemprop="name" content="Linux 下 ‘奇怪’ 的 shell">
+<meta itemprop="description" content="前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。 如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。 下面的这些"><meta itemprop="datePublished" content="2021-03-26T13:29:14&#43;08:00" />
+<meta itemprop="dateModified" content="2021-03-26T13:29:14&#43;08:00" />
+<meta itemprop="wordCount" content="765">
+<meta itemprop="keywords" content="GNU,Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux 下 ‘奇怪’ 的 shell"/>
+<meta name="twitter:description" content="前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。 如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。 下面的这些"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -184,26 +168,26 @@
 <p>例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># \t 是制表符， \47 是一个单引号</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;BEGIN {print &#34;&#39;</span>-F<span class="s1">&#39;\t\47foobar&#39;</span><span class="se">\t</span>ddd<span class="s1">&#39;&#34; }&#39;</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="c1"># \t 是制表符， \47 是一个单引号</span>
+
+awk <span class="s1">&#39;BEGIN {print &#34;&#39;</span>-F<span class="s1">&#39;\t\47foobar&#39;</span><span class="se">\t</span>ddd<span class="s1">&#39;&#34; }&#39;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>在命令行试验一下，得到结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">-F      <span class="err">&#39;</span>foobartddd
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">-F      <span class="err">&#39;</span>foobartddd
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>任何用<code>反斜线</code>作为<code>前缀</code>的一个字符，会被 shell 先去掉反斜线后，原封不动的传给指定的命令</li>
@@ -212,24 +196,24 @@
 <p>例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;BEGIN {print &#34;hello\thello&#39;</span><span class="se">\t</span><span class="s1">&#39; &#34; }&#39;</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+awk <span class="s1">&#39;BEGIN {print &#34;hello\thello&#39;</span><span class="se">\t</span><span class="s1">&#39; &#34; }&#39;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>执行一下脚本，看看结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">hello   hellot
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">hello   hellot
+</code></pre></td></tr></table>
 </div>
 </div><p>请注意，这里的第一个 <code>\t</code> 被解释成了制表符，而第二个  <code>\t</code> 直接被解释成了 <code>t</code> 字符串。</p>
 <ul>
@@ -238,24 +222,24 @@
 <p>例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;BEGIN {print &#34;&#39;</span><span class="se">\t</span><span class="s1">&#39;&#34; }&#39;</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+awk <span class="s1">&#39;BEGIN {print &#34;&#39;</span><span class="se">\t</span><span class="s1">&#39;&#34; }&#39;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>执行一下脚本，看看结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">t
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">t
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>双引号内部的代码块会被 shell 解释和处理。所以对于特别的字符，如果需要传递纯文本，要使用<code>下划线 + 字符</code>的写法。</li>
@@ -263,24 +247,24 @@
 <p>例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;BEGIN {print &#34;\\\$&#34; }&#39;</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+awk <span class="s1">&#39;BEGIN {print &#34;\\\$&#34; }&#39;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>执行一下脚本，看看结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="se">\$</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="se">\$</span>
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="小结">小结</h2>
 <p>说实话，shell 里面的这些字符的解释真的很诡异。</p>
@@ -292,7 +276,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -345,7 +329,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -363,7 +347,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -380,7 +364,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

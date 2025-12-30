@@ -16,16 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。
-例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了 disqus 以外的评论插件怎么办，流量统计怎么做，安装的主题图片展示效果较差怎么办？
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。 例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/switchtohugo/" />
@@ -37,34 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/switchtohugo/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题">
-  <meta property="og:description" content="前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。
-例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了 disqus 以外的评论插件怎么办，流量统计怎么做，安装的主题图片展示效果较差怎么办？">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-04-09T18:53:13+08:00">
-    <meta property="article:modified_time" content="2021-04-09T18:53:13+08:00">
-    <meta property="article:tag" content="HUGO">
-    <meta property="article:tag" content="Blog">
+<meta property="og:title" content="解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题" />
+<meta property="og:description" content="前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。 例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/switchtohugo/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-09T18:53:13&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-09T18:53:13&#43;08:00" />
 
-  <meta itemprop="name" content="解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题">
-  <meta itemprop="description" content="前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。
-例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了 disqus 以外的评论插件怎么办，流量统计怎么做，安装的主题图片展示效果较差怎么办？">
-  <meta itemprop="datePublished" content="2021-04-09T18:53:13+08:00">
-  <meta itemprop="dateModified" content="2021-04-09T18:53:13+08:00">
-  <meta itemprop="wordCount" content="1653">
-  <meta itemprop="keywords" content="HUGO,Blog">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题">
-  <meta name="twitter:description" content="前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。
-例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了 disqus 以外的评论插件怎么办，流量统计怎么做，安装的主题图片展示效果较差怎么办？">
+<meta itemprop="name" content="解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题">
+<meta itemprop="description" content="前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。 例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了"><meta itemprop="datePublished" content="2021-04-09T18:53:13&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-09T18:53:13&#43;08:00" />
+<meta itemprop="wordCount" content="1653">
+<meta itemprop="keywords" content="HUGO,blog," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题"/>
+<meta name="twitter:description" content="前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。 例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -194,13 +182,13 @@
 <p>在配置文件中添加如下两行自定义 hugo 内置变量：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">hasCJKLanguage</span> <span class="p">=</span> <span class="kc">true</span> <span class="c"># 开启中文、日文、韩文字符识别，默认为 false</span>
-</span></span><span class="line"><span class="cl"><span class="nx">summaryLength</span> <span class="p">=</span> <span class="mi">150</span> <span class="c"># 自定义 summary 字数，默认是 70</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-toml" data-lang="toml"><span class="nx">hasCJKLanguage</span> <span class="p">=</span> <span class="kc">true</span> <span class="c"># 开启中文、日文、韩文字符识别，默认为 false</span>
+<span class="nx">summaryLength</span> <span class="p">=</span> <span class="mi">150</span> <span class="c"># 自定义 summary 字数，默认是 70</span>
+</code></pre></td></tr></table>
 </div>
 </div><h2 id="使用第三方插件">使用第三方插件</h2>
 <p>第二个问题是如何使用评论插件的问题，主题自带的评论插件是 disqus ，我个人不是很喜欢，主要是广告：P。我更倾向于直接快速的配置，同时可以让使用 github 的同学一起交流。</p>
@@ -229,19 +217,19 @@
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">Params</span><span class="p">.</span><span class="nx">utteranc</span><span class="p">]</span> <span class="c"># 注意自己的配置写法</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">enable</span> <span class="p">=</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">repo</span> <span class="p">=</span> <span class="s2">&#34;Bitnut/comment&#34;</span> <span class="c"># 换成自己的</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">issueTerm</span> <span class="p">=</span> <span class="s2">&#34;pathname&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;github-light&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">Params</span><span class="p">.</span><span class="nx">utteranc</span><span class="p">]</span> <span class="c"># 注意自己的配置写法</span>
+  <span class="nx">enable</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">repo</span> <span class="p">=</span> <span class="s2">&#34;Bitnut/comment&#34;</span> <span class="c"># 换成自己的</span>
+  <span class="nx">issueTerm</span> <span class="p">=</span> <span class="s2">&#34;pathname&#34;</span>
+  <span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;github-light&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>其中的首行（Params 行）需要注意一下，hugo 的配置是 <code>大小写敏感</code> 的，所以，具体怎么写，视主题的配置方式而定。</p>
 <h2 id="覆盖主题的模块">覆盖主题的模块</h2>
@@ -264,7 +252,7 @@
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -275,16 +263,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">footer</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post__footer&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://utteranc.es/client.js&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">repo</span><span class="o">=</span><span class="s">&#34;Bitnut/comment&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">issue-term</span><span class="o">=</span><span class="s">&#34;pathname&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">theme</span><span class="o">=</span><span class="s">&#34;github-light&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">async</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">footer</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post__footer&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://utteranc.es/client.js&#34;</span>
+            <span class="na">repo</span><span class="o">=</span><span class="s">&#34;Bitnut/comment&#34;</span>
+            <span class="na">issue-term</span><span class="o">=</span><span class="s">&#34;pathname&#34;</span>
+            <span class="na">theme</span><span class="o">=</span><span class="s">&#34;github-light&#34;</span>
+            <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span>
+            <span class="na">async</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>查看并测试评论插件是否生效：</p>
 <p><img src="/static/test-comment.png" alt="评论插件效果"></p>
@@ -297,7 +285,7 @@
 <p>首先我们选择需要覆盖的模板文件，这里我继续复用上面提到的 single.html。并在 footer 加上脚本链接：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -307,22 +295,22 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">footer</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post__footer&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    ...
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    ...
-</span></span><span class="line"><span class="cl">    {{ range .Site.Params.customJs -}}
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ . | absURL }}&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    {{- end }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">footer</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post__footer&#34;</span><span class="p">&gt;</span>
+    ...
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    ...
+    {{ range .Site.Params.customJs -}}
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ . | absURL }}&#34;</span><span class="p">&gt;</span>
+    {{- end }}
+<span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><h4 id="解释">解释：</h4>
 <p>我首先通过 cdn 引入了 jquery，便于我操作 dom，然后使用了在配置文件中定义好的 hugo 变量： <code>customJs</code>。</p>
 <p>在配置文件中这样添加 customJS 变量：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -331,14 +319,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">...</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">Params</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="p">...</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nx">customCSS</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;css/custom.css&#34;</span><span class="p">]</span> <span class="c"># Include custom CSS files</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">customJS</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;js/custom.js&#34;</span><span class="p">]</span> <span class="c"># Include custom JS files</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">...</span>
+
+<span class="p">[</span><span class="nx">Params</span><span class="p">]</span>
+  <span class="p">...</span>
+
+  <span class="nx">customCSS</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;css/custom.css&#34;</span><span class="p">]</span> <span class="c"># Include custom CSS files</span>
+  <span class="nx">customJS</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;js/custom.js&#34;</span><span class="p">]</span> <span class="c"># Include custom JS files</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>在 params 标签下添加 js 和 css 文件的相对路径（相对于根目录下的 static 目录）。</p>
 <p>然后快乐地编写脚本即可～</p>
@@ -350,7 +338,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -403,7 +391,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -421,7 +409,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -438,7 +426,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

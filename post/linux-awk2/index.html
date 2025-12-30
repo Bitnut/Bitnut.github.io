@@ -16,17 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="
-前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。
-仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/linux-awk2/" />
@@ -38,35 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/linux-awk2/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="Linux Awk 入门（02）">
-  <meta property="og:description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。
-仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-05-12T13:00:28+08:00">
-    <meta property="article:modified_time" content="2021-05-12T13:00:28+08:00">
-    <meta property="article:tag" content="GNU">
-    <meta property="article:tag" content="Linux">
-    <meta property="article:tag" content="Awk">
+<meta property="og:title" content="Linux Awk 入门（02）" />
+<meta property="og:description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/linux-awk2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-12T13:00:28&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-12T13:00:28&#43;08:00" />
 
-  <meta itemprop="name" content="Linux Awk 入门（02）">
-  <meta itemprop="description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。
-仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。">
-  <meta itemprop="datePublished" content="2021-05-12T13:00:28+08:00">
-  <meta itemprop="dateModified" content="2021-05-12T13:00:28+08:00">
-  <meta itemprop="wordCount" content="1201">
-  <meta itemprop="keywords" content="GNU,Linux,Awk">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Linux Awk 入门（02）">
-  <meta name="twitter:description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。
-仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。">
+<meta itemprop="name" content="Linux Awk 入门（02）">
+<meta itemprop="description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以"><meta itemprop="datePublished" content="2021-05-12T13:00:28&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-12T13:00:28&#43;08:00" />
+<meta itemprop="wordCount" content="1201">
+<meta itemprop="keywords" content="GNU,Linux,Awk," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux Awk 入门（02）"/>
+<meta name="twitter:description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -191,80 +177,80 @@
 <p>首先，让我们来掌握一些基本的工具。</p>
 <h3 id="1-基本运算符">1. 基本运算符</h3>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">运算符</th>
-          <th style="text-align: center">类型</th>
-          <th style="text-align: center">涵义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">+</td>
-          <td style="text-align: center">数学运算符</td>
-          <td style="text-align: center">加法</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">-</td>
-          <td style="text-align: center">数学运算符</td>
-          <td style="text-align: center">减法</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">*</td>
-          <td style="text-align: center">数学运算符</td>
-          <td style="text-align: center">乘法</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">/</td>
-          <td style="text-align: center">数学运算符</td>
-          <td style="text-align: center">除法</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">%</td>
-          <td style="text-align: center">数学运算符</td>
-          <td style="text-align: center">取余</td>
-      </tr>
-      <tr>
-          <td style="text-align: center"><space></td>
-          <td style="text-align: center">字符串</td>
-          <td style="text-align: center">连接</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">涵义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">加法</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">减法</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">乘法</td>
+</tr>
+<tr>
+<td style="text-align:center">/</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">除法</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">取余</td>
+</tr>
+<tr>
+<td style="text-align:center"><space></td>
+<td style="text-align:center">字符串</td>
+<td style="text-align:center">连接</td>
+</tr>
+</tbody>
 </table>
 <p>使用值： &ldquo;7&rdquo; 和 &ldquo;3&rdquo; 得到的结果是：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">表达式</th>
-          <th style="text-align: center">结果</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">7 + 3</td>
-          <td style="text-align: center">10</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">7 - 3</td>
-          <td style="text-align: center">4</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">7 * 3</td>
-          <td style="text-align: center">21</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">7 / 3</td>
-          <td style="text-align: center">2.33333</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">7 % 3</td>
-          <td style="text-align: center">1</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">7 3</td>
-          <td style="text-align: center">73</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th style="text-align:center">表达式</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">7 + 3</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td style="text-align:center">7 - 3</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">7 * 3</td>
+<td style="text-align:center">21</td>
+</tr>
+<tr>
+<td style="text-align:center">7 / 3</td>
+<td style="text-align:center">2.33333</td>
+</tr>
+<tr>
+<td style="text-align:center">7 % 3</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">7 3</td>
+<td style="text-align:center">73</td>
+</tr>
+</tbody>
 </table>
 <h3 id="2-与或非">2. 与或非</h3>
 <p>和大多数语言一样， awk 中使用 <code>&amp;&amp;</code> <code>||</code> <code>!</code> 分别表示 <code>与</code> <code>或</code> <code>非</code>。</p>
@@ -276,65 +262,65 @@
 <p>案例如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-awk" data-lang="awk"><span class="line"><span class="cl"><span class="nx">foo</span> <span class="o">!~</span> <span class="sr">/Hello/</span>
-</span></span><span class="line"><span class="cl"><span class="nx">bar</span> <span class="o">~</span> <span class="sr">/(one|two|three)/</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-awk" data-lang="awk"><span class="nx">foo</span> <span class="o">!~</span> <span class="sr">/Hello/</span>
+<span class="nx">bar</span> <span class="o">~</span> <span class="sr">/(one|two|three)/</span>
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="3-内置变量">3. 内置变量</h3>
 <p>其实到这里我们已经可以进入到实战中了，不希望花太多时间的话，现在就可以跳到下一章开始实战。</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">变量</th>
-          <th style="text-align: center">涵义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">$0</td>
-          <td style="text-align: center">当前记录（这个变量中存放着整个行的内容）</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">$1~$n</td>
-          <td style="text-align: center">当前记录的第 n 个字段，字段间由 FS 分隔</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">FS</td>
-          <td style="text-align: center">输入字段分隔符 默认是空格或 Tab</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">NF</td>
-          <td style="text-align: center">当前记录中的字段个数，就是有多少列</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">NR</td>
-          <td style="text-align: center">已经读出的记录数，就是行号，从 1 开始，如果有多个文件话，这个值也是不断累加中。</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">FNR</td>
-          <td style="text-align: center">当前记录数，与 NR 不同的是，这个值会是各个文件自己的行号</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">RS</td>
-          <td style="text-align: center">输入的记录分隔符， 默认为换行符</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">OFS</td>
-          <td style="text-align: center">输出字段分隔符， 默认也是空格</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">ORS</td>
-          <td style="text-align: center">输出的记录分隔符，默认为换行符</td>
-      </tr>
-      <tr>
-          <td style="text-align: center">FILENAME</td>
-          <td style="text-align: center">当前输入文件的名字</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th style="text-align:center">变量</th>
+<th style="text-align:center">涵义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$0</td>
+<td style="text-align:center">当前记录（这个变量中存放着整个行的内容）</td>
+</tr>
+<tr>
+<td style="text-align:center">$1~$n</td>
+<td style="text-align:center">当前记录的第 n 个字段，字段间由 FS 分隔</td>
+</tr>
+<tr>
+<td style="text-align:center">FS</td>
+<td style="text-align:center">输入字段分隔符 默认是空格或 Tab</td>
+</tr>
+<tr>
+<td style="text-align:center">NF</td>
+<td style="text-align:center">当前记录中的字段个数，就是有多少列</td>
+</tr>
+<tr>
+<td style="text-align:center">NR</td>
+<td style="text-align:center">已经读出的记录数，就是行号，从 1 开始，如果有多个文件话，这个值也是不断累加中。</td>
+</tr>
+<tr>
+<td style="text-align:center">FNR</td>
+<td style="text-align:center">当前记录数，与 NR 不同的是，这个值会是各个文件自己的行号</td>
+</tr>
+<tr>
+<td style="text-align:center">RS</td>
+<td style="text-align:center">输入的记录分隔符， 默认为换行符</td>
+</tr>
+<tr>
+<td style="text-align:center">OFS</td>
+<td style="text-align:center">输出字段分隔符， 默认也是空格</td>
+</tr>
+<tr>
+<td style="text-align:center">ORS</td>
+<td style="text-align:center">输出的记录分隔符，默认为换行符</td>
+</tr>
+<tr>
+<td style="text-align:center">FILENAME</td>
+<td style="text-align:center">当前输入文件的名字</td>
+</tr>
+</tbody>
 </table>
 <h2 id="二实战案例">二、实战案例</h2>
 <p>ok 我们已经了解到匹配模式的最基本工具了，运算符 &amp; 正则 &amp; 内置变量构成模式，比较运算符规定匹配方式。我们就得到了 n 多匹配的 <code>规则</code>，也就是前文提到的 <code>pattern</code>。</p>
@@ -347,7 +333,7 @@
 <p>我的输出如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -371,29 +357,29 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Proto Recv-Q Send-Q Local Address           Foreign Address         State
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:57380       142.250.101.188:5228    ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:57869       ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:37290       152.199.4.33:https      ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:55242       40.91.80.66:https       TIME_WAIT
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:54114       ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:48186       142.250.101.188:https   ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:ssh         113.66.33.4:58356       ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:57313       TIME_WAIT
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:37552       server-52-85-193-:https ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:54168       ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:38470       42.186.18.104:http      TIME_WAIT
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:40763       TIME_WAIT
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:39704       lb-140-82-114-25-:https ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>     <span class="m">48</span> 193.9.44.77:ssh         113.66.33.4:58242       ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:44800       ec2-18-208-101-52:https ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:54133       ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:43774       74.125.137.188:5228     FIN_WAIT2
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:56067       ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:9964        ESTABLISHED
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:53038       52.167.249.196:https    TIME_WAIT
-</span></span><span class="line"><span class="cl">tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:54068       TIME_WAIT
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">Proto Recv-Q Send-Q Local Address           Foreign Address         State
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:57380       142.250.101.188:5228    ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:57869       ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:37290       152.199.4.33:https      ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:55242       40.91.80.66:https       TIME_WAIT
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:54114       ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:48186       142.250.101.188:https   ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:ssh         113.66.33.4:58356       ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:57313       TIME_WAIT
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:37552       server-52-85-193-:https ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:54168       ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:38470       42.186.18.104:http      TIME_WAIT
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:40763       TIME_WAIT
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:39704       lb-140-82-114-25-:https ESTABLISHED
+tcp        <span class="m">0</span>     <span class="m">48</span> 193.9.44.77:ssh         113.66.33.4:58242       ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:44800       ec2-18-208-101-52:https ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:54133       ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:43774       74.125.137.188:5228     FIN_WAIT2
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:56067       ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:9964        ESTABLISHED
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:53038       52.167.249.196:https    TIME_WAIT
+tcp        <span class="m">0</span>      <span class="m">0</span> 193.9.44.77:https       113.66.33.4:54068       TIME_WAIT
+</code></pre></td></tr></table>
 </div>
 </div><p>其中，<code>$1!~/Active|unix/</code> 使用了简单的正则匹配，过滤了非网络链接的信息以及一些提示信息</p>
 <p><code>NF!=7  {print $0}'</code> 使用了内置变量 <code>NF</code> 代表每行的记录数，过滤了超过七列的记录。</p>
@@ -407,13 +393,13 @@
 <p>得到打印结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="m">0</span>        <span class="m">0</span>        193.9.44.77:55242  40.91.80.66:https
-</span></span><span class="line"><span class="cl"><span class="m">0</span>        <span class="m">0</span>        193.9.44.77:53038  52.167.249.196:https
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="m">0</span>        <span class="m">0</span>        193.9.44.77:55242  40.91.80.66:https
+<span class="m">0</span>        <span class="m">0</span>        193.9.44.77:53038  52.167.249.196:https
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="拓展资料">拓展资料</h3>
 <p>其实到这里，我们可以说对 awk 已经初步入门了。对上面提到的一些技术细节感兴趣，或者需要的朋友可以到 gawk 的文档看看。</p>
@@ -431,7 +417,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -485,7 +471,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -503,7 +489,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -520,7 +506,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

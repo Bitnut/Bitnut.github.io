@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Eslint on 三口一个瓜的博客</title>
+    <title>eslint on 三口一个瓜的博客</title>
     <link>http://localhost:1313/tags/eslint/</link>
-    <description>Recent content in Eslint on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <description>Recent content in eslint on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 08 Dec 2021 03:00:55 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/eslint/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Dec 2021 03:00:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/eslint/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在 JS/TS 开发中快乐地使用 eslint</title>
       <link>http://localhost:1313/post/eslint-automic/</link>
       <pubDate>Wed, 08 Dec 2021 03:00:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/eslint-automic/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查出隐藏的代码问题，帮助我们减少 代码出现低级错误的可能。&lt;/p&gt;</description>
+      <description>前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查</description>
     </item>
+    
   </channel>
 </rss>

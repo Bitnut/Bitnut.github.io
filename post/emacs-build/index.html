@@ -16,17 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1
-解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;&amp;1
-可能会遇到一些依赖保错
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 可能会" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/emacs-build/" />
@@ -38,38 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/emacs-build/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="编译安装 emacs">
-  <meta property="og:description" content="走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1
-解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;&amp;1
-可能会遇到一些依赖保错">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-02-19T21:53:55+08:00">
-    <meta property="article:modified_time" content="2021-02-19T21:53:55+08:00">
-    <meta property="article:tag" content="Emacs">
-    <meta property="article:tag" content="GNU">
-    <meta property="article:tag" content="Linux">
+<meta property="og:title" content="编译安装 emacs" />
+<meta property="og:description" content="走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;&amp;1 可能会" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/emacs-build/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-19T21:53:55&#43;08:00" />
+<meta property="article:modified_time" content="2021-02-19T21:53:55&#43;08:00" />
 
-  <meta itemprop="name" content="编译安装 emacs">
-  <meta itemprop="description" content="走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1
-解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;&amp;1
-可能会遇到一些依赖保错">
-  <meta itemprop="datePublished" content="2021-02-19T21:53:55+08:00">
-  <meta itemprop="dateModified" content="2021-02-19T21:53:55+08:00">
-  <meta itemprop="wordCount" content="319">
-  <meta itemprop="keywords" content="Emacs,GNU,Linux">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="编译安装 emacs">
-  <meta name="twitter:description" content="走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1
-解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;&amp;1
-可能会遇到一些依赖保错">
+<meta itemprop="name" content="编译安装 emacs">
+<meta itemprop="description" content="走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;&amp;1 可能会"><meta itemprop="datePublished" content="2021-02-19T21:53:55&#43;08:00" />
+<meta itemprop="dateModified" content="2021-02-19T21:53:55&#43;08:00" />
+<meta itemprop="wordCount" content="320">
+<meta itemprop="keywords" content="emacs,GNU,linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="编译安装 emacs"/>
+<meta name="twitter:description" content="走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 1 2 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;&amp;1 可能会"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -185,13 +168,13 @@
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xz -d emacs-27.1.tar.xz
-</span></span><span class="line"><span class="cl">tar -xvf emacs-27.1.tar
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">xz -d emacs-27.1.tar.xz
+tar -xvf emacs-27.1.tar
+</code></pre></td></tr></table>
 </div>
 </div><ol start="3">
 <li>配置安装选项</li>
@@ -221,7 +204,7 @@
 <h3 id="脚本">脚本</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -273,61 +256,63 @@
 </span><span class="lnt">50
 </span><span class="lnt">51
 </span><span class="lnt">52
+</span><span class="lnt">53
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#!/bin/bash</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">packageArr</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">package</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">unzipFile</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">targetDir</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">files</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">function</span> getFile<span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;Getting emacs packages&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">files</span><span class="o">=</span><span class="k">$(</span>ls <span class="nv">$1</span> <span class="p">|</span> grep -E <span class="s1">&#39;emacs.*xz|emacs.*tar&#39;</span><span class="k">)</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> <span class="si">${#</span><span class="nv">files</span><span class="si">}</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span> <span class="nb">echo</span> <span class="s2">&#34;cannot find emacs release packages&#34;</span><span class="p">;</span> <span class="nb">exit</span> 1<span class="p">;</span> <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">packageArr</span><span class="o">=()</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> file in <span class="nv">$files</span>
-</span></span><span class="line"><span class="cl">    <span class="k">do</span>
-</span></span><span class="line"><span class="cl">        packageArr<span class="o">[</span><span class="si">${#</span><span class="nv">packageArr</span><span class="p">[@]</span><span class="si">}</span><span class="o">]=</span><span class="nv">$file</span>
-</span></span><span class="line"><span class="cl">    <span class="k">done</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">package</span><span class="o">=</span><span class="si">${</span><span class="nv">packageArr</span><span class="p">[0]</span><span class="si">}</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">unzipFile</span><span class="o">=</span><span class="si">${</span><span class="nv">package</span><span class="p">%</span><span class="se">\.</span><span class="nv">xz</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">targetDir</span><span class="o">=</span><span class="si">${</span><span class="nv">unzipFile</span><span class="p">%</span><span class="se">\.</span><span class="nv">tar</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;get eamcs packages complete&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">getFile
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;unziping package&#34;</span> <span class="si">${</span><span class="nv">package</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;...&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># xz -d ${package}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;unziping tar file&#34;</span> <span class="si">${</span><span class="nv">unzipFile</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;...&#34;</span>
-</span></span><span class="line"><span class="cl">tar -xvf <span class="si">${</span><span class="nv">unzipFile</span><span class="si">}</span> &gt; /dev/null
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="si">${</span><span class="nv">targetDir</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;configuring emacs to /opt/emacs&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;...&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">./configure --prefix<span class="o">=</span>/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Doing make and make install&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">make
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">make install
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Adding soft link&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ln -s /opt/bin/emacs /usr/bin/emacs
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">
+<span class="c1">#!/bin/bash</span>
+
+<span class="nv">packageArr</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
+<span class="nv">package</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
+<span class="nv">unzipFile</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
+<span class="nv">targetDir</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
+<span class="nv">files</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
+
+<span class="k">function</span> getFile<span class="o">()</span> <span class="o">{</span>
+
+
+    <span class="nb">echo</span> <span class="s2">&#34;Getting emacs packages&#34;</span><span class="p">;</span>
+    <span class="nv">files</span><span class="o">=</span><span class="k">$(</span>ls <span class="nv">$1</span> <span class="p">|</span> grep -E <span class="s1">&#39;emacs.*xz|emacs.*tar&#39;</span><span class="k">)</span><span class="p">;</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="si">${#</span><span class="nv">files</span><span class="si">}</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span> <span class="nb">echo</span> <span class="s2">&#34;cannot find emacs release packages&#34;</span><span class="p">;</span> <span class="nb">exit</span> 1<span class="p">;</span> <span class="k">fi</span>
+    <span class="nv">packageArr</span><span class="o">=()</span>
+    <span class="k">for</span> file in <span class="nv">$files</span>
+    <span class="k">do</span>
+        packageArr<span class="o">[</span><span class="si">${#</span><span class="nv">packageArr</span><span class="p">[@]</span><span class="si">}</span><span class="o">]=</span><span class="nv">$file</span>
+    <span class="k">done</span>
+    <span class="nv">package</span><span class="o">=</span><span class="si">${</span><span class="nv">packageArr</span><span class="p">[0]</span><span class="si">}</span><span class="p">;</span>
+    <span class="nv">unzipFile</span><span class="o">=</span><span class="si">${</span><span class="nv">package</span><span class="p">%</span><span class="se">\.</span><span class="nv">xz</span><span class="si">}</span>
+    <span class="nv">targetDir</span><span class="o">=</span><span class="si">${</span><span class="nv">unzipFile</span><span class="p">%</span><span class="se">\.</span><span class="nv">tar</span><span class="si">}</span>
+    <span class="nb">echo</span> <span class="s2">&#34;get eamcs packages complete&#34;</span><span class="p">;</span>
+<span class="o">}</span>
+
+getFile
+
+<span class="nb">echo</span> <span class="s2">&#34;unziping package&#34;</span> <span class="si">${</span><span class="nv">package</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="s2">&#34;...&#34;</span>
+<span class="c1"># xz -d ${package}</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;unziping tar file&#34;</span> <span class="si">${</span><span class="nv">unzipFile</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="s2">&#34;...&#34;</span>
+tar -xvf <span class="si">${</span><span class="nv">unzipFile</span><span class="si">}</span> &gt; /dev/null
+
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">targetDir</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="s2">&#34;configuring emacs to /opt/emacs&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;...&#34;</span>
+
+
+./configure --prefix<span class="o">=</span>/opt/emacs/ --with-mailutils --with-pop &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;Doing make and make install&#34;</span>
+
+make
+
+make install
+
+<span class="nb">echo</span> <span class="s2">&#34;Adding soft link&#34;</span>
+
+ln -s /opt/bin/emacs /usr/bin/emacs
+
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -335,7 +320,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -389,7 +374,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -407,7 +392,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -424,7 +409,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

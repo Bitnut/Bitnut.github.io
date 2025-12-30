@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Web on 三口一个瓜的博客</title>
+    <title>web on 三口一个瓜的博客</title>
     <link>http://localhost:1313/tags/web/</link>
-    <description>Recent content in Web on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <description>Recent content in web on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 12 Apr 2021 22:13:37 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Apr 2021 22:13:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Socks5 协议详解（经典设计）</title>
       <link>http://localhost:1313/post/socks5-protocal/</link>
       <pubDate>Mon, 12 Apr 2021 22:13:37 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/socks5-protocal/</guid>
-      <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;&#xA;&lt;p&gt;socks5 是一个简单的代理协议，它的全称是 &lt;code&gt;SOCKS Protocol Version 5&lt;/code&gt; 顾名思义就是第五代的 &lt;code&gt;socks&lt;/code&gt; 协议。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/static/socks5_server_traffic.png&#34; alt=&#34;socks5-server-traffic&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，具体是哪些，接下来都会慢慢了解到。&lt;/p&gt;</description>
+      <description>简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。 socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，</description>
     </item>
+    
     <item>
       <title>webpack 配置错误拾遗</title>
       <link>http://localhost:1313/post/webpack-error-collect/</link>
       <pubDate>Thu, 14 Jan 2021 22:20:01 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/webpack-error-collect/</guid>
-      <description>&lt;h2 id=&#34;1---展开运算符错误&#34;&gt;1.  &lt;code&gt;...&lt;/code&gt; 展开运算符错误&lt;/h2&gt;&#xA;&lt;p&gt;错误原因：&lt;/p&gt;&#xA;&lt;p&gt;早期的 babel 有许多问题，一些早期的版本（可能现在也没有解决）无法识别的语法、运算符可以通过插件的形式给 babel 打补丁，这里就是其中一种。&lt;/p&gt;</description>
+      <description>1. ... 展开运算符错误 错误原因： 早期的 babel 有许多问题，一些早期的版本（可能现在也没有解决）无法识别的语法、运算符可以通过插件的形式给 babel 打补丁，这里</description>
     </item>
+    
     <item>
       <title>解决按钮移动动画伴随光标样式抖动的问题</title>
       <link>http://localhost:1313/post/icontransform/</link>
       <pubDate>Thu, 30 Apr 2020 00:01:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/icontransform/</guid>
-      <description>&lt;h3 id=&#34;问题描述&#34;&gt;问题描述&lt;/h3&gt;&#xA;&lt;p&gt;最近在工作中遇到了一个很奇怪的问题，网站的页面大部分按钮和卡片都有一个向上移动的过渡动画，当鼠标悬浮在这些元素上的时候，动画会触发并在一定时间内缓缓完成、同时鼠标样式变成 pointer，。&lt;/p&gt;</description>
+      <description>问题描述 最近在工作中遇到了一个很奇怪的问题，网站的页面大部分按钮和卡片都有一个向上移动的过渡动画，当鼠标悬浮在这些元素上的时候，动画会触发并</description>
     </item>
+    
     <item>
       <title>如何简单粗暴地让网页变黑白？</title>
       <link>http://localhost:1313/post/blackwhite/</link>
       <pubDate>Tue, 14 Apr 2020 22:31:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/blackwhite/</guid>
-      <description>&lt;p&gt;很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。&lt;/p&gt;&#xA;&lt;h4 id=&#34;今天主要来探讨一下让页面变黑白效果的方法&#34;&gt;今天主要来探讨一下让页面变黑白效果的方法&lt;/h4&gt;&#xA;&lt;p&gt;今年早些时候，新冠疫情给国内造成了巨大损失。因此在今年四月四的时候，为了叨念逝者、寄托哀思，国内不仅暂停了大部分娱乐活动，而且各大门户网站、视频网站，都对首页或者所有页面做出了内容和样式的大调整。&lt;/p&gt;</description>
+      <description>很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。 今天主要来探讨一下让页面变黑白效果的方</description>
     </item>
+    
   </channel>
 </rss>

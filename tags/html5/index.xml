@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Html5 on 三口一个瓜的博客</title>
+    <title>html5 on 三口一个瓜的博客</title>
     <link>http://localhost:1313/tags/html5/</link>
-    <description>Recent content in Html5 on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <description>Recent content in html5 on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 11 Apr 2021 09:44:50 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/html5/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Apr 2021 09:44:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/html5/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决 http 访问简书图片资源 403 问题</title>
       <link>http://localhost:1313/post/jianshu403/</link>
       <pubDate>Sun, 11 Apr 2021 09:44:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/jianshu403/</guid>
-      <description>&lt;h2 id=&#34;问题起因&#34;&gt;问题起因&lt;/h2&gt;&#xA;&lt;p&gt;最近遇到一个问题，我有些文章放在简书还没有同步过来个人博客上。可就是当我移植过来之后，突然发现图片都显示不出来了。&lt;/p&gt;&#xA;&lt;p&gt;具体情况如图：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/static/jianshu-403.png&#34; alt=&#34;报错信息&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;识别问题&#34;&gt;识别问题&lt;/h2&gt;&#xA;&lt;p&gt;经过搜索，发现 403 报错的原因是服务器拒绝了我们的请求。说明我们可能哪儿做错了。&lt;/p&gt;</description>
+      <description>问题起因 最近遇到一个问题，我有些文章放在简书还没有同步过来个人博客上。可就是当我移植过来之后，突然发现图片都显示不出来了。 具体情况如图： 识别</description>
     </item>
+    
   </channel>
 </rss>

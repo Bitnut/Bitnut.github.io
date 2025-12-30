@@ -16,15 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/linux-link/" />
@@ -36,31 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/linux-link/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="Linux 中的软链接和硬链接">
-  <meta property="og:description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-03-21T17:10:40+08:00">
-    <meta property="article:modified_time" content="2021-03-21T17:10:40+08:00">
-    <meta property="article:tag" content="GNU">
-    <meta property="article:tag" content="Linux">
+<meta property="og:title" content="Linux 中的软链接和硬链接" />
+<meta property="og:description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/linux-link/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-21T17:10:40&#43;08:00" />
+<meta property="article:modified_time" content="2021-03-21T17:10:40&#43;08:00" />
 
-  <meta itemprop="name" content="Linux 中的软链接和硬链接">
-  <meta itemprop="description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。">
-  <meta itemprop="datePublished" content="2021-03-21T17:10:40+08:00">
-  <meta itemprop="dateModified" content="2021-03-21T17:10:40+08:00">
-  <meta itemprop="wordCount" content="1267">
-  <meta itemprop="keywords" content="GNU,Linux">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Linux 中的软链接和硬链接">
-  <meta name="twitter:description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。">
+<meta itemprop="name" content="Linux 中的软链接和硬链接">
+<meta itemprop="description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过"><meta itemprop="datePublished" content="2021-03-21T17:10:40&#43;08:00" />
+<meta itemprop="dateModified" content="2021-03-21T17:10:40&#43;08:00" />
+<meta itemprop="wordCount" content="1267">
+<meta itemprop="keywords" content="GNU,Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux 中的软链接和硬链接"/>
+<meta name="twitter:description" content="Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -183,7 +175,7 @@
 <p>首先，我们建立一个源文件 test，再建立两个硬链接和一个软链接文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -194,16 +186,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ touch <span class="nb">test</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ ln <span class="nb">test</span> test-hd1
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ ln <span class="nb">test</span> test-hd2
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ ln -s <span class="nb">test</span> test-soft
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ ls -li
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ touch <span class="nb">test</span>
+
+$ ln <span class="nb">test</span> test-hd1
+
+$ ln <span class="nb">test</span> test-hd2
+
+$ ln -s <span class="nb">test</span> test-soft
+
+$ ls -li
+</code></pre></td></tr></table>
 </div>
 </div><p>结果如下图：</p>
 <p><img src="/static/linux-link-ls.png" alt="图一"></p>
@@ -225,7 +217,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -278,7 +270,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -296,7 +288,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -313,7 +305,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Node on 三口一个瓜的博客</title>
+    <title>node on 三口一个瓜的博客</title>
     <link>http://localhost:1313/tags/node/</link>
-    <description>Recent content in Node on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <description>Recent content in node on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 20 Mar 2021 19:11:51 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Mar 2021 19:11:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</title>
       <link>http://localhost:1313/post/ruinyourtscode/</link>
       <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/ruinyourtscode/</guid>
-      <description>&lt;h1 id=&#34;如何写出无法维护的-ts-代码挫败-microsoft-试图接管-javascript-的阴谋&#34;&gt;如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;If builders built buildings the way programmers write programs, then&#xA;the first woodpecker that came along would destroy civilization.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge&lt;/p&gt;</description>
+      <description>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. ~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law 前言 这篇文章主</description>
     </item>
+    
     <item>
       <title>NVM 报 ls-remote command results in “N/A 错误</title>
       <link>http://localhost:1313/post/nvm-error/</link>
       <pubDate>Fri, 15 Jan 2021 22:20:01 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/nvm-error/</guid>
-      <description>&lt;h1 id=&#34;nvm-报-ls-remote-command-results-in-na-错误&#34;&gt;NVM 报 ls-remote command results in “N/A 错误&lt;/h1&gt;&#xA;&lt;p&gt;今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。&lt;/p&gt;&#xA;&lt;p&gt;出现这个报错的原因有许多种，我遇到的报错实际上是由代理引起。&lt;/p&gt;</description>
+      <description>NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。 出现这个报错的原因有许多种，我遇到的报错实际上是由代</description>
     </item>
+    
   </channel>
 </rss>

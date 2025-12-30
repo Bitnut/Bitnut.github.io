@@ -16,18 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content=" 版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥
-博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
-CryptDB 简单原理论述
-相关资料 想要理解CryptDB, 你可能需要阅读如下资料： CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. 文章链接
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥 博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 CryptDB 简单原理论述 相关资料 想要理解Cryp" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/cryptdb2/" />
@@ -39,40 +35,24 @@ CryptDB 简单原理论述
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/cryptdb2/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="详细论述 CryptDB 的原理">
-  <meta property="og:description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥
-博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
-CryptDB 简单原理论述
-相关资料 想要理解CryptDB, 你可能需要阅读如下资料： CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. 文章链接">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2017-09-11T08:52:18+08:00">
-    <meta property="article:modified_time" content="2017-09-11T08:52:18+08:00">
-    <meta property="article:tag" content="Cryptdb">
-    <meta property="article:tag" content="Database">
+<meta property="og:title" content="详细论述 CryptDB 的原理" />
+<meta property="og:description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥 博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 CryptDB 简单原理论述 相关资料 想要理解Cryp" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cryptdb2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-09-11T08:52:18&#43;08:00" />
+<meta property="article:modified_time" content="2017-09-11T08:52:18&#43;08:00" />
 
-  <meta itemprop="name" content="详细论述 CryptDB 的原理">
-  <meta itemprop="description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥
-博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
-CryptDB 简单原理论述
-相关资料 想要理解CryptDB, 你可能需要阅读如下资料： CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. 文章链接">
-  <meta itemprop="datePublished" content="2017-09-11T08:52:18+08:00">
-  <meta itemprop="dateModified" content="2017-09-11T08:52:18+08:00">
-  <meta itemprop="wordCount" content="4304">
-  <meta itemprop="keywords" content="Cryptdb,Database">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="详细论述 CryptDB 的原理">
-  <meta name="twitter:description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥
-博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
-CryptDB 简单原理论述
-相关资料 想要理解CryptDB, 你可能需要阅读如下资料： CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. 文章链接">
+<meta itemprop="name" content="详细论述 CryptDB 的原理">
+<meta itemprop="description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥 博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 CryptDB 简单原理论述 相关资料 想要理解Cryp"><meta itemprop="datePublished" content="2017-09-11T08:52:18&#43;08:00" />
+<meta itemprop="dateModified" content="2017-09-11T08:52:18&#43;08:00" />
+<meta itemprop="wordCount" content="4304">
+<meta itemprop="keywords" content="cryptdb,database," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详细论述 CryptDB 的原理"/>
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥 博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 CryptDB 简单原理论述 相关资料 想要理解Cryp"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -180,7 +160,8 @@ CryptDB 简单原理论述
 </div>
     <div class="post-content">
       <blockquote>
-<p>版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥</p></blockquote>
+<p>版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥</p>
+</blockquote>
 <h2 id="博主写的-cryptdb-另外几篇相关文章">博主写的 CryptDB 另外几篇相关文章：</h2>
 <p><a href="https://bitnut.github.io/posts/cryptdb-install/">cryptdb 安装及使用说明</a></p>
 <p><a href="https://bitnut.github.io/posts/cryptdb1/">CryptDB 简单原理论述</a></p>
@@ -326,7 +307,7 @@ CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with en
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -379,7 +360,7 @@ CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with en
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -397,7 +378,7 @@ CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with en
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -414,7 +395,7 @@ CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with en
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

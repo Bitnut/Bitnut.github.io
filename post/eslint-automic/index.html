@@ -16,15 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查出隐藏的代码问题，帮助我们减少 代码出现低级错误的可能。
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/eslint-automic/" />
@@ -36,33 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/eslint-automic/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="在 JS/TS 开发中快乐地使用 eslint">
-  <meta property="og:description" content="前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查出隐藏的代码问题，帮助我们减少 代码出现低级错误的可能。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-12-08T03:00:55+08:00">
-    <meta property="article:modified_time" content="2021-12-08T03:00:55+08:00">
-    <meta property="article:tag" content="Nodejs">
-    <meta property="article:tag" content="Javascript">
-    <meta property="article:tag" content="Typescript">
-    <meta property="article:tag" content="Eslint">
+<meta property="og:title" content="在 JS/TS 开发中快乐地使用 eslint" />
+<meta property="og:description" content="前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/eslint-automic/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-08T03:00:55&#43;08:00" />
+<meta property="article:modified_time" content="2021-12-08T03:00:55&#43;08:00" />
 
-  <meta itemprop="name" content="在 JS/TS 开发中快乐地使用 eslint">
-  <meta itemprop="description" content="前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查出隐藏的代码问题，帮助我们减少 代码出现低级错误的可能。">
-  <meta itemprop="datePublished" content="2021-12-08T03:00:55+08:00">
-  <meta itemprop="dateModified" content="2021-12-08T03:00:55+08:00">
-  <meta itemprop="wordCount" content="1242">
-  <meta itemprop="keywords" content="Nodejs,Javascript,Typescript,Eslint">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="在 JS/TS 开发中快乐地使用 eslint">
-  <meta name="twitter:description" content="前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查出隐藏的代码问题，帮助我们减少 代码出现低级错误的可能。">
+<meta itemprop="name" content="在 JS/TS 开发中快乐地使用 eslint">
+<meta itemprop="description" content="前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查"><meta itemprop="datePublished" content="2021-12-08T03:00:55&#43;08:00" />
+<meta itemprop="dateModified" content="2021-12-08T03:00:55&#43;08:00" />
+<meta itemprop="wordCount" content="1242">
+<meta itemprop="keywords" content="nodejs,javascript,typescript,eslint," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在 JS/TS 开发中快乐地使用 eslint"/>
+<meta name="twitter:description" content="前言 在 JS/TS 开发中，往往绕不开 eslint。在多人合作开发的时候，使用 eslint 这个静态代码检查工具，可以很好的帮助我们构建风格一致的代码仓库，同时检查"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -199,7 +189,7 @@
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -258,64 +248,64 @@
 </span><span class="lnt">57
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># requirement npx/eslint/git</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># target JS/TS files</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># only modified files tracked by git</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> i in <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
-</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nv">$i</span> in
-</span></span><span class="line"><span class="cl">        -c<span class="o">=</span>*<span class="p">|</span>--config<span class="o">=</span>*<span class="o">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">ESLINT_CONF</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">shift</span> <span class="c1"># past argument=value</span>
-</span></span><span class="line"><span class="cl">            <span class="p">;;</span>
-</span></span><span class="line"><span class="cl">        -i<span class="o">=</span>*<span class="p">|</span>--ignore<span class="o">=</span>*<span class="o">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">ESLINT_IGNORE</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">shift</span> <span class="c1"># past argument=value</span>
-</span></span><span class="line"><span class="cl">            <span class="p">;;</span>
-</span></span><span class="line"><span class="cl">        -h<span class="p">|</span>--help<span class="o">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">echo</span> <span class="s2">&#34;-c=/--config= use eslint config file\n-i=/--ignore= use eslint ignore file&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">exitFlag</span><span class="o">=</span><span class="m">1</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">shift</span> <span class="c1"># past argument=value</span>
-</span></span><span class="line"><span class="cl">            <span class="p">;;</span>
-</span></span><span class="line"><span class="cl">        *<span class="o">)</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># unknown option</span>
-</span></span><span class="line"><span class="cl">            <span class="p">;;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">esac</span>
-</span></span><span class="line"><span class="cl"><span class="k">done</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$exitFlag</span><span class="s2">&#34;</span> -eq <span class="m">1</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> 0<span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span>  -z <span class="s2">&#34;</span><span class="nv">$ESLINT_CONF</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">ESLINT_CONF</span><span class="o">=</span><span class="s2">&#34;.eslintrc&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> -z <span class="s2">&#34;</span><span class="nv">$ESLINT_IGNORE</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">ESLINT_IGNORE</span><span class="o">=</span><span class="s2">&#34;.eslintignore&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">LOG_FILE</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>basename <span class="s2">&#34;</span><span class="nv">$0</span><span class="s2">&#34;</span> <span class="p">|</span> cut -f <span class="m">1</span> -d <span class="s1">&#39;.&#39;</span><span class="k">)</span><span class="s2">.log&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;./</span><span class="nv">$LOG_FILE</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">npx eslint -c <span class="si">${</span><span class="nv">ESLINT_CONF</span><span class="si">}</span> --ignore-path <span class="si">${</span><span class="nv">ESLINT_IGNORE</span><span class="si">}</span> <span class="k">$(</span> git status --porcelain <span class="p">|</span> awk <span class="s1">&#39;$1!=&#34;D&#34; {if ($1==&#34;R&#34;) { print $4 } else { print $2 }}&#39;</span> <span class="p">|</span> grep -E <span class="s1">&#39;(.ts|.js)$&#39;</span> <span class="k">)</span> --fix
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> -e <span class="s2">&#34;ERROR: Please check eslint hints.\n&#34;</span>
-</span></span><span class="line"><span class="cl">    npx eslint -c <span class="si">${</span><span class="nv">ESLINT_CONF</span><span class="si">}</span> --ignore-path <span class="si">${</span><span class="nv">ESLINT_IGNORE</span><span class="si">}</span>  <span class="k">$(</span> git status --porcelain <span class="p">|</span> awk <span class="s1">&#39;$1!=&#34;D&#34; {if ($1==&#34;R&#34;) { print $4 } else { print $2 }}&#39;</span> <span class="p">|</span> grep -E <span class="s1">&#39;(.ts|.js)$&#39;</span> <span class="k">)</span> -f unix <span class="p">|</span> head -n -2  <span class="p">|</span> awk <span class="s1">&#39;{print $NF}&#39;</span> &gt;&gt; <span class="s2">&#34;./</span><span class="nv">$LOG_FILE</span><span class="s2">&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> -e <span class="s2">&#34;Hightest eslint error/warning\n&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> -e <span class="s2">&#34;times\terror&#34;</span>
-</span></span><span class="line"><span class="cl">    cat <span class="s2">&#34;./</span><span class="nv">$LOG_FILE</span><span class="s2">&#34;</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -rn <span class="p">|</span> head -n <span class="m">10</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">exit</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Perfect coding format!&#34;</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
+</span><span class="cp"></span><span class="c1"># requirement npx/eslint/git</span>
+<span class="c1"># target JS/TS files</span>
+<span class="c1"># only modified files tracked by git</span>
+
+<span class="k">for</span> i in <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+    <span class="k">case</span> <span class="nv">$i</span> in
+        -c<span class="o">=</span>*<span class="p">|</span>--config<span class="o">=</span>*<span class="o">)</span>
+            <span class="nv">ESLINT_CONF</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&#34;</span>
+            <span class="nb">shift</span> <span class="c1"># past argument=value</span>
+            <span class="p">;;</span>
+        -i<span class="o">=</span>*<span class="p">|</span>--ignore<span class="o">=</span>*<span class="o">)</span>
+            <span class="nv">ESLINT_IGNORE</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">i</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&#34;</span>
+            <span class="nb">shift</span> <span class="c1"># past argument=value</span>
+            <span class="p">;;</span>
+        -h<span class="p">|</span>--help<span class="o">)</span>
+            <span class="nb">echo</span> <span class="s2">&#34;-c=/--config= use eslint config file\n-i=/--ignore= use eslint ignore file&#34;</span>
+            <span class="nv">exitFlag</span><span class="o">=</span><span class="m">1</span>
+            <span class="nb">shift</span> <span class="c1"># past argument=value</span>
+            <span class="p">;;</span>
+        *<span class="o">)</span>
+            <span class="c1"># unknown option</span>
+            <span class="p">;;</span>
+    <span class="k">esac</span>
+<span class="k">done</span>
+
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$exitFlag</span><span class="s2">&#34;</span> -eq <span class="m">1</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+
+    <span class="nb">exit</span> 0<span class="p">;</span>
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[[</span>  -z <span class="s2">&#34;</span><span class="nv">$ESLINT_CONF</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+
+    <span class="nv">ESLINT_CONF</span><span class="o">=</span><span class="s2">&#34;.eslintrc&#34;</span>
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[[</span> -z <span class="s2">&#34;</span><span class="nv">$ESLINT_IGNORE</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+
+    <span class="nv">ESLINT_IGNORE</span><span class="o">=</span><span class="s2">&#34;.eslintignore&#34;</span>
+<span class="k">fi</span>
+
+<span class="nv">LOG_FILE</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>basename <span class="s2">&#34;</span><span class="nv">$0</span><span class="s2">&#34;</span> <span class="p">|</span> cut -f <span class="m">1</span> -d <span class="s1">&#39;.&#39;</span><span class="k">)</span><span class="s2">.log&#34;</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;./</span><span class="nv">$LOG_FILE</span><span class="s2">&#34;</span>
+
+npx eslint -c <span class="si">${</span><span class="nv">ESLINT_CONF</span><span class="si">}</span> --ignore-path <span class="si">${</span><span class="nv">ESLINT_IGNORE</span><span class="si">}</span> <span class="k">$(</span> git status --porcelain <span class="p">|</span> awk <span class="s1">&#39;$1!=&#34;D&#34; {if ($1==&#34;R&#34;) { print $4 } else { print $2 }}&#39;</span> <span class="p">|</span> grep -E <span class="s1">&#39;(.ts|.js)$&#39;</span> <span class="k">)</span> --fix
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> -e <span class="s2">&#34;ERROR: Please check eslint hints.\n&#34;</span>
+    npx eslint -c <span class="si">${</span><span class="nv">ESLINT_CONF</span><span class="si">}</span> --ignore-path <span class="si">${</span><span class="nv">ESLINT_IGNORE</span><span class="si">}</span>  <span class="k">$(</span> git status --porcelain <span class="p">|</span> awk <span class="s1">&#39;$1!=&#34;D&#34; {if ($1==&#34;R&#34;) { print $4 } else { print $2 }}&#39;</span> <span class="p">|</span> grep -E <span class="s1">&#39;(.ts|.js)$&#39;</span> <span class="k">)</span> -f unix <span class="p">|</span> head -n -2  <span class="p">|</span> awk <span class="s1">&#39;{print $NF}&#39;</span> &gt;&gt; <span class="s2">&#34;./</span><span class="nv">$LOG_FILE</span><span class="s2">&#34;</span><span class="p">;</span>
+    <span class="nb">echo</span> -e <span class="s2">&#34;Hightest eslint error/warning\n&#34;</span><span class="p">;</span>
+    <span class="nb">echo</span> -e <span class="s2">&#34;times\terror&#34;</span>
+    cat <span class="s2">&#34;./</span><span class="nv">$LOG_FILE</span><span class="s2">&#34;</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -rn <span class="p">|</span> head -n <span class="m">10</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;Perfect coding format!&#34;</span>
+</code></pre></td></tr></table>
 </div>
 </div><ol start="3">
 <li>在自己的 build 命令中添加运行上述脚本</li>
@@ -326,7 +316,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -381,7 +371,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -399,7 +389,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -416,7 +406,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

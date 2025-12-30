@@ -16,18 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="前言 总结整理一下简单、常用的 ps 命令用法。
-一、查看进程 命令： ps
-命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。
-常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="前言 总结整理一下简单、常用的 ps 命令用法。 一、查看进程 命令： ps 命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。 常用命令参数： -a 显示同一终" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/linux-ps/" />
@@ -39,39 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/linux-ps/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="Linux 下的 ps 命令和常用组合">
-  <meta property="og:description" content="前言 总结整理一下简单、常用的 ps 命令用法。
-一、查看进程 命令： ps
-命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。
-常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-02-19T21:53:55+08:00">
-    <meta property="article:modified_time" content="2021-02-19T21:53:55+08:00">
-    <meta property="article:tag" content="Linux">
+<meta property="og:title" content="Linux 下的 ps 命令和常用组合" />
+<meta property="og:description" content="前言 总结整理一下简单、常用的 ps 命令用法。 一、查看进程 命令： ps 命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。 常用命令参数： -a 显示同一终" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/linux-ps/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-19T21:53:55&#43;08:00" />
+<meta property="article:modified_time" content="2021-02-19T21:53:55&#43;08:00" />
 
-  <meta itemprop="name" content="Linux 下的 ps 命令和常用组合">
-  <meta itemprop="description" content="前言 总结整理一下简单、常用的 ps 命令用法。
-一、查看进程 命令： ps
-命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。
-常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程">
-  <meta itemprop="datePublished" content="2021-02-19T21:53:55+08:00">
-  <meta itemprop="dateModified" content="2021-02-19T21:53:55+08:00">
-  <meta itemprop="wordCount" content="1106">
-  <meta itemprop="keywords" content="Linux">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Linux 下的 ps 命令和常用组合">
-  <meta name="twitter:description" content="前言 总结整理一下简单、常用的 ps 命令用法。
-一、查看进程 命令： ps
-命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。
-常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程">
+<meta itemprop="name" content="Linux 下的 ps 命令和常用组合">
+<meta itemprop="description" content="前言 总结整理一下简单、常用的 ps 命令用法。 一、查看进程 命令： ps 命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。 常用命令参数： -a 显示同一终"><meta itemprop="datePublished" content="2021-02-19T21:53:55&#43;08:00" />
+<meta itemprop="dateModified" content="2021-02-19T21:53:55&#43;08:00" />
+<meta itemprop="wordCount" content="1106">
+<meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux 下的 ps 命令和常用组合"/>
+<meta name="twitter:description" content="前言 总结整理一下简单、常用的 ps 命令用法。 一、查看进程 命令： ps 命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。 常用命令参数： -a 显示同一终"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -204,19 +185,19 @@
 <p>-p 为显示进程识别码，最后加上用户名。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">picher@pichers-laptop:~$ pstree -p picher <span class="p">|</span> grep emacs
-</span></span><span class="line"><span class="cl">              <span class="p">|</span>-gnome-terminal-<span class="o">(</span>3023<span class="o">)</span>-+-bash<span class="o">(</span>3030<span class="o">)</span>-+-emacs<span class="o">(</span>5517<span class="o">)</span>-+-bash<span class="o">(</span>28980<span class="o">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">|</span>                       <span class="p">|</span>            <span class="p">|</span>             <span class="p">|</span>-<span class="o">{</span>emacs<span class="o">}(</span>5518<span class="o">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">|</span>                       <span class="p">|</span>            <span class="p">|</span>             <span class="p">|</span>-<span class="o">{</span>emacs<span class="o">}(</span>5519<span class="o">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">|</span>                       <span class="p">|</span>            <span class="p">|</span>             <span class="sb">`</span>-<span class="o">{</span>emacs<span class="o">}(</span>5520<span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">picher@pichers-laptop:~$ pstree -p picher <span class="p">|</span> grep emacs
+              <span class="p">|</span>-gnome-terminal-<span class="o">(</span>3023<span class="o">)</span>-+-bash<span class="o">(</span>3030<span class="o">)</span>-+-emacs<span class="o">(</span>5517<span class="o">)</span>-+-bash<span class="o">(</span>28980<span class="o">)</span>
+              <span class="p">|</span>                       <span class="p">|</span>            <span class="p">|</span>             <span class="p">|</span>-<span class="o">{</span>emacs<span class="o">}(</span>5518<span class="o">)</span>
+              <span class="p">|</span>                       <span class="p">|</span>            <span class="p">|</span>             <span class="p">|</span>-<span class="o">{</span>emacs<span class="o">}(</span>5519<span class="o">)</span>
+              <span class="p">|</span>                       <span class="p">|</span>            <span class="p">|</span>             <span class="sb">`</span>-<span class="o">{</span>emacs<span class="o">}(</span>5520<span class="o">)</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>可以看到，emacs(5517)这个进程共启动了 4 个子线程，加上主线程共 5 个线程。</p>
 <h2 id="三杀死进程">三、杀死进程</h2>
@@ -268,7 +249,7 @@
 <p>输出：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -280,17 +261,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-</span></span><span class="line"><span class="cl">root          <span class="m">1</span>  0.0  0.3 <span class="m">185228</span>  <span class="m">3100</span> ?        Ss   May23   0:08 /lib/systemd/systemd --system --deserialize <span class="m">21</span>
-</span></span><span class="line"><span class="cl">root          <span class="m">2</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:00 <span class="o">[</span>kthreadd<span class="o">]</span>
-</span></span><span class="line"><span class="cl">root          <span class="m">4</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I&lt;   May23   0:00 <span class="o">[</span>kworker/0:0H<span class="o">]</span>
-</span></span><span class="line"><span class="cl">root          <span class="m">6</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I&lt;   May23   0:00 <span class="o">[</span>mm_percpu_wq<span class="o">]</span>
-</span></span><span class="line"><span class="cl">root          <span class="m">7</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:04 <span class="o">[</span>ksoftirqd/0<span class="o">]</span>
-</span></span><span class="line"><span class="cl">root          <span class="m">8</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I    May23   0:03 <span class="o">[</span>rcu_sched<span class="o">]</span>
-</span></span><span class="line"><span class="cl">root          <span class="m">9</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I    May23   0:00 <span class="o">[</span>rcu_bh<span class="o">]</span>
-</span></span><span class="line"><span class="cl">root         <span class="m">10</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:00 <span class="o">[</span>migration/0<span class="o">]</span>
-</span></span><span class="line"><span class="cl">root         <span class="m">11</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:00 <span class="o">[</span>watchdog/0<span class="o">]</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root          <span class="m">1</span>  0.0  0.3 <span class="m">185228</span>  <span class="m">3100</span> ?        Ss   May23   0:08 /lib/systemd/systemd --system --deserialize <span class="m">21</span>
+root          <span class="m">2</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:00 <span class="o">[</span>kthreadd<span class="o">]</span>
+root          <span class="m">4</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I&lt;   May23   0:00 <span class="o">[</span>kworker/0:0H<span class="o">]</span>
+root          <span class="m">6</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I&lt;   May23   0:00 <span class="o">[</span>mm_percpu_wq<span class="o">]</span>
+root          <span class="m">7</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:04 <span class="o">[</span>ksoftirqd/0<span class="o">]</span>
+root          <span class="m">8</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I    May23   0:03 <span class="o">[</span>rcu_sched<span class="o">]</span>
+root          <span class="m">9</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        I    May23   0:00 <span class="o">[</span>rcu_bh<span class="o">]</span>
+root         <span class="m">10</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:00 <span class="o">[</span>migration/0<span class="o">]</span>
+root         <span class="m">11</span>  0.0  0.0      <span class="m">0</span>     <span class="m">0</span> ?        S    May23   0:00 <span class="o">[</span>watchdog/0<span class="o">]</span>
+</code></pre></td></tr></table>
 </div>
 </div><h4 id="参数解释">参数解释：</h4>
 <p>USER：该 process 属于那个使用者账号的</p>
@@ -326,7 +307,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -378,7 +359,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -396,7 +377,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -413,7 +394,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

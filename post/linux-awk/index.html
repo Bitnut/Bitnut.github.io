@@ -16,17 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="
-快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。
-它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写” : P。
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/linux-awk/" />
@@ -38,35 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/linux-awk/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="Linux Awk 入门（01）">
-  <meta property="og:description" content="快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。
-它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写” : P。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-04-21T12:00:28+08:00">
-    <meta property="article:modified_time" content="2021-04-21T12:00:28+08:00">
-    <meta property="article:tag" content="GNU">
-    <meta property="article:tag" content="Linux">
-    <meta property="article:tag" content="Awk">
+<meta property="og:title" content="Linux Awk 入门（01）" />
+<meta property="og:description" content="快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/linux-awk/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-21T12:00:28&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-21T12:00:28&#43;08:00" />
 
-  <meta itemprop="name" content="Linux Awk 入门（01）">
-  <meta itemprop="description" content="快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。
-它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写” : P。">
-  <meta itemprop="datePublished" content="2021-04-21T12:00:28+08:00">
-  <meta itemprop="dateModified" content="2021-04-21T12:00:28+08:00">
-  <meta itemprop="wordCount" content="1137">
-  <meta itemprop="keywords" content="GNU,Linux,Awk">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Linux Awk 入门（01）">
-  <meta name="twitter:description" content="快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。
-它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写” : P。">
+<meta itemprop="name" content="Linux Awk 入门（01）">
+<meta itemprop="description" content="快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是"><meta itemprop="datePublished" content="2021-04-21T12:00:28&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-21T12:00:28&#43;08:00" />
+<meta itemprop="wordCount" content="1137">
+<meta itemprop="keywords" content="GNU,Linux,Awk," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux Awk 入门（01）"/>
+<meta name="twitter:description" content="快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -178,22 +164,23 @@
 <p>它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写”  : P。</p>
 <blockquote>
 <p>awk is：</p>
-<p>refreshingly easy to read and write &ndash; <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Getting-Started">GNU awk get started</a></p></blockquote>
+<p>refreshingly easy to read and write &ndash; <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Getting-Started">GNU awk get started</a></p>
+</blockquote>
 <p>awk 和其他编程语言的主要区别是，它是数据驱动的语言（编程人员指定文本的特征、以及找到后需要执行的操作）。</p>
 <p>我对 awk 的理解是，awk 已经不属于我们语言层面上的<code>语法糖</code>了，它是我们操作类 unix 操作系统、运维，乃至开发过程中的<code>语法糖</code>，是很重要的编程工具，我们应该掌握这个技能。</p>
 <h2 id="二基本语句">二、基本语句</h2>
 <p>简单到不能再简单：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-awk" data-lang="awk"><span class="line"><span class="cl"><span class="nx">pattern</span> <span class="p">{</span> <span class="nx">action</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nx">pattern</span> <span class="p">{</span> <span class="nx">action</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">...</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-awk" data-lang="awk"><span class="nx">pattern</span> <span class="p">{</span> <span class="nx">action</span> <span class="p">}</span>
+<span class="nx">pattern</span> <span class="p">{</span> <span class="nx">action</span> <span class="p">}</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>啥意思？</p>
 <p>基本的 awk 程序由一条条表达式组成，每个表达式由 pattern（规则），action（操作）为了和规则区分开来被用 <code>{}</code> 包裹。</p>
@@ -204,60 +191,62 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">awk <span class="s1">&#39;program&#39;</span> input-file1 input-file2 …
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">awk <span class="s1">&#39;program&#39;</span> input-file1 input-file2 …
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>使用脚本</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">awk -f program-file input-file1 input-file2 …
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">awk -f program-file input-file1 input-file2 …
+</code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p><em>注</em>： 如果使用的是 bash 最好在个人 <code>启动文件</code> (如： .bashrc)中加上： <code>set +H</code>。见 <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Read-Terminal">Awk env note</a></p></blockquote>
+<p><em>注</em>： 如果使用的是 bash 最好在个人 <code>启动文件</code> (如： .bashrc)中加上： <code>set +H</code>。见 <a href="https://www.gnu.org/software/gawk/manual/gawk.html#Read-Terminal">Awk env note</a></p>
+</blockquote>
 <ol>
 <li>创建一个名为 test-awk.awk 的程序（有没有 awk 后缀其实并不影响，但它使得维护变得更加方便），在其中写好 <code>BEGIN { print &quot;Don't Panic!&quot; }</code> ;</li>
 <li>然后 <code>awk -f test-awk</code>;</li>
 </ol>
 <p>这和直接执行 <code>awk 'BEGIN { print &quot;Don\47t Panic!&quot; }'</code> 是一样的效果。</p>
 <blockquote>
-<p><em>注</em>：  在 shell 中，执行的命令中被双引号括起来的文本是会被执行的，例如上文的 “\47”。</p></blockquote>
+<p><em>注</em>：  在 shell 中，执行的命令中被双引号括起来的文本是会被执行的，例如上文的 “\47”。</p>
+</blockquote>
 <h2 id="四最基础的-awk-程序">四、最基础的 awk 程序</h2>
 <p>一个基础的 awk 程序的结构是下面这样的：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-awk" data-lang="awk"><span class="line"><span class="cl"><span class="nb">BEGIN</span> <span class="p">{</span> <span class="p">......</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nx">pattern</span> <span class="p">{</span> <span class="nx">action1</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nx">pattern</span> <span class="p">{</span> <span class="nx">action2</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">END</span> <span class="p">{</span> <span class="p">......</span> <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-awk" data-lang="awk"><span class="nb">BEGIN</span> <span class="p">{</span> <span class="p">......</span> <span class="p">}</span>
+<span class="nx">pattern</span> <span class="p">{</span> <span class="nx">action1</span> <span class="p">}</span>
+<span class="nx">pattern</span> <span class="p">{</span> <span class="nx">action2</span> <span class="p">}</span>
+<span class="nb">END</span> <span class="p">{</span> <span class="p">......</span> <span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>例如我们可以这样写：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-awk" data-lang="awk"><span class="line"><span class="cl"><span class="nb">BEGIN</span> <span class="p">{</span> <span class="kr">print</span> <span class="s2">&#34;File\t\tOwner&#34;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span> <span class="kr">print</span> <span class="o">$</span><span class="mi">9</span><span class="p">,</span> <span class="s2">&#34;\t&#34;</span><span class="p">,</span> <span class="o">$</span><span class="mi">3</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">END</span> <span class="p">{</span> <span class="kr">print</span> <span class="s2">&#34; - DONE -&#34;</span> <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-awk" data-lang="awk"><span class="nb">BEGIN</span> <span class="p">{</span> <span class="kr">print</span> <span class="s2">&#34;File\t\tOwner&#34;</span><span class="p">}</span>
+<span class="p">{</span> <span class="kr">print</span> <span class="o">$</span><span class="mi">9</span><span class="p">,</span> <span class="s2">&#34;\t&#34;</span><span class="p">,</span> <span class="o">$</span><span class="mi">3</span><span class="p">}</span>
+<span class="nb">END</span> <span class="p">{</span> <span class="kr">print</span> <span class="s2">&#34; - DONE -&#34;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>灵魂问题： 这个程序有什么用？ 当然是入门 awk。。。</li>
@@ -266,7 +255,7 @@
 <p>可以看到输出如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -278,20 +267,21 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">File             Owner
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">HelloWorld.lua   picher
-</span></span><span class="line"><span class="cl">awk-test.awk     picher
-</span></span><span class="line"><span class="cl">connect-dev.sh   picher
-</span></span><span class="line"><span class="cl">find-home.sh     picher
-</span></span><span class="line"><span class="cl">login-dev.sh     picher
-</span></span><span class="line"><span class="cl">ncProxy.sh       picher
-</span></span><span class="line"><span class="cl">pro-emacs.sh     picher
-</span></span><span class="line"><span class="cl"> - DONE -
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">File             Owner
+
+HelloWorld.lua   picher
+awk-test.awk     picher
+connect-dev.sh   picher
+find-home.sh     picher
+login-dev.sh     picher
+ncProxy.sh       picher
+pro-emacs.sh     picher
+ - DONE -
+</code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>忽略一些不相关的东西（doge，我们可以看到，这个脚本就是过滤了我们 ls 命令的输出。</p></blockquote>
+<p>忽略一些不相关的东西（doge，我们可以看到，这个脚本就是过滤了我们 ls 命令的输出。</p>
+</blockquote>
 <p>仔细观察这段代码，并试着执行一次就可以学到以下知识点：</p>
 <ul>
 <li>BEGIN 和 END 是重要的起始、结束 awk 脚本的命令；</li>
@@ -325,7 +315,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -379,7 +369,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -397,7 +387,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -414,7 +404,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

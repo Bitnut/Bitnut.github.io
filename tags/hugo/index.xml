@@ -4,16 +4,17 @@
     <title>HUGO on 三口一个瓜的博客</title>
     <link>http://localhost:1313/tags/hugo/</link>
     <description>Recent content in HUGO on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 09 Apr 2021 18:53:13 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Apr 2021 18:53:13 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题</title>
       <link>http://localhost:1313/post/switchtohugo/</link>
       <pubDate>Fri, 09 Apr 2021 18:53:13 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/switchtohugo/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。&lt;/p&gt;&#xA;&lt;p&gt;例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了 disqus 以外的评论插件怎么办，流量统计怎么做，安装的主题图片展示效果较差怎么办？&lt;/p&gt;</description>
+      <description>前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。 例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了</description>
     </item>
+    
   </channel>
 </rss>

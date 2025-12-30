@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Css on 三口一个瓜的博客</title>
+    <title>css on 三口一个瓜的博客</title>
     <link>http://localhost:1313/tags/css/</link>
-    <description>Recent content in Css on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <description>Recent content in css on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 Apr 2020 00:01:55 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Apr 2020 00:01:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/css/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决按钮移动动画伴随光标样式抖动的问题</title>
       <link>http://localhost:1313/post/icontransform/</link>
       <pubDate>Thu, 30 Apr 2020 00:01:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/icontransform/</guid>
-      <description>&lt;h3 id=&#34;问题描述&#34;&gt;问题描述&lt;/h3&gt;&#xA;&lt;p&gt;最近在工作中遇到了一个很奇怪的问题，网站的页面大部分按钮和卡片都有一个向上移动的过渡动画，当鼠标悬浮在这些元素上的时候，动画会触发并在一定时间内缓缓完成、同时鼠标样式变成 pointer，。&lt;/p&gt;</description>
+      <description>问题描述 最近在工作中遇到了一个很奇怪的问题，网站的页面大部分按钮和卡片都有一个向上移动的过渡动画，当鼠标悬浮在这些元素上的时候，动画会触发并</description>
     </item>
+    
     <item>
       <title>如何简单粗暴地让网页变黑白？</title>
       <link>http://localhost:1313/post/blackwhite/</link>
       <pubDate>Tue, 14 Apr 2020 22:31:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/post/blackwhite/</guid>
-      <description>&lt;p&gt;很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。&lt;/p&gt;&#xA;&lt;h4 id=&#34;今天主要来探讨一下让页面变黑白效果的方法&#34;&gt;今天主要来探讨一下让页面变黑白效果的方法&lt;/h4&gt;&#xA;&lt;p&gt;今年早些时候，新冠疫情给国内造成了巨大损失。因此在今年四月四的时候，为了叨念逝者、寄托哀思，国内不仅暂停了大部分娱乐活动，而且各大门户网站、视频网站，都对首页或者所有页面做出了内容和样式的大调整。&lt;/p&gt;</description>
+      <description>很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。 今天主要来探讨一下让页面变黑白效果的方</description>
     </item>
+    
   </channel>
 </rss>

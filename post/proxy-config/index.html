@@ -16,16 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。
-配置 Trojan 服务 一、 准备一台 VPS（境外），不需要购买域名和配置证书。
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。 配" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/proxy-config/" />
@@ -37,34 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/proxy-config/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="代理实践纪录">
-  <meta property="og:description" content="变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。
-配置 Trojan 服务 一、 准备一台 VPS（境外），不需要购买域名和配置证书。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-03-04T21:00:35+08:00">
-    <meta property="article:modified_time" content="2021-03-04T21:00:35+08:00">
-    <meta property="article:tag" content="GNU">
-    <meta property="article:tag" content="Linux">
+<meta property="og:title" content="代理实践纪录" />
+<meta property="og:description" content="变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。 配" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/proxy-config/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-04T21:00:35&#43;08:00" />
+<meta property="article:modified_time" content="2021-03-04T21:00:35&#43;08:00" />
 
-  <meta itemprop="name" content="代理实践纪录">
-  <meta itemprop="description" content="变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。
-配置 Trojan 服务 一、 准备一台 VPS（境外），不需要购买域名和配置证书。">
-  <meta itemprop="datePublished" content="2021-03-04T21:00:35+08:00">
-  <meta itemprop="dateModified" content="2021-03-04T21:00:35+08:00">
-  <meta itemprop="wordCount" content="918">
-  <meta itemprop="keywords" content="GNU,Linux">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="代理实践纪录">
-  <meta name="twitter:description" content="变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。
-配置 Trojan 服务 一、 准备一台 VPS（境外），不需要购买域名和配置证书。">
+<meta itemprop="name" content="代理实践纪录">
+<meta itemprop="description" content="变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。 配"><meta itemprop="datePublished" content="2021-03-04T21:00:35&#43;08:00" />
+<meta itemprop="dateModified" content="2021-03-04T21:00:35&#43;08:00" />
+<meta itemprop="wordCount" content="918">
+<meta itemprop="keywords" content="GNU,Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="代理实践纪录"/>
+<meta name="twitter:description" content="变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。 配"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -188,7 +176,7 @@ centos 7+
 <p><code>sudo apt-get upgrade</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -201,22 +189,22 @@ centos 7+
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="c1">#阿里源</span>
-</span></span><span class="line"><span class="cl">    deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"> <span class="c1">#阿里源</span>
+    deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+</code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -229,22 +217,22 @@ centos 7+
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">    <span class="c1">#网易源</span>
-</span></span><span class="line"><span class="cl">    deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">    <span class="c1">#网易源</span>
+    deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
+    deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
+    deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
+    deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
+</code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -257,22 +245,22 @@ centos 7+
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">    <span class="c1">#清华源</span>
-</span></span><span class="line"><span class="cl">    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">    <span class="c1">#清华源</span>
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+</code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -285,18 +273,18 @@ centos 7+
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">##中科大源</span>
-</span></span><span class="line"><span class="cl">    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
-</span></span><span class="line"><span class="cl">    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">##中科大源</span>
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+    deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+    deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>四、 安装 Trojan 服务端</li>
@@ -315,15 +303,15 @@ centos 7+
 <p>使用如下命令将配置文件拷贝到本地目录：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">scp root@xxx.xxx.xxx.xxx:/home/trojan/ca-cert.pem ./
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">scp root@xxx.xxx.xxx.xxx:/home/trojan/client.json ./
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">scp root@xxx.xxx.xxx.xxx:/home/trojan/ca-cert.pem ./
+
+scp root@xxx.xxx.xxx.xxx:/home/trojan/client.json ./
+</code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>七、安装 Trojan 客户端</li>
@@ -343,7 +331,7 @@ centos 7+
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -396,7 +384,7 @@ centos 7+
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -414,7 +402,7 @@ centos 7+
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -431,7 +419,7 @@ centos 7+
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

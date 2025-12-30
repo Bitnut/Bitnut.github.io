@@ -16,15 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个终端看看，可以看到下图：
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/linux-tty/" />
@@ -36,34 +35,26 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/linux-tty/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="认识 Linux 下的 TTY">
-  <meta property="og:description" content="linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个终端看看，可以看到下图：">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-02-18T16:34:47+08:00">
-    <meta property="article:modified_time" content="2021-02-18T16:34:47+08:00">
-    <meta property="article:tag" content="GNU">
-    <meta property="article:tag" content="Linux">
-    <meta property="og:image" content="http://localhost:1313/static/tron.jpg">
+<meta property="og:title" content="认识 Linux 下的 TTY" />
+<meta property="og:description" content="linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/linux-tty/" /><meta property="og:image" content="http://localhost:1313/static/tron.jpg" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-18T16:34:47&#43;08:00" />
+<meta property="article:modified_time" content="2021-02-18T16:34:47&#43;08:00" />
 
-  <meta itemprop="name" content="认识 Linux 下的 TTY">
-  <meta itemprop="description" content="linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个终端看看，可以看到下图：">
-  <meta itemprop="datePublished" content="2021-02-18T16:34:47+08:00">
-  <meta itemprop="dateModified" content="2021-02-18T16:34:47+08:00">
-  <meta itemprop="wordCount" content="1085">
-  <meta itemprop="image" content="http://localhost:1313/static/tron.jpg">
-  <meta itemprop="keywords" content="GNU,Linux">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/static/tron.jpg">
-  <meta name="twitter:title" content="认识 Linux 下的 TTY">
-  <meta name="twitter:description" content="linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个终端看看，可以看到下图：">
+<meta itemprop="name" content="认识 Linux 下的 TTY">
+<meta itemprop="description" content="linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个"><meta itemprop="datePublished" content="2021-02-18T16:34:47&#43;08:00" />
+<meta itemprop="dateModified" content="2021-02-18T16:34:47&#43;08:00" />
+<meta itemprop="wordCount" content="1079"><meta itemprop="image" content="http://localhost:1313/static/tron.jpg">
+<meta itemprop="keywords" content="GNU,Linux," /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/static/tron.jpg"/>
+
+<meta name="twitter:title" content="认识 Linux 下的 TTY"/>
+<meta name="twitter:description" content="linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,7 +173,7 @@
 <p><code>0 / 1 / 2 / 3 / ptmx</code></p>
 <h3 id="几个文件是啥意思">几个文件是啥意思？</h3>
 <p>在 Linux 系统的设备特殊文件目录 /dev/ 下，终端特殊设备文件一般有:</p>
-<p><em>注：以下几列中的地址，末尾带有&rsquo;/&lsquo;的是目录，否则是一个文件；n 应直接看作数字的代称，如 0,1,2,3&hellip;&hellip;</em></p>
+<p><em>注：以下几列中的地址，末尾带有'/&lsquo;的是目录，否则是一个文件；n 应直接看作数字的代称，如 0,1,2,3&hellip;&hellip;</em></p>
 <ul>
 <li>串行端口终端(/dev/ttySn)</li>
 <li>伪终端(/dev/pty/)</li>
@@ -211,15 +202,15 @@
 <p>注意到，ptmx 同时出现在 /dev/ 和 /dev/pts/ 文件夹下面。我们打印一下这两个文件：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">picher@pichers-laptop:/dev$ ls -l /dev/ptmx /dev/pts/ptmx
-</span></span><span class="line"><span class="cl">crw-rw-rw- <span class="m">1</span> root tty  5, <span class="m">2</span> 2月  <span class="m">19</span> 21:34 /dev/ptmx
-</span></span><span class="line"><span class="cl">c--------- <span class="m">1</span> root root 5, <span class="m">2</span> 2月  <span class="m">16</span> 17:25 /dev/pts/ptmx
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">picher@pichers-laptop:/dev$ ls -l /dev/ptmx /dev/pts/ptmx
+crw-rw-rw- <span class="m">1</span> root tty  5, <span class="m">2</span> 2月  <span class="m">19</span> 21:34 /dev/ptmx
+c--------- <span class="m">1</span> root root 5, <span class="m">2</span> 2月  <span class="m">16</span> 17:25 /dev/pts/ptmx
+</code></pre></td></tr></table>
 </div>
 </div><p>从两个文件的 major 和 minor Number： 5, 2; 以及同样的设备类型： c (character or block) 可以得知，这两个设备文件符代表和使用的是内核中的同一个功能。</p>
 <p>实际上，在 /dev/ 文件夹下的 ptmx 是标准的实现，而 /dev/pts/ 下的，则是为软件容器（如 docker）添加的一个 master 伪终端。</p>
@@ -252,7 +243,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -305,7 +296,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -323,7 +314,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -340,7 +331,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

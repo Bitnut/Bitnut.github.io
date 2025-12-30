@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI on 三口一个瓜的博客</title>
+    <link>http://localhost:1313/tags/ai/</link>
+    <description>Recent content in AI on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 31 Dec 2025 07:20:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/meaning-of-traditional-coding/</link>
+      <pubDate>Wed, 31 Dec 2025 07:20:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/meaning-of-traditional-coding/</guid>
+      <description>人工智能场景下，古法编程的意义 在最近的一次闲聊中，我的朋友 @罗蔚 提到团队中有新人（甚至是社招的经验两年新人）没有办法很好地完成自己的任务。他</description>
+    </item>
+    
+  </channel>
+</rss>

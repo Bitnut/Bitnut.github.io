@@ -4,79 +4,98 @@
     <title>Categories on 三口一个瓜的博客</title>
     <link>http://localhost:1313/categories/</link>
     <description>Recent content in Categories on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 07 Apr 2025 20:29:47 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 31 Dec 2025 07:20:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>随笔</title>
+      <link>http://localhost:1313/categories/%E9%9A%8F%E7%AC%94/</link>
+      <pubDate>Wed, 31 Dec 2025 07:20:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/categories/%E9%9A%8F%E7%AC%94/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>哲学</title>
       <link>http://localhost:1313/categories/%E5%93%B2%E5%AD%A6/</link>
       <pubDate>Mon, 07 Apr 2025 20:29:47 +0800</pubDate>
+      
       <guid>http://localhost:1313/categories/%E5%93%B2%E5%AD%A6/</guid>
       <description></description>
     </item>
-    <item>
-      <title>随笔</title>
-      <link>http://localhost:1313/categories/%E9%9A%8F%E7%AC%94/</link>
-      <pubDate>Mon, 07 Apr 2025 20:29:47 +0800</pubDate>
-      <guid>http://localhost:1313/categories/%E9%9A%8F%E7%AC%94/</guid>
-      <description></description>
-    </item>
+    
     <item>
       <title>经典设计</title>
       <link>http://localhost:1313/categories/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Tue, 08 Nov 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/categories/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>计算机组成</title>
       <link>http://localhost:1313/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/</link>
       <pubDate>Tue, 08 Nov 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Programming Language</title>
+      <title>programming language</title>
       <link>http://localhost:1313/categories/programming-language/</link>
       <pubDate>Sat, 26 Mar 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/categories/programming-language/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Programming</title>
+      <title>programming</title>
       <link>http://localhost:1313/categories/programming/</link>
       <pubDate>Sun, 24 Oct 2021 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/categories/programming/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Backend</title>
+      <title>backend</title>
       <link>http://localhost:1313/categories/backend/</link>
       <pubDate>Tue, 07 Sep 2021 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/categories/backend/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>专题</title>
       <link>http://localhost:1313/categories/%E4%B8%93%E9%A2%98/</link>
       <pubDate>Mon, 14 Jun 2021 14:53:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/categories/%E4%B8%93%E9%A2%98/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>教程</title>
       <link>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</link>
       <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
       <guid>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>工具</title>
       <link>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7/</link>
       <pubDate>Thu, 04 Mar 2021 21:00:35 +0800</pubDate>
+      
       <guid>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7/</guid>
       <description></description>
     </item>
+    
   </channel>
 </rss>

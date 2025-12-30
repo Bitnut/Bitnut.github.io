@@ -16,16 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。
-socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，具体是哪些，接下来都会慢慢了解到。
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。 socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/socks5-protocal/" />
@@ -37,34 +35,24 @@ socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/socks5-protocal/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="Socks5 协议详解（经典设计）">
-  <meta property="og:description" content="简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。
-socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，具体是哪些，接下来都会慢慢了解到。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-04-12T22:13:37+08:00">
-    <meta property="article:modified_time" content="2021-04-12T22:13:37+08:00">
-    <meta property="article:tag" content="Protocal">
-    <meta property="article:tag" content="Web">
+<meta property="og:title" content="Socks5 协议详解（经典设计）" />
+<meta property="og:description" content="简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。 socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/socks5-protocal/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-12T22:13:37&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-12T22:13:37&#43;08:00" />
 
-  <meta itemprop="name" content="Socks5 协议详解（经典设计）">
-  <meta itemprop="description" content="简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。
-socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，具体是哪些，接下来都会慢慢了解到。">
-  <meta itemprop="datePublished" content="2021-04-12T22:13:37+08:00">
-  <meta itemprop="dateModified" content="2021-04-12T22:13:37+08:00">
-  <meta itemprop="wordCount" content="2478">
-  <meta itemprop="keywords" content="Protocal,Web">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Socks5 协议详解（经典设计）">
-  <meta name="twitter:description" content="简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。
-socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，具体是哪些，接下来都会慢慢了解到。">
+<meta itemprop="name" content="Socks5 协议详解（经典设计）">
+<meta itemprop="description" content="简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。 socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，"><meta itemprop="datePublished" content="2021-04-12T22:13:37&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-12T22:13:37&#43;08:00" />
+<meta itemprop="wordCount" content="2478">
+<meta itemprop="keywords" content="Protocal,Web," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Socks5 协议详解（经典设计）"/>
+<meta name="twitter:description" content="简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。 socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -195,7 +183,8 @@ socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了
 <blockquote>
 <p>The protocol is conceptually a &ldquo;shim-layer&rdquo; between the application
 layer and the transport layer, and as such does not provide network-
-layer gateway services, such as forwarding of ICMP messages.</p></blockquote>
+layer gateway services, such as forwarding of ICMP messages.</p>
+</blockquote>
 <p>我们知道，传输层是负责提供数据传输服务的网络层。在这一层里，包含有著名的 tcp 、udp 协议，也包含有 ssl 、 tsl 这样的传输层安全协议。因此，按照 RFC 的描述，socks 协议是处于传输层和应用层之间的层次，所以 sock 肯定是不包含文中所说： <code>network-layer gateway services</code> 的数据传输、以及数据完整性校验的功能的。而根据维基百科所说，socks 协议实际可以归为 OSI 的会话层（session layer）。</p>
 <h3 id="协议连接">协议连接</h3>
 <p>sock5 的客户端没有啥特殊要求，而服务端一般在 TCP 的 1080 端口监听请求。socks 连接在 sock5 这一代已经支持了身份验证，一旦客户端验证不同过，服务端会断开连接。</p>
@@ -210,26 +199,26 @@ layer gateway services, such as forwarding of ICMP messages.</p></blockquote>
 <h2 id="协议描述">协议描述</h2>
 <p>我们首先来定义一下表示形式：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">VER</th>
-          <th style="text-align: center">NMETHODS</th>
-          <th style="text-align: center">METHODS</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">1 to 255</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th style="text-align:center">VER</th>
+<th style="text-align:center">NMETHODS</th>
+<th style="text-align:center">METHODS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1 to 255</td>
+</tr>
+</tbody>
 </table>
 <p>如上表所示：</p>
 <ol>
 <li>表头代指的是协议中的字段名。如 <code>VER</code> 指的是协议中有字段 <code>VER</code>。</li>
 <li>所有表内纯数字，代指的是字段名的长度。如 1 代指长度为 1 byte， 1 to 255 代指长度为 1~255 byte。</li>
-<li>X&rsquo;hh 语法。表内的类似写法代表的是某字段的用一个 byte 存储的实值，它采用的是 <code>十六进制</code>。 X'05&rsquo; 那么就是 05 也就是 0x05 的意思。</li>
+<li>X&rsquo;hh 语法。表内的类似写法代表的是某字段的用一个 byte 存储的实值，它采用的是 <code>十六进制</code>。 X'05' 那么就是 05 也就是 0x05 的意思。</li>
 <li>Variable。表内的 Variable 代表着某字段的长度<code>可变</code>，可能是 1 或 2 个 byte，或者是另外一个字段指定的。</li>
 </ol>
 <h2 id="深入细节">深入细节</h2>
@@ -241,20 +230,20 @@ layer gateway services, such as forwarding of ICMP messages.</p></blockquote>
 </ul>
 <p>建立TCP连接之后，Client发送如下数据：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">VER</th>
-          <th style="text-align: center">NMETHODS</th>
-          <th style="text-align: center">METHODS</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">1 to 255</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th style="text-align:center">VER</th>
+<th style="text-align:center">NMETHODS</th>
+<th style="text-align:center">METHODS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1 to 255</td>
+</tr>
+</tbody>
 </table>
 <p>VER 是指协议版本，因为是 socks5，所以值是 0x05</p>
 <p>NMETHODS 是指有多少个可以使用的方法，也就是客户端支持的认证方法，有以下值：</p>
@@ -264,90 +253,93 @@ layer gateway services, such as forwarding of ICMP messages.</p></blockquote>
 <p>0x02 USERNAME/PASSWORD 用户名密码认证</p>
 <p>0x03 to 0x7f IANA ASSIGNED 一般不用。INNA保留。</p>
 <p>0x80 to 0xfe RESERVED FOR PRIVATE METHODS 保留作私有用处。</p>
-<p>0xFF NO ACCEPTABLE METHODS 不接受任何方法/没有合适的方法</p></blockquote>
+<p>0xFF NO ACCEPTABLE METHODS 不接受任何方法/没有合适的方法</p>
+</blockquote>
 <p>METHODS 就是方法值，有多少个方法就有多少个byte</p>
 <ul>
 <li>第二步，Server返回可以使用的方法
 收到Client的请求之后，Server选择一个自己也支持的认证方案，然后返回：</li>
 </ul>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">VER</th>
-          <th style="text-align: center">METHOD</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">1</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th style="text-align:center">VER</th>
+<th style="text-align:center">METHOD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
 </table>
 <p>VER 和 METHOD 的取值与上一节相同</p>
 <ul>
 <li>第三步，客户端告知目标地址</li>
 </ul>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">VER</th>
-          <th style="text-align: center">CMD</th>
-          <th style="text-align: center">RSV</th>
-          <th style="text-align: center">ATYP</th>
-          <th style="text-align: center">DST.ADDR</th>
-          <th style="text-align: center">DST.PORT</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">X'00'</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">Variable</td>
-          <td style="text-align: center">2</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th style="text-align:center">VER</th>
+<th style="text-align:center">CMD</th>
+<th style="text-align:center">RSV</th>
+<th style="text-align:center">ATYP</th>
+<th style="text-align:center">DST.ADDR</th>
+<th style="text-align:center">DST.PORT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X'00'</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">Variable</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
 </table>
 <p>VER 还是版本，取值是 0x05</p>
 <p>CMD 是指要做啥，取值如下：</p>
 <blockquote>
 <p>CONNECT 0x01 连接</p>
 <p>BIND 0x02 端口监听(也就是在Server上监听一个端口)</p>
-<p>UDP ASSOCIATE 0x03 使用UDP</p></blockquote>
+<p>UDP ASSOCIATE 0x03 使用UDP</p>
+</blockquote>
 <p>RSV 是保留位，值是 0x00</p>
 <p>ATYP 是目标地址类型，有如下取值：</p>
 <blockquote>
 <p>0x01 IPv4</p>
 <p>0x03 域名</p>
-<p>0x04 IPv6</p></blockquote>
+<p>0x04 IPv6</p>
+</blockquote>
 <p>DST.ADDR 就是目标地址的值了，如果是IPv4，那么就是 4 bytes，如果是 IPv6 那么就是 16 bytes，如果是域名，那么第一个字节代表名字长度，接下来 1-255 字节是表示目标地址</p>
 <p>DST.PORT 两个字节代表端口号</p>
 <ul>
 <li>第四步，服务端回复</li>
 </ul>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">VER</th>
-          <th style="text-align: center">REP</th>
-          <th style="text-align: center">RSV</th>
-          <th style="text-align: center">ATYP</th>
-          <th style="text-align: center">BND.ADDR</th>
-          <th style="text-align: center">BND.PORT</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">X'00'</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">Variable</td>
-          <td style="text-align: center">2</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th style="text-align:center">VER</th>
+<th style="text-align:center">REP</th>
+<th style="text-align:center">RSV</th>
+<th style="text-align:center">ATYP</th>
+<th style="text-align:center">BND.ADDR</th>
+<th style="text-align:center">BND.PORT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X'00'</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">Variable</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
 </table>
 <p>VER 还是版本，值是 0x05</p>
 <p>REP 是状态码，取值如下：</p>
@@ -361,13 +353,15 @@ layer gateway services, such as forwarding of ICMP messages.</p></blockquote>
 <p>0x06 TTL expired</p>
 <p>0x07 Command not supported</p>
 <p>0x08 Address type not supported</p>
-<p>0x09 to 0xff unassigned</p></blockquote>
+<p>0x09 to 0xff unassigned</p>
+</blockquote>
 <p>RSV 保留位，取值为 0x00</p>
 <p>ATYP 是目标地址类型，有如下取值：</p>
 <blockquote>
 <p>0x01 IPv4</p>
 <p>0x03 域名</p>
-<p>0x04 IPv6</p></blockquote>
+<p>0x04 IPv6</p>
+</blockquote>
 <p>BND.ADDR 是商议好的目标地址的值，BND 的意思是 bound，规则同上
 BND.PORT 两个字节代表端口号</p>
 <ul>
@@ -403,7 +397,7 @@ BND.PORT 两个字节代表端口号</p>
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -456,7 +450,7 @@ BND.PORT 两个字节代表端口号</p>
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -474,7 +468,7 @@ BND.PORT 两个字节代表端口号</p>
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -491,7 +485,7 @@ BND.PORT 两个字节代表端口号</p>
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 

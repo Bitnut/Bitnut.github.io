@@ -4,191 +4,260 @@
     <title>Tags on 三口一个瓜的博客</title>
     <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on 三口一个瓜的博客</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 07 Apr 2025 20:29:47 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 31 Dec 2025 07:20:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Note</title>
+      <title>AI</title>
+      <link>http://localhost:1313/tags/ai/</link>
+      <pubDate>Wed, 31 Dec 2025 07:20:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vibe Coding</title>
+      <link>http://localhost:1313/tags/vibe-coding/</link>
+      <pubDate>Wed, 31 Dec 2025 07:20:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/vibe-coding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>note</title>
       <link>http://localhost:1313/tags/note/</link>
       <pubDate>Mon, 07 Apr 2025 20:29:47 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/note/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Thinking</title>
+      <title>thinking</title>
       <link>http://localhost:1313/tags/thinking/</link>
       <pubDate>Mon, 07 Apr 2025 20:29:47 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/thinking/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Linux</title>
+      <title>linux</title>
       <link>http://localhost:1313/tags/linux/</link>
       <pubDate>Tue, 28 May 2024 21:53:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/linux/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Hardware</title>
+      <title>hardware</title>
       <link>http://localhost:1313/tags/hardware/</link>
       <pubDate>Tue, 08 Nov 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/hardware/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Javascript</title>
+      <title>javascript</title>
       <link>http://localhost:1313/tags/javascript/</link>
       <pubDate>Sat, 26 Mar 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/javascript/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Nodejs</title>
+      <title>nodejs</title>
       <link>http://localhost:1313/tags/nodejs/</link>
       <pubDate>Sat, 26 Mar 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/nodejs/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>V8</title>
+      <title>v8</title>
       <link>http://localhost:1313/tags/v8/</link>
       <pubDate>Sat, 26 Mar 2022 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/v8/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Eslint</title>
+      <title>eslint</title>
       <link>http://localhost:1313/tags/eslint/</link>
       <pubDate>Wed, 08 Dec 2021 03:00:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/eslint/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Typescript</title>
+      <title>typescript</title>
       <link>http://localhost:1313/tags/typescript/</link>
       <pubDate>Wed, 08 Dec 2021 03:00:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/typescript/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Express</title>
+      <title>express</title>
       <link>http://localhost:1313/tags/express/</link>
       <pubDate>Tue, 07 Sep 2021 08:04:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/express/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>Awk</title>
       <link>http://localhost:1313/tags/awk/</link>
       <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/awk/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>GNU</title>
       <link>http://localhost:1313/tags/gnu/</link>
       <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/gnu/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>Protocal</title>
       <link>http://localhost:1313/tags/protocal/</link>
       <pubDate>Mon, 12 Apr 2021 22:13:37 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/protocal/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Web</title>
+      <title>web</title>
       <link>http://localhost:1313/tags/web/</link>
       <pubDate>Mon, 12 Apr 2021 22:13:37 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/web/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Html5</title>
+      <title>html5</title>
       <link>http://localhost:1313/tags/html5/</link>
       <pubDate>Sun, 11 Apr 2021 09:44:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/html5/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Http</title>
+      <title>http</title>
       <link>http://localhost:1313/tags/http/</link>
       <pubDate>Sun, 11 Apr 2021 09:44:50 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/http/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Blog</title>
+      <title>blog</title>
       <link>http://localhost:1313/tags/blog/</link>
       <pubDate>Fri, 09 Apr 2021 18:53:13 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/blog/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>HUGO</title>
       <link>http://localhost:1313/tags/hugo/</link>
       <pubDate>Fri, 09 Apr 2021 18:53:13 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/hugo/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>MS</title>
       <link>http://localhost:1313/tags/ms/</link>
       <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/ms/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Node</title>
+      <title>node</title>
       <link>http://localhost:1313/tags/node/</link>
       <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/node/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Ts</title>
+      <title>ts</title>
       <link>http://localhost:1313/tags/ts/</link>
       <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/ts/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Emacs</title>
+      <title>emacs</title>
       <link>http://localhost:1313/tags/emacs/</link>
       <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/emacs/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Frontend</title>
+      <title>frontend</title>
       <link>http://localhost:1313/tags/frontend/</link>
       <pubDate>Thu, 14 Jan 2021 22:20:01 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/frontend/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Css</title>
+      <title>css</title>
       <link>http://localhost:1313/tags/css/</link>
       <pubDate>Thu, 30 Apr 2020 00:01:55 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/css/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Cryptdb</title>
+      <title>cryptdb</title>
       <link>http://localhost:1313/tags/cryptdb/</link>
       <pubDate>Mon, 11 Sep 2017 08:52:53 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/cryptdb/</guid>
       <description></description>
     </item>
+    
     <item>
-      <title>Database</title>
+      <title>database</title>
       <link>http://localhost:1313/tags/database/</link>
       <pubDate>Mon, 11 Sep 2017 08:52:53 +0800</pubDate>
+      
       <guid>http://localhost:1313/tags/database/</guid>
       <description></description>
     </item>
+    
   </channel>
 </rss>

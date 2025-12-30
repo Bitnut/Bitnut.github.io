@@ -16,17 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
-详细论述 CryptDB 的原理
-1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上 这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加密过的数据上。因此就意味着需要在数据库服务端存放多种经过不同方式加密的数据。当用户执行特定操作时，Mysql-proxy就会截获操作请求并使用使用特定的加密方式对该操作进行加密，使得该操作能够正确运行在Server端。
-" />
+<meta name="author" content="Bitnut/三口一个瓜" /><meta name="description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.147.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/cryptdb1/" />
@@ -38,37 +35,24 @@
 
 
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.af7fd1da18d66c2b017df5b4cae508ef44cfcac3fb4c7c7a327fe4f4f9e28b08.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:url" content="http://localhost:1313/post/cryptdb1/">
-  <meta property="og:site_name" content="三口一个瓜的博客">
-  <meta property="og:title" content="CryptDB  简单原理论述">
-  <meta property="og:description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
-详细论述 CryptDB 的原理
-1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上 这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加密过的数据上。因此就意味着需要在数据库服务端存放多种经过不同方式加密的数据。当用户执行特定操作时，Mysql-proxy就会截获操作请求并使用使用特定的加密方式对该操作进行加密，使得该操作能够正确运行在Server端。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2017-09-11T08:52:53+08:00">
-    <meta property="article:modified_time" content="2017-09-11T08:52:53+08:00">
-    <meta property="article:tag" content="Cryptdb">
-    <meta property="article:tag" content="Database">
+<meta property="og:title" content="CryptDB  简单原理论述" />
+<meta property="og:description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cryptdb1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-09-11T08:52:53&#43;08:00" />
+<meta property="article:modified_time" content="2017-09-11T08:52:53&#43;08:00" />
 
-  <meta itemprop="name" content="CryptDB  简单原理论述">
-  <meta itemprop="description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
-详细论述 CryptDB 的原理
-1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上 这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加密过的数据上。因此就意味着需要在数据库服务端存放多种经过不同方式加密的数据。当用户执行特定操作时，Mysql-proxy就会截获操作请求并使用使用特定的加密方式对该操作进行加密，使得该操作能够正确运行在Server端。">
-  <meta itemprop="datePublished" content="2017-09-11T08:52:53+08:00">
-  <meta itemprop="dateModified" content="2017-09-11T08:52:53+08:00">
-  <meta itemprop="wordCount" content="3871">
-  <meta itemprop="keywords" content="Cryptdb,Database">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="CryptDB  简单原理论述">
-  <meta name="twitter:description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明
-详细论述 CryptDB 的原理
-1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上 这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加密过的数据上。因此就意味着需要在数据库服务端存放多种经过不同方式加密的数据。当用户执行特定操作时，Mysql-proxy就会截获操作请求并使用使用特定的加密方式对该操作进行加密，使得该操作能够正确运行在Server端。">
+<meta itemprop="name" content="CryptDB  简单原理论述">
+<meta itemprop="description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作"><meta itemprop="datePublished" content="2017-09-11T08:52:53&#43;08:00" />
+<meta itemprop="dateModified" content="2017-09-11T08:52:53&#43;08:00" />
+<meta itemprop="wordCount" content="3871">
+<meta itemprop="keywords" content="cryptdb,database," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CryptDB  简单原理论述"/>
+<meta name="twitter:description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -262,7 +246,7 @@
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content"></span>
+    <span class="item-content">Bitnut/三口一个瓜</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
@@ -315,7 +299,7 @@
       <div class="social-links">
       <a href="940095072.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/Bitnut" class="iconfont icon-github" title="github"></a>
-  
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -333,7 +317,7 @@
   <span class="copyright-year">
     &copy; 
     2016 - 
-    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span>Bitnut/三口一个瓜</span>
   </span>
 </div>
 
@@ -350,7 +334,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
 
 
 
